@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZivCreateRegisterTableViewController">
+            <connections>
+                <outlet property="dayLabel" destination="chm-xT-4qB" id="CfI-ac-sfW"/>
+                <outlet property="dayPickerView" destination="4Cd-J9-TJ8" id="Gnn-L3-RpA"/>
+                <outlet property="formalAttendanceSwitch" destination="sni-hg-j1h" id="u5M-1e-hfW"/>
+                <outlet property="monthLabel" destination="y9w-dB-otD" id="Ali-AK-iam"/>
+                <outlet property="monthPickerView" destination="6HG-ey-AVt" id="qiq-ci-Wct"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yearLabel" destination="zEd-E4-sWg" id="hAU-bb-7qe"/>
+                <outlet property="yearPickerView" destination="WNL-1U-4Om" id="kXM-c8-wO5"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择签到表的年、月、日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lla-Xz-ekN">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="260" id="dzA-oC-VsN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uPY-R9-DlG">
+                    <subviews>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNL-1U-4Om"/>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HG-ey-AVt"/>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cd-J9-TJ8"/>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="216" id="jWk-62-VUm"/>
+                    </constraints>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="LeK-tP-sgn">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEd-E4-sWg">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Xa-RB-klA">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9w-dB-otD">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E34-4W-QdL">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chm-xT-4qB">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84s-En-Ydn">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="DqE-JZ-fqJ"/>
+                        <constraint firstAttribute="width" constant="240" id="dL1-yb-gc7"/>
+                    </constraints>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是否大排" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcQ-l1-Wmr">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sni-hg-j1h">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="49" id="E6e-XQ-Hjh"/>
+                        <constraint firstAttribute="height" constant="31" id="s7c-m0-t1k"/>
+                    </constraints>
+                </switch>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="LeK-tP-sgn" firstAttribute="top" secondItem="lla-Xz-ekN" secondAttribute="bottom" constant="34.5" id="1J1-zo-xBA"/>
+                <constraint firstItem="LeK-tP-sgn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AtJ-DU-3Lh"/>
+                <constraint firstItem="sni-hg-j1h" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ckh-Zp-aVl"/>
+                <constraint firstItem="lla-Xz-ekN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="F8g-AH-qca"/>
+                <constraint firstItem="fcQ-l1-Wmr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Nmw-UG-UDg"/>
+                <constraint firstItem="uPY-R9-DlG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cxc-5e-WQJ"/>
+                <constraint firstItem="sni-hg-j1h" firstAttribute="top" secondItem="fcQ-l1-Wmr" secondAttribute="bottom" constant="8.5" id="ebI-Sx-6j4"/>
+                <constraint firstItem="fcQ-l1-Wmr" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="iX9-qQ-sfH"/>
+                <constraint firstItem="uPY-R9-DlG" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="peh-IJ-1Q6"/>
+                <constraint firstItem="lla-Xz-ekN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qMn-08-XTr"/>
+                <constraint firstItem="fcQ-l1-Wmr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="207" id="rRZ-80-P8c"/>
+                <constraint firstAttribute="bottom" secondItem="uPY-R9-DlG" secondAttribute="bottom" id="wXS-eg-f19"/>
+            </constraints>
+            <point key="canvasLocation" x="34" y="59"/>
+        </view>
+    </objects>
+</document>

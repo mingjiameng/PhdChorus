@@ -12,7 +12,38 @@
 		44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D36A1D9CD36F00325F2B /* ViewController.m */; };
 		44C0D36E1D9CD36F00325F2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D36C1D9CD36F00325F2B /* Main.storyboard */; };
 		44C0D3701D9CD36F00325F2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D36F1D9CD36F00325F2B /* Assets.xcassets */; };
-		44C0D3731D9CD36F00325F2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D3711D9CD36F00325F2B /* LaunchScreen.storyboard */; };
+		44C0D3DC1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3DA1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.m */; };
+		44C0D3DD1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D3DB1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.xib */; };
+		44C0D3E11D9CDF3700325F2B /* zkeySandboxHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3E01D9CDF3700325F2B /* zkeySandboxHelper.m */; };
+		44C0D3E31D9CDF4D00325F2B /* LibXL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C0D3E21D9CDF4D00325F2B /* LibXL.framework */; };
+		44C0D3E61D9CDF6200325F2B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C0D3E51D9CDF6200325F2B /* libstdc++.tbd */; };
+		44C0D3E81D9CDF6D00325F2B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C0D3E71D9CDF6D00325F2B /* libz.tbd */; };
+		44C0D3ED1D9CDFD200325F2B /* ZivStaticFunctionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3EB1D9CDFD200325F2B /* ZivStaticFunctionListViewController.m */; };
+		44C0D3EE1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D3EC1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib */; };
+		44C0D3F61D9CDFE700325F2B /* ZivExportExcelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3F11D9CDFE700325F2B /* ZivExportExcelViewController.m */; };
+		44C0D3F71D9CDFE700325F2B /* ZivExportExcelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D3F21D9CDFE700325F2B /* ZivExportExcelViewController.xib */; };
+		44C0D3F81D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3F41D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.m */; };
+		44C0D3F91D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D3F51D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.xib */; };
+		44C0D4011D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3FC1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.m */; };
+		44C0D4021D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D3FD1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.xib */; };
+		44C0D4031D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3FF1D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.m */; };
+		44C0D4041D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4001D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.xib */; };
+		44C0D40B1D9CE01800325F2B /* ZivInfoRegistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4071D9CE01800325F2B /* ZivInfoRegistTableViewController.m */; };
+		44C0D40C1D9CE01800325F2B /* ZivAddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4091D9CE01800325F2B /* ZivAddContactViewController.m */; };
+		44C0D40D1D9CE01800325F2B /* ZivAddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D40A1D9CE01800325F2B /* ZivAddContactViewController.xib */; };
+		44C0D41D1D9CE03100325F2B /* ZivAttendanceTableListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4101D9CE03100325F2B /* ZivAttendanceTableListViewController.m */; };
+		44C0D41E1D9CE03100325F2B /* ZivCreateRegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4121D9CE03100325F2B /* ZivCreateRegisterTableViewController.m */; };
+		44C0D41F1D9CE03100325F2B /* ZivCreateRegisterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4131D9CE03100325F2B /* ZivCreateRegisterTableViewController.xib */; };
+		44C0D4201D9CE03100325F2B /* ZivRegistOrLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4151D9CE03100325F2B /* ZivRegistOrLeaveViewController.m */; };
+		44C0D4211D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4161D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib */; };
+		44C0D4221D9CE03100325F2B /* ZivAskForLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4181D9CE03100325F2B /* ZivAskForLeaveViewController.m */; };
+		44C0D4231D9CE03100325F2B /* ZivAskForLeaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4191D9CE03100325F2B /* ZivAskForLeaveViewController.xib */; };
+		44C0D4241D9CE03100325F2B /* ZivRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D41B1D9CE03100325F2B /* ZivRegisterViewController.m */; };
+		44C0D4251D9CE03100325F2B /* ZivRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D41C1D9CE03100325F2B /* ZivRegisterViewController.xib */; };
+		44C0D42B1D9CE04000325F2B /* ZivDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4281D9CE04000325F2B /* ZivDBManager.m */; };
+		44C0D42C1D9CE04000325F2B /* ZivDBManager+Statics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D42A1D9CE04000325F2B /* ZivDBManager+Statics.mm */; };
+		44C0D4301D9CE07B00325F2B /* ZivRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D42F1D9CE07B00325F2B /* ZivRootViewController.m */; };
+		44C0D4321D9CE08900325F2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4311D9CE08900325F2B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +55,57 @@
 		44C0D36A1D9CD36F00325F2B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		44C0D36D1D9CD36F00325F2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		44C0D36F1D9CD36F00325F2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		44C0D3721D9CD36F00325F2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44C0D3741D9CD36F00325F2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44C0D3D91D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivMergeAttendanceTableViewController.h; sourceTree = "<group>"; };
+		44C0D3DA1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivMergeAttendanceTableViewController.m; sourceTree = "<group>"; };
+		44C0D3DB1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivMergeAttendanceTableViewController.xib; sourceTree = "<group>"; };
+		44C0D3DF1D9CDF3700325F2B /* zkeySandboxHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zkeySandboxHelper.h; sourceTree = "<group>"; };
+		44C0D3E01D9CDF3700325F2B /* zkeySandboxHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zkeySandboxHelper.m; sourceTree = "<group>"; };
+		44C0D3E21D9CDF4D00325F2B /* LibXL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LibXL.framework; sourceTree = "<group>"; };
+		44C0D3E51D9CDF6200325F2B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		44C0D3E71D9CDF6D00325F2B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		44C0D3EA1D9CDFD200325F2B /* ZivStaticFunctionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivStaticFunctionListViewController.h; sourceTree = "<group>"; };
+		44C0D3EB1D9CDFD200325F2B /* ZivStaticFunctionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivStaticFunctionListViewController.m; sourceTree = "<group>"; };
+		44C0D3EC1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivStaticFunctionListViewController.xib; sourceTree = "<group>"; };
+		44C0D3F01D9CDFE700325F2B /* ZivExportExcelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivExportExcelViewController.h; sourceTree = "<group>"; };
+		44C0D3F11D9CDFE700325F2B /* ZivExportExcelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivExportExcelViewController.m; sourceTree = "<group>"; };
+		44C0D3F21D9CDFE700325F2B /* ZivExportExcelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivExportExcelViewController.xib; sourceTree = "<group>"; };
+		44C0D3F31D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivSelectStartEndTimeViewController.h; sourceTree = "<group>"; };
+		44C0D3F41D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivSelectStartEndTimeViewController.m; sourceTree = "<group>"; };
+		44C0D3F51D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivSelectStartEndTimeViewController.xib; sourceTree = "<group>"; };
+		44C0D3FB1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivAttendanceStaticByDayViewController.h; sourceTree = "<group>"; };
+		44C0D3FC1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivAttendanceStaticByDayViewController.m; sourceTree = "<group>"; };
+		44C0D3FD1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivAttendanceStaticByDayViewController.xib; sourceTree = "<group>"; };
+		44C0D3FE1D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivAttendanceByDayAndPartViewController.h; sourceTree = "<group>"; };
+		44C0D3FF1D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivAttendanceByDayAndPartViewController.m; sourceTree = "<group>"; };
+		44C0D4001D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivAttendanceByDayAndPartViewController.xib; sourceTree = "<group>"; };
+		44C0D4061D9CE01800325F2B /* ZivInfoRegistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivInfoRegistTableViewController.h; sourceTree = "<group>"; };
+		44C0D4071D9CE01800325F2B /* ZivInfoRegistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivInfoRegistTableViewController.m; sourceTree = "<group>"; };
+		44C0D4081D9CE01800325F2B /* ZivAddContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivAddContactViewController.h; sourceTree = "<group>"; };
+		44C0D4091D9CE01800325F2B /* ZivAddContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivAddContactViewController.m; sourceTree = "<group>"; };
+		44C0D40A1D9CE01800325F2B /* ZivAddContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivAddContactViewController.xib; sourceTree = "<group>"; };
+		44C0D40F1D9CE03100325F2B /* ZivAttendanceTableListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivAttendanceTableListViewController.h; sourceTree = "<group>"; };
+		44C0D4101D9CE03100325F2B /* ZivAttendanceTableListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivAttendanceTableListViewController.m; sourceTree = "<group>"; };
+		44C0D4111D9CE03100325F2B /* ZivCreateRegisterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivCreateRegisterTableViewController.h; sourceTree = "<group>"; };
+		44C0D4121D9CE03100325F2B /* ZivCreateRegisterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivCreateRegisterTableViewController.m; sourceTree = "<group>"; };
+		44C0D4131D9CE03100325F2B /* ZivCreateRegisterTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivCreateRegisterTableViewController.xib; sourceTree = "<group>"; };
+		44C0D4141D9CE03100325F2B /* ZivRegistOrLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivRegistOrLeaveViewController.h; sourceTree = "<group>"; };
+		44C0D4151D9CE03100325F2B /* ZivRegistOrLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivRegistOrLeaveViewController.m; sourceTree = "<group>"; };
+		44C0D4161D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivRegistOrLeaveViewController.xib; sourceTree = "<group>"; };
+		44C0D4171D9CE03100325F2B /* ZivAskForLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivAskForLeaveViewController.h; sourceTree = "<group>"; };
+		44C0D4181D9CE03100325F2B /* ZivAskForLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivAskForLeaveViewController.m; sourceTree = "<group>"; };
+		44C0D4191D9CE03100325F2B /* ZivAskForLeaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivAskForLeaveViewController.xib; sourceTree = "<group>"; };
+		44C0D41A1D9CE03100325F2B /* ZivRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivRegisterViewController.h; sourceTree = "<group>"; };
+		44C0D41B1D9CE03100325F2B /* ZivRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivRegisterViewController.m; sourceTree = "<group>"; };
+		44C0D41C1D9CE03100325F2B /* ZivRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivRegisterViewController.xib; sourceTree = "<group>"; };
+		44C0D4271D9CE04000325F2B /* ZivDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivDBManager.h; sourceTree = "<group>"; };
+		44C0D4281D9CE04000325F2B /* ZivDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivDBManager.m; sourceTree = "<group>"; };
+		44C0D4291D9CE04000325F2B /* ZivDBManager+Statics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZivDBManager+Statics.h"; sourceTree = "<group>"; };
+		44C0D42A1D9CE04000325F2B /* ZivDBManager+Statics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "ZivDBManager+Statics.mm"; sourceTree = "<group>"; };
+		44C0D42E1D9CE07B00325F2B /* ZivRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivRootViewController.h; sourceTree = "<group>"; };
+		44C0D42F1D9CE07B00325F2B /* ZivRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivRootViewController.m; sourceTree = "<group>"; };
+		44C0D4311D9CE08900325F2B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		44C0D4341D9CE0E400325F2B /* SHARED_MICRO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHARED_MICRO.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +113,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44C0D3E81D9CDF6D00325F2B /* libz.tbd in Frameworks */,
+				44C0D3E61D9CDF6200325F2B /* libstdc++.tbd in Frameworks */,
+				44C0D3E31D9CDF4D00325F2B /* LibXL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +127,7 @@
 			children = (
 				44C0D3621D9CD36F00325F2B /* PhdChorus */,
 				44C0D3611D9CD36F00325F2B /* Products */,
+				44C0D3E41D9CDF6200325F2B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,14 +142,13 @@
 		44C0D3621D9CD36F00325F2B /* PhdChorus */ = {
 			isa = PBXGroup;
 			children = (
-				44C0D3661D9CD36F00325F2B /* AppDelegate.h */,
-				44C0D3671D9CD36F00325F2B /* AppDelegate.m */,
-				44C0D3691D9CD36F00325F2B /* ViewController.h */,
-				44C0D36A1D9CD36F00325F2B /* ViewController.m */,
-				44C0D36C1D9CD36F00325F2B /* Main.storyboard */,
-				44C0D36F1D9CD36F00325F2B /* Assets.xcassets */,
-				44C0D3711D9CD36F00325F2B /* LaunchScreen.storyboard */,
-				44C0D3741D9CD36F00325F2B /* Info.plist */,
+				44C0D42D1D9CE06900325F2B /* Root */,
+				44C0D4261D9CE03500325F2B /* Database */,
+				44C0D40E1D9CE02100325F2B /* SignIn */,
+				44C0D4051D9CE00D00325F2B /* AddNewMember */,
+				44C0D3E91D9CDFC700325F2B /* Statics */,
+				44C0D3DE1D9CDF2D00325F2B /* Helper */,
+				44C0D3D81D9CDF1C00325F2B /* API */,
 				44C0D3631D9CD36F00325F2B /* Supporting Files */,
 			);
 			path = PhdChorus;
@@ -74,9 +157,138 @@
 		44C0D3631D9CD36F00325F2B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				44C0D3691D9CD36F00325F2B /* ViewController.h */,
+				44C0D36A1D9CD36F00325F2B /* ViewController.m */,
+				44C0D36C1D9CD36F00325F2B /* Main.storyboard */,
+				44C0D4341D9CE0E400325F2B /* SHARED_MICRO.h */,
+				44C0D36F1D9CD36F00325F2B /* Assets.xcassets */,
+				44C0D3741D9CD36F00325F2B /* Info.plist */,
 				44C0D3641D9CD36F00325F2B /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		44C0D3D81D9CDF1C00325F2B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D3D91D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.h */,
+				44C0D3DA1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.m */,
+				44C0D3DB1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.xib */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		44C0D3DE1D9CDF2D00325F2B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D3DF1D9CDF3700325F2B /* zkeySandboxHelper.h */,
+				44C0D3E01D9CDF3700325F2B /* zkeySandboxHelper.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		44C0D3E41D9CDF6200325F2B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D3E21D9CDF4D00325F2B /* LibXL.framework */,
+				44C0D3E71D9CDF6D00325F2B /* libz.tbd */,
+				44C0D3E51D9CDF6200325F2B /* libstdc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		44C0D3E91D9CDFC700325F2B /* Statics */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D3EA1D9CDFD200325F2B /* ZivStaticFunctionListViewController.h */,
+				44C0D3EB1D9CDFD200325F2B /* ZivStaticFunctionListViewController.m */,
+				44C0D3EC1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib */,
+				44C0D3FA1D9CDFEB00325F2B /* StatisByDay */,
+				44C0D3EF1D9CDFD900325F2B /* Excel */,
+			);
+			name = Statics;
+			sourceTree = "<group>";
+		};
+		44C0D3EF1D9CDFD900325F2B /* Excel */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D3F01D9CDFE700325F2B /* ZivExportExcelViewController.h */,
+				44C0D3F11D9CDFE700325F2B /* ZivExportExcelViewController.m */,
+				44C0D3F21D9CDFE700325F2B /* ZivExportExcelViewController.xib */,
+				44C0D3F31D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.h */,
+				44C0D3F41D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.m */,
+				44C0D3F51D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.xib */,
+			);
+			name = Excel;
+			sourceTree = "<group>";
+		};
+		44C0D3FA1D9CDFEB00325F2B /* StatisByDay */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D3FB1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.h */,
+				44C0D3FC1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.m */,
+				44C0D3FD1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.xib */,
+				44C0D3FE1D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.h */,
+				44C0D3FF1D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.m */,
+				44C0D4001D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.xib */,
+			);
+			name = StatisByDay;
+			sourceTree = "<group>";
+		};
+		44C0D4051D9CE00D00325F2B /* AddNewMember */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D4061D9CE01800325F2B /* ZivInfoRegistTableViewController.h */,
+				44C0D4071D9CE01800325F2B /* ZivInfoRegistTableViewController.m */,
+				44C0D4081D9CE01800325F2B /* ZivAddContactViewController.h */,
+				44C0D4091D9CE01800325F2B /* ZivAddContactViewController.m */,
+				44C0D40A1D9CE01800325F2B /* ZivAddContactViewController.xib */,
+			);
+			name = AddNewMember;
+			sourceTree = "<group>";
+		};
+		44C0D40E1D9CE02100325F2B /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D40F1D9CE03100325F2B /* ZivAttendanceTableListViewController.h */,
+				44C0D4101D9CE03100325F2B /* ZivAttendanceTableListViewController.m */,
+				44C0D4111D9CE03100325F2B /* ZivCreateRegisterTableViewController.h */,
+				44C0D4121D9CE03100325F2B /* ZivCreateRegisterTableViewController.m */,
+				44C0D4131D9CE03100325F2B /* ZivCreateRegisterTableViewController.xib */,
+				44C0D4141D9CE03100325F2B /* ZivRegistOrLeaveViewController.h */,
+				44C0D4151D9CE03100325F2B /* ZivRegistOrLeaveViewController.m */,
+				44C0D4161D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib */,
+				44C0D4171D9CE03100325F2B /* ZivAskForLeaveViewController.h */,
+				44C0D4181D9CE03100325F2B /* ZivAskForLeaveViewController.m */,
+				44C0D4191D9CE03100325F2B /* ZivAskForLeaveViewController.xib */,
+				44C0D41A1D9CE03100325F2B /* ZivRegisterViewController.h */,
+				44C0D41B1D9CE03100325F2B /* ZivRegisterViewController.m */,
+				44C0D41C1D9CE03100325F2B /* ZivRegisterViewController.xib */,
+			);
+			name = SignIn;
+			sourceTree = "<group>";
+		};
+		44C0D4261D9CE03500325F2B /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D4271D9CE04000325F2B /* ZivDBManager.h */,
+				44C0D4281D9CE04000325F2B /* ZivDBManager.m */,
+				44C0D4291D9CE04000325F2B /* ZivDBManager+Statics.h */,
+				44C0D42A1D9CE04000325F2B /* ZivDBManager+Statics.mm */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		44C0D42D1D9CE06900325F2B /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				44C0D4311D9CE08900325F2B /* LaunchScreen.storyboard */,
+				44C0D42E1D9CE07B00325F2B /* ZivRootViewController.h */,
+				44C0D42F1D9CE07B00325F2B /* ZivRootViewController.m */,
+				44C0D3661D9CD36F00325F2B /* AppDelegate.h */,
+				44C0D3671D9CD36F00325F2B /* AppDelegate.m */,
+			);
+			name = Root;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +350,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44C0D3731D9CD36F00325F2B /* LaunchScreen.storyboard in Resources */,
+				44C0D3F91D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.xib in Resources */,
+				44C0D3F71D9CDFE700325F2B /* ZivExportExcelViewController.xib in Resources */,
+				44C0D4211D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib in Resources */,
+				44C0D40D1D9CE01800325F2B /* ZivAddContactViewController.xib in Resources */,
+				44C0D4021D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.xib in Resources */,
+				44C0D4231D9CE03100325F2B /* ZivAskForLeaveViewController.xib in Resources */,
+				44C0D3DD1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.xib in Resources */,
 				44C0D3701D9CD36F00325F2B /* Assets.xcassets in Resources */,
+				44C0D3EE1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib in Resources */,
 				44C0D36E1D9CD36F00325F2B /* Main.storyboard in Resources */,
+				44C0D4251D9CE03100325F2B /* ZivRegisterViewController.xib in Resources */,
+				44C0D4321D9CE08900325F2B /* LaunchScreen.storyboard in Resources */,
+				44C0D41F1D9CE03100325F2B /* ZivCreateRegisterTableViewController.xib in Resources */,
+				44C0D4041D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,9 +374,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44C0D41E1D9CE03100325F2B /* ZivCreateRegisterTableViewController.m in Sources */,
+				44C0D42B1D9CE04000325F2B /* ZivDBManager.m in Sources */,
 				44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */,
+				44C0D4201D9CE03100325F2B /* ZivRegistOrLeaveViewController.m in Sources */,
+				44C0D40C1D9CE01800325F2B /* ZivAddContactViewController.m in Sources */,
+				44C0D4241D9CE03100325F2B /* ZivRegisterViewController.m in Sources */,
+				44C0D4301D9CE07B00325F2B /* ZivRootViewController.m in Sources */,
+				44C0D4221D9CE03100325F2B /* ZivAskForLeaveViewController.m in Sources */,
+				44C0D3E11D9CDF3700325F2B /* zkeySandboxHelper.m in Sources */,
+				44C0D40B1D9CE01800325F2B /* ZivInfoRegistTableViewController.m in Sources */,
+				44C0D4011D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.m in Sources */,
+				44C0D3ED1D9CDFD200325F2B /* ZivStaticFunctionListViewController.m in Sources */,
+				44C0D3DC1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.m in Sources */,
+				44C0D3F81D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.m in Sources */,
+				44C0D42C1D9CE04000325F2B /* ZivDBManager+Statics.mm in Sources */,
+				44C0D4031D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.m in Sources */,
 				44C0D3681D9CD36F00325F2B /* AppDelegate.m in Sources */,
 				44C0D3651D9CD36F00325F2B /* main.m in Sources */,
+				44C0D41D1D9CE03100325F2B /* ZivAttendanceTableListViewController.m in Sources */,
+				44C0D3F61D9CDFE700325F2B /* ZivExportExcelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,14 +406,6 @@
 				44C0D36D1D9CD36F00325F2B /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		44C0D3711D9CD36F00325F2B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				44C0D3721D9CD36F00325F2B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -274,9 +506,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A535C7GTCH;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhdChorus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.overcode.Ziv.PhdChorus;
+				PRODUCT_BUNDLE_IDENTIFIER = com.overcode.lzp.PhdChorusCommunity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -286,9 +524,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A535C7GTCH;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PhdChorus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.overcode.Ziv.PhdChorus;
+				PRODUCT_BUNDLE_IDENTIFIER = com.overcode.lzp.PhdChorusCommunity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -312,6 +556,7 @@
 				44C0D3791D9CD36F00325F2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
