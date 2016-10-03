@@ -196,22 +196,22 @@
 /*
  * 每日出勤数据统计
  */
-- (void)part:(NSString *)part memberCountOfHighPart:(int *)highPartCount andLowPart:(int *)lowPartCount
+- (void)part:(NSString *)part memberCountOfHighPart:(NSInteger *)highPartCount andLowPart:(NSInteger *)lowPartCount
 {
     NSString *hightPartName = [part stringByAppendingString:@"1"];
     NSString *lowPartName = [part stringByAppendingString:@"2"];
     
-    *highPartCount = (int)[[[self.member_info_db objectForKey:hightPartName] allKeys] count];
-    *lowPartCount = (int)[[[self.member_info_db objectForKey:lowPartName] allKeys] count];
+    *highPartCount = [[[self.member_info_db objectForKey:hightPartName] allKeys] count];
+    *lowPartCount = [[[self.member_info_db objectForKey:lowPartName] allKeys] count];
 }
 
-- (void)part:(NSString *)part memberCountOfZhongguancun:(int *)zhongguancunCount andYanqi:(int *)yanqiCount
+- (void)part:(NSString *)part memberCountOfZhongguancun:(NSInteger *)zhongguancunCount andYanqi:(NSInteger *)yanqiCount
 {
     NSString *hightPartName = [part stringByAppendingString:@"1"];
     NSString *lowPartName = [part stringByAppendingString:@"2"];
     NSArray *partArray = @[hightPartName, lowPartName];
     
-    int yanqi_tmp = 0, zhongguancun_tmp = 0;
+    NSInteger yanqi_tmp = 0, zhongguancun_tmp = 0;
     
     for (NSString *partName in partArray) {
         NSDictionary *part_info = [self.member_info_db objectForKey:partName];
@@ -233,20 +233,20 @@
     *yanqiCount = yanqi_tmp;
 }
 
-- (void)part:(NSString *)part attendanceCountOfHighPart:(int *)highPartCount andLowPart:(int *)lowPartCount inAttendanceTable:(nonnull NSString *)tableName
+- (void)part:(NSString *)part attendanceCountOfHighPart:(NSInteger *)highPartCount andLowPart:(NSInteger *)lowPartCount inAttendanceTable:(nonnull NSString *)tableName
 {
     NSString *hightPartName = [part stringByAppendingString:@"1"];
     NSString *lowPartName = [part stringByAppendingString:@"2"];
     NSDictionary *attendanceTable = [self attendanceTableByName:tableName];
     
-    int high_part_count = (int)[[[attendanceTable objectForKey:hightPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
-    int low_part_count = (int)[[[attendanceTable objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
+    NSInteger high_part_count = [[[attendanceTable objectForKey:hightPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
+    NSInteger low_part_count = [[[attendanceTable objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
     
     *highPartCount = high_part_count;
     *lowPartCount = low_part_count;
 }
 
-- (void)part:(NSString *)part attendanceCountOfZhongguancun:(int *)zhongguancunCount andYanqi:(int *)yanqiCount inAttendanceTable:(nonnull NSString *)tableName
+- (void)part:(NSString *)part attendanceCountOfZhongguancun:(NSInteger *)zhongguancunCount andYanqi:(NSInteger *)yanqiCount inAttendanceTable:(nonnull NSString *)tableName
 {
     NSString *hightPartName = [part stringByAppendingString:@"1"];
     NSString *lowPartName = [part stringByAppendingString:@"2"];
@@ -255,7 +255,7 @@
     NSSet *hight_part_attendance_list = [[attendanceTable objectForKey:hightPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
     NSSet *low_part_attendance_list = [[attendanceTable objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
     
-    int zhongguancun_count = 0, yanqi_count = 0;
+    NSInteger zhongguancun_count = 0, yanqi_count = 0;
     NSString *zone = nil;
 
     for (NSString *name in hight_part_attendance_list) {
@@ -286,14 +286,14 @@
     return [personal_info objectForKey:MEMBER_INFO_KEY_ZONE];
 }
 
-- (void)part:(NSString *)part absenceCountOfHighPart:(int *)highPartCount andLowPart:(int *)lowPartCount inAttendanceTable:(nonnull NSString *)tableName
+- (void)part:(NSString *)part absenceCountOfHighPart:(NSInteger *)highPartCount andLowPart:(NSInteger *)lowPartCount inAttendanceTable:(nonnull NSString *)tableName
 {
     NSString *hightPartName = [part stringByAppendingString:@"1"];
     NSString *lowPartName = [part stringByAppendingString:@"2"];
     NSDictionary *attendanceTable = [self attendanceTableByName:tableName];
     
-    int high_part_count = (int)[[[attendanceTable objectForKey:hightPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST] count];
-    int low_part_count = (int)[[[attendanceTable objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST] count];
+    NSInteger high_part_count = [[[attendanceTable objectForKey:hightPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST] count];
+    NSInteger low_part_count = [[[attendanceTable objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST] count];
     
     *highPartCount = high_part_count;
     *lowPartCount = low_part_count;

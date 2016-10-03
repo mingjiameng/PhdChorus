@@ -11,6 +11,7 @@
 #import "ZivDBManager+Statics.h"
 
 @interface ZivStaticsDayAttendanceViewController () <UITableViewDelegate>
+
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *attendanceCountLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *absenceCountLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *zhongguancunAttendanceCountLabels;
@@ -24,29 +25,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    
+    self.title = @"签到统计";
+    [self calculateStatics];
 }
 
 - (void)calculateStatics
 {
     NSArray *partArray = @[ZivChorusPartS, ZivChorusPartA, ZivChorusPartT, ZivChorusPartB];
-    int member_count_high_part, member_count_low_part;
-    int member_count_zone_zhongguancun, member_count_zone_yanqi;
-    int attendance_count_high_part, attendance_count_low_part;
-    int absence_count_high_part, absence_count_low_part;
-    int attendance_count_zone_zhongguancun, attendance_count_zone_yanqi;
+    NSInteger member_count_high_part, member_count_low_part;
+    NSInteger member_count_zone_zhongguancun, member_count_zone_yanqi;
+    NSInteger attendance_count_high_part, attendance_count_low_part;
+    NSInteger absence_count_high_part, absence_count_low_part;
+    NSInteger attendance_count_zone_zhongguancun, attendance_count_zone_yanqi;
     NSString *partName = nil;
     UILabel *attendanceCountLabel, *absenceCountLabel, *zhongguancunAttendanceCountLabel, *yanqiAttendanceCountLabel;
     UILabel *highPartAttendanceLabel, *lowPartAttendanceLabel;
     
-    for (int i = 0; i < partArray.count; ++i) {
+    for (NSInteger i = 0; i < partArray.count; ++i) {
         partName = [partArray objectAtIndex:i];
         [[ZivDBManager shareDatabaseManager] part:partName memberCountOfHighPart:&member_count_high_part andLowPart:&member_count_low_part];
         [[ZivDBManager shareDatabaseManager] part:partName memberCountOfZhongguancun:&member_count_zone_zhongguancun andYanqi:&member_count_zone_yanqi];
-        [[ZivDBManager shareDatabaseManager] part:partName absenceCountOfHighPart:&absence_count_high_part andLowPart:&absence_count_low_part inAttendanceTable:self.tableName];
-        [[ZivDBManager shareDatabaseManager] part:partName attendanceCountOfHighPart:&attendance_count_high_part andLowPart:&attendance_count_low_part inAttendanceTable:self.tableName];
-        [[ZivDBManager shareDatabaseManager] part:partName attendanceCountOfZhongguancun:&attendance_count_zone_zhongguancun andYanqi:&attendance_count_zone_yanqi inAttendanceTable:self.tableName];
+        [[ZivDBManager shareDatabaseManager] part:partName absenceCountOfHighPart:&absence_count_high_part andLowPart:&absence_count_low_part inAttendanceTable:self.attendanceTableName];
+        [[ZivDBManager shareDatabaseManager] part:partName attendanceCountOfHighPart:&attendance_count_high_part andLowPart:&attendance_count_low_part inAttendanceTable:self.attendanceTableName];
+        [[ZivDBManager shareDatabaseManager] part:partName attendanceCountOfZhongguancun:&attendance_count_zone_zhongguancun andYanqi:&attendance_count_zone_yanqi inAttendanceTable:self.attendanceTableName];
         
         attendanceCountLabel = [self attendanceCountLabelOfPart:partName];
         absenceCountLabel = [self absenceCountLabelOfPart:partName];
@@ -55,12 +56,12 @@
         highPartAttendanceLabel = [self highPartCountLabelOfPart:partName];
         lowPartAttendanceLabel = [self lowPartCountLabelOfPart:partName];
         
-        attendanceCountLabel.text = [NSString stringWithFormat:@"出勤 %d", (attendance_count_high_part + attendance_count_low_part)];
-        absenceCountLabel.text = [NSString stringWithFormat:@"请假 %d", (absence_count_high_part + absence_count_low_part)];
-        zhongguancunAttendanceCountLabel.text = [NSString stringWithFormat:@"%d/%d", attendance_count_zone_zhongguancun, member_count_zone_zhongguancun];
-        yanqiAttendanceCountLabel.text = [NSString stringWithFormat:@"%d/%d", attendance_count_zone_yanqi, member_count_zone_yanqi];
-        lowPartAttendanceLabel.text = [NSString stringWithFormat:@"%d/%d", attendance_count_low_part, member_count_low_part];
-        highPartAttendanceLabel.text = [NSString stringWithFormat:@"%d/%d", attendance_count_high_part, member_count_high_part];
+        attendanceCountLabel.text = [NSString stringWithFormat:@"出勤 %ld", (attendance_count_high_part + attendance_count_low_part)];
+        absenceCountLabel.text = [NSString stringWithFormat:@"请假 %ld", (absence_count_high_part + absence_count_low_part)];
+        zhongguancunAttendanceCountLabel.text = [NSString stringWithFormat:@"%ld/%ld", attendance_count_zone_zhongguancun, member_count_zone_zhongguancun];
+        yanqiAttendanceCountLabel.text = [NSString stringWithFormat:@"%ld/%ld", attendance_count_zone_yanqi, member_count_zone_yanqi];
+        lowPartAttendanceLabel.text = [NSString stringWithFormat:@"%ld/%ld", attendance_count_low_part, member_count_low_part];
+        highPartAttendanceLabel.text = [NSString stringWithFormat:@"%ld/%ld", attendance_count_high_part, member_count_high_part];
         
         
     }
@@ -128,6 +129,8 @@
             return label;
         }
     }
+    
+    NSLog(@"can't find label with tagID:%ld", (long)tagID);
     
     return nil;
 }

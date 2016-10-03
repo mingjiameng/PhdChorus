@@ -10,6 +10,6 @@
 
 @interface ZivStaticsDayAttendanceViewController : UIViewController
 
-@property (strong, nonatomic, nonnull) NSString *tableName;
+@property (strong, nonatomic, nonnull) NSString *attendanceTableName;
 
 @end

@@ -100,9 +100,9 @@
         
     } else if (self.usage == ZivAttendanceTableListUsageStatic) {
 //        ZivAttendanceStaticByDayViewController *dayStaticVC = [[ZivAttendanceStaticByDayViewController alloc] init];
-//        dayStaticVC.attendanceTableName = [self.registerTableList objectAtIndex:indexPath.row];
         
         ZivStaticsDayAttendanceViewController *dayStaticVC = [[ZivStaticsDayAttendanceViewController alloc] init];
+        dayStaticVC.attendanceTableName = [self.registerTableList objectAtIndex:indexPath.row];
         
         [self.navigationController pushViewController:dayStaticVC animated:YES];
         
