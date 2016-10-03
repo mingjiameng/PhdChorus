@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4436032A1DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 443603281DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.m */; };
+		4436032B1DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443603291DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.xib */; };
 		44C0D3651D9CD36F00325F2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3641D9CD36F00325F2B /* main.m */; };
 		44C0D3681D9CD36F00325F2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3671D9CD36F00325F2B /* AppDelegate.m */; };
 		44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D36A1D9CD36F00325F2B /* ViewController.m */; };
@@ -47,6 +49,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		443603271DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivStaticsDayAttendanceViewController.h; sourceTree = "<group>"; };
+		443603281DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivStaticsDayAttendanceViewController.m; sourceTree = "<group>"; };
+		443603291DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivStaticsDayAttendanceViewController.xib; sourceTree = "<group>"; };
 		44C0D3601D9CD36F00325F2B /* PhdChorus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhdChorus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C0D3641D9CD36F00325F2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		44C0D3661D9CD36F00325F2B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -225,6 +230,9 @@
 		44C0D3FA1D9CDFEB00325F2B /* StatisByDay */ = {
 			isa = PBXGroup;
 			children = (
+				443603271DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.h */,
+				443603281DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.m */,
+				443603291DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.xib */,
 				44C0D3FB1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.h */,
 				44C0D3FC1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.m */,
 				44C0D3FD1D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.xib */,
@@ -359,6 +367,7 @@
 				44C0D3DD1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.xib in Resources */,
 				44C0D3701D9CD36F00325F2B /* Assets.xcassets in Resources */,
 				44C0D3EE1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib in Resources */,
+				4436032B1DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.xib in Resources */,
 				44C0D36E1D9CD36F00325F2B /* Main.storyboard in Resources */,
 				44C0D4251D9CE03100325F2B /* ZivRegisterViewController.xib in Resources */,
 				44C0D4321D9CE08900325F2B /* LaunchScreen.storyboard in Resources */,
@@ -387,6 +396,7 @@
 				44C0D4011D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.m in Sources */,
 				44C0D3ED1D9CDFD200325F2B /* ZivStaticFunctionListViewController.m in Sources */,
 				44C0D3DC1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.m in Sources */,
+				4436032A1DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.m in Sources */,
 				44C0D3F81D9CDFE700325F2B /* ZivSelectStartEndTimeViewController.m in Sources */,
 				44C0D42C1D9CE04000325F2B /* ZivDBManager+Statics.mm in Sources */,
 				44C0D4031D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.m in Sources */,

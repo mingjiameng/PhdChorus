@@ -19,8 +19,13 @@
 #define MEMBER_INFO_KEY_STAGE @"stage"
 #define MEMBER_INFO_KEY_ZONE @"zone"
 
-static  NSString * _Nonnull yanqi_zone = @"雁栖湖";
-static NSString * _Nonnull zhongguancun_zon = @"中关村";
+static NSString * _Nonnull ZivAttendanceZoneIdentifireYanqi = @"雁栖湖";
+static NSString * _Nonnull ZivAttendanceZoneIdentifireZhongguancun = @"中关村";
+
+static NSString * _Nonnull ZivChorusPartS = @"S";
+static NSString * _Nonnull ZivChorusPartA = @"A";
+static NSString * _Nonnull ZivChorusPartT = @"T";
+static NSString * _Nonnull ZivChorusPartB = @"B";
 
 @interface ZivDBManager : NSObject
 

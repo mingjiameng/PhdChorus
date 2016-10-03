@@ -17,6 +17,9 @@
 
 @implementation ZivDBManager (Statics)
 
+/*
+ * 导出Excel表
+ */
 - (nullable NSString *)exportAttendanceTableOfPart:(NSString *)part from:(NSString *)startTime to:(NSString *)endTime
 {
     if ([endTime compare:startTime] == NSOrderedAscending) {
@@ -48,9 +51,9 @@
     for (NSString *name in part_name_list) {
         personal_info = [part_info objectForKey:name];
         personal_zone = [personal_info objectForKey:MEMBER_INFO_KEY_ZONE];
-        if ([personal_zone compare:yanqi_zone] == NSOrderedSame) {
+        if ([personal_zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
             [yanqi_part_name_list addObject:name];
-        } else if ([personal_zone compare:zhongguancun_zon] == NSOrderedSame) {
+        } else if ([personal_zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
             [zhongguancun_part_name_list addObject:name];
         }
     }
@@ -165,9 +168,135 @@
 
 }
 
+// return nil if the attendance is not formal
+- (nullable NSString *)zoneOfAttendanceTable:(nonnull NSString *)attendaceDate
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    NSDate *date = [dateFormat dateFromString:attendaceDate];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:date];
+    
+    // 从周日开始算起 周日＝1
+    if (comps.weekday == 1) {
+        return ZivAttendanceZoneIdentifireYanqi;
+    } else if (comps.weekday == 7) {
+        return ZivAttendanceZoneIdentifireZhongguancun;
+    }
+    
+    return nil;
+}
+
 - (nonnull NSString *)publicPathForAttendanceExcelOfPart:(NSString *)part From:(NSString *)startTime to:(NSString *)endTime
 {
     return [[zkeySandboxHelper pathOfTmp] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@签到表%@.xls", startTime, endTime, part]];
+}
+
+
+/*
+ * 每日出勤数据统计
+ */
+- (void)part:(NSString *)part memberCountOfHighPart:(int *)highPartCount andLowPart:(int *)lowPartCount
+{
+    NSString *hightPartName = [part stringByAppendingString:@"1"];
+    NSString *lowPartName = [part stringByAppendingString:@"2"];
+    
+    *highPartCount = (int)[[[self.member_info_db objectForKey:hightPartName] allKeys] count];
+    *lowPartCount = (int)[[[self.member_info_db objectForKey:lowPartName] allKeys] count];
+}
+
+- (void)part:(NSString *)part memberCountOfZhongguancun:(int *)zhongguancunCount andYanqi:(int *)yanqiCount
+{
+    NSString *hightPartName = [part stringByAppendingString:@"1"];
+    NSString *lowPartName = [part stringByAppendingString:@"2"];
+    NSArray *partArray = @[hightPartName, lowPartName];
+    
+    int yanqi_tmp = 0, zhongguancun_tmp = 0;
+    
+    for (NSString *partName in partArray) {
+        NSDictionary *part_info = [self.member_info_db objectForKey:partName];
+        NSArray *nameArray = [part_info allKeys];
+        NSDictionary *personalInfoDic = nil;
+        NSString *zone = nil;
+        for (NSString *name in nameArray) {
+            personalInfoDic = [part_info objectForKey:name];
+            zone = [personalInfoDic objectForKey:MEMBER_INFO_KEY_ZONE];
+            if ([zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
+                ++zhongguancun_tmp;
+            } else if ([zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
+                ++yanqi_tmp;
+            }
+        }
+    }
+    
+    *zhongguancunCount = zhongguancun_tmp;
+    *yanqiCount = yanqi_tmp;
+}
+
+- (void)part:(NSString *)part attendanceCountOfHighPart:(int *)highPartCount andLowPart:(int *)lowPartCount inAttendanceTable:(nonnull NSString *)tableName
+{
+    NSString *hightPartName = [part stringByAppendingString:@"1"];
+    NSString *lowPartName = [part stringByAppendingString:@"2"];
+    NSDictionary *attendanceTable = [self attendanceTableByName:tableName];
+    
+    int high_part_count = (int)[[[attendanceTable objectForKey:hightPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
+    int low_part_count = (int)[[[attendanceTable objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
+    
+    *highPartCount = high_part_count;
+    *lowPartCount = low_part_count;
+}
+
+- (void)part:(NSString *)part attendanceCountOfZhongguancun:(int *)zhongguancunCount andYanqi:(int *)yanqiCount inAttendanceTable:(nonnull NSString *)tableName
+{
+    NSString *hightPartName = [part stringByAppendingString:@"1"];
+    NSString *lowPartName = [part stringByAppendingString:@"2"];
+    NSDictionary *attendanceTable = [self attendanceTableByName:tableName];
+    
+    NSSet *hight_part_attendance_list = [[attendanceTable objectForKey:hightPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+    NSSet *low_part_attendance_list = [[attendanceTable objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+    
+    int zhongguancun_count = 0, yanqi_count = 0;
+    NSString *zone = nil;
+
+    for (NSString *name in hight_part_attendance_list) {
+        zone = [self zoneOfMember:name inPart:hightPartName];
+        if ([zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
+            ++zhongguancun_count;
+        } else if ([zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
+            ++yanqi_count;
+        }
+    }
+    
+    for (NSString *name in low_part_attendance_list) {
+        zone = [self zoneOfMember:name inPart:lowPartName];
+        if ([zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
+            ++zhongguancun_count;
+        } else if ([zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
+            ++yanqi_count;
+        }
+    }
+    
+    *zhongguancunCount = zhongguancun_count;
+    *yanqiCount = yanqi_count;
+}
+
+- (nullable NSString *)zoneOfMember:(nonnull NSString *)name inPart:(nonnull NSString *)part
+{
+    NSDictionary *personal_info = [[self.member_info_db objectForKey:part] objectForKey:name];
+    return [personal_info objectForKey:MEMBER_INFO_KEY_ZONE];
+}
+
+- (void)part:(NSString *)part absenceCountOfHighPart:(int *)highPartCount andLowPart:(int *)lowPartCount inAttendanceTable:(nonnull NSString *)tableName
+{
+    NSString *hightPartName = [part stringByAppendingString:@"1"];
+    NSString *lowPartName = [part stringByAppendingString:@"2"];
+    NSDictionary *attendanceTable = [self attendanceTableByName:tableName];
+    
+    int high_part_count = (int)[[[attendanceTable objectForKey:hightPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST] count];
+    int low_part_count = (int)[[[attendanceTable objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST] count];
+    
+    *highPartCount = high_part_count;
+    *lowPartCount = low_part_count;
 }
 
 @end

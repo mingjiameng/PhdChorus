@@ -349,7 +349,7 @@
 - (NSArray *)zoneList
 {
     if (!_zoneList) {
-        _zoneList = @[yanqi_zone, zhongguancun_zon];
+        _zoneList = @[ZivAttendanceZoneIdentifireYanqi, ZivAttendanceZoneIdentifireZhongguancun];
     }
     
     return _zoneList;

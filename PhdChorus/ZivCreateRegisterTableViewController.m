@@ -113,6 +113,25 @@
     self.monthPickerView.delegate = self;
     self.dayPickerView.dataSource = self;
     self.dayPickerView.delegate = self;
+    
+    NSDateComponents *comps = [self currentYearMonthDay];
+    self.yearLabel.text = [NSString stringWithFormat:@"%ld", (long)comps.year];
+    self.monthLabel.text = [NSString stringWithFormat:@"%ld", (long)comps.month];
+    self.dayLabel.text = [NSString stringWithFormat:@"%ld", (long)comps.day];
+    
+    [self.yearPickerView selectRow:(comps.year - 2016) inComponent:0 animated:NO];
+    [self.monthPickerView selectRow:(comps.month - 1) inComponent:0 animated:NO];
+    [self.dayPickerView selectRow:(comps.day - 1) inComponent:0 animated:NO];
+}
+
+- (NSDateComponents *)currentYearMonthDay
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *currentDate = [NSDate date];
+    
+    NSDateComponents *comps = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:currentDate];
+
+    return comps;
 }
 
 - (NSArray *)yearArray

@@ -13,6 +13,7 @@
 #import "SHARED_MICRO.h"
 #import "ZivRegistOrLeaveViewController.h"
 #import "ZivAttendanceStaticByDayViewController.h"
+#import "ZivStaticsDayAttendanceViewController.h"
 
 @interface ZivAttendanceTableListViewController ()
 
@@ -30,8 +31,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (self.usage == ZivAttendanceTableListUsageAsign) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRegisterTable)];
+    }
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRegisterTable)];
     self.navigationItem.title = @"签到表";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:CREATE_ATTENDANCE_TABLE_NOTIFICATION object:nil];
@@ -96,8 +99,10 @@
         [self.navigationController pushViewController:registerVC animated:YES];
         
     } else if (self.usage == ZivAttendanceTableListUsageStatic) {
-        ZivAttendanceStaticByDayViewController *dayStaticVC = [[ZivAttendanceStaticByDayViewController alloc] init];
-        dayStaticVC.attendanceTableName = [self.registerTableList objectAtIndex:indexPath.row];
+//        ZivAttendanceStaticByDayViewController *dayStaticVC = [[ZivAttendanceStaticByDayViewController alloc] init];
+//        dayStaticVC.attendanceTableName = [self.registerTableList objectAtIndex:indexPath.row];
+        
+        ZivStaticsDayAttendanceViewController *dayStaticVC = [[ZivStaticsDayAttendanceViewController alloc] init];
         
         [self.navigationController pushViewController:dayStaticVC animated:YES];
         
