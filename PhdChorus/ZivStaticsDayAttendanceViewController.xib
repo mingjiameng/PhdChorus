@@ -210,8 +210,7 @@
                                         </stackView>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mn7-qq-yp2">
-                                    <frame key="frameInset" width="320" height="88"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mn7-qq-yp2">
                                     <connections>
                                         <action selector="selectPart:" destination="-1" eventType="touchUpInside" id="pph-ie-jv5"/>
                                     </connections>

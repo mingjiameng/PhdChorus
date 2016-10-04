@@ -35,19 +35,25 @@
     return  NSTemporaryDirectory();
 }
 
-+ (void)deleteFileAtPath:(NSString *)filePath
++ (BOOL)deleteFileAtPath:(NSString *)filePath
 {
     if (filePath == nil) {
-        return;
+        return NO;
     }
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:filePath]) {
-        NSError *error;
-        if (![fileManager removeItemAtPath:filePath error:&error]) {
-            NSLog(@"Unable to delete file: %@", [error localizedDescription]);
-        }
+    if (![fileManager fileExistsAtPath:filePath]) {
+        return YES;
     }
+    
+    
+    NSError *error;
+    if (![fileManager removeItemAtPath:filePath error:&error]) {
+        NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+        return NO;
+    }
+    
+    return YES;
 }
 
 + (BOOL)fileExitAtPath:(NSString *)filePath

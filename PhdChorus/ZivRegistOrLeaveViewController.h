@@ -10,6 +10,6 @@
 
 @interface ZivRegistOrLeaveViewController : UIViewController
 
-@property (nonatomic, strong) NSString *regiterTableName;
+@property (nonatomic, strong) NSString *attendanceTableName;
 
 @end

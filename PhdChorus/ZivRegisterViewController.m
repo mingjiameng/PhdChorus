@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIPickerView *partPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *namePickerView;
+@property (weak, nonatomic) IBOutlet UIButton *actionButton;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *partTextField;
@@ -32,15 +33,35 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.title = @"签到";
+    NSString *title = @"ERROR";
+    if (self.usage == ZivRegisterViewControllerUsageSignUp) {
+        title = @"签到";
+    } else if (self.usage ==ZivRegisterViewControllerUsageAskForLeave) {
+        title = @"请假";
+    } else if (self.usage == ZivRegisterViewControllerUsageAbsent) {
+        title = @"缺勤";
+    }
+    
+    self.navigationItem.title = title;
+    
     [self configInputView];
 }
 
-- (IBAction)register:(UIButton *)sender
+- (IBAction)action:(UIButton *)sender
 {
-    BOOL success = [[ZivDBManager shareDatabaseManager] attendAt:self.regiterTableName inPart:self.partTextField.text withName:self.nameTextField.text];
+    BOOL success = NO;
+    NSString *message = @"ERROR";
+    if (self.usage == ZivRegisterViewControllerUsageSignUp) {
+        success = [[ZivDBManager shareDatabaseManager] attendanceTable:self.attendanceTableName someoneSignUp:self.nameTextField.text inPart:self.partTextField.text];
+        message = (success ? @"签到成功" : @"签到失败");
+    } else if (self.usage == ZivRegisterViewControllerUsageAskForLeave) {
+        [[ZivDBManager shareDatabaseManager] attendanceTable:self.attendanceTableName someoneSignUp:self.nameTextField.text inPart:self.partTextField.text];
+        message = (success ? @"请假成功" : @"请假失败");
+    } else if (self.usage == ZivRegisterViewControllerUsageAbsent) {
+        success = [[ZivDBManager shareDatabaseManager] attendanceTable:self.attendanceTableName setSomeoneAbsent:self.nameTextField.text inPart:self.partTextField.text];
+        message = (success ? @"已将该人设为缺勤" : @"设置失败");
+    }
     
-    NSString *message = (success ? @"签到成功" : @"签到失败");
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:NULL];
@@ -59,6 +80,16 @@
     self.namePickerView.dataSource = self;
     self.namePickerView.delegate = self;
     self.nameTextField.delegate = self;
+    
+    NSString *title = @"ERROR";
+    if (self.usage == ZivRegisterViewControllerUsageSignUp) {
+        title = @"确认签到";
+    } else if (self.usage ==ZivRegisterViewControllerUsageAskForLeave) {
+        title = @"确认请假";
+    } else if (self.usage == ZivRegisterViewControllerUsageAbsent) {
+        title = @"设为缺勤";
+    }
+    [self.actionButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField

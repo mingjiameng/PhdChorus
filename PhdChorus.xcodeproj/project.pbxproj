@@ -40,8 +40,6 @@
 		44C0D41F1D9CE03100325F2B /* ZivCreateRegisterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4131D9CE03100325F2B /* ZivCreateRegisterTableViewController.xib */; };
 		44C0D4201D9CE03100325F2B /* ZivRegistOrLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4151D9CE03100325F2B /* ZivRegistOrLeaveViewController.m */; };
 		44C0D4211D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4161D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib */; };
-		44C0D4221D9CE03100325F2B /* ZivAskForLeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4181D9CE03100325F2B /* ZivAskForLeaveViewController.m */; };
-		44C0D4231D9CE03100325F2B /* ZivAskForLeaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4191D9CE03100325F2B /* ZivAskForLeaveViewController.xib */; };
 		44C0D4241D9CE03100325F2B /* ZivRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D41B1D9CE03100325F2B /* ZivRegisterViewController.m */; };
 		44C0D4251D9CE03100325F2B /* ZivRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D41C1D9CE03100325F2B /* ZivRegisterViewController.xib */; };
 		44C0D42B1D9CE04000325F2B /* ZivDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D4281D9CE04000325F2B /* ZivDBManager.m */; };
@@ -102,9 +100,6 @@
 		44C0D4141D9CE03100325F2B /* ZivRegistOrLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivRegistOrLeaveViewController.h; sourceTree = "<group>"; };
 		44C0D4151D9CE03100325F2B /* ZivRegistOrLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivRegistOrLeaveViewController.m; sourceTree = "<group>"; };
 		44C0D4161D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivRegistOrLeaveViewController.xib; sourceTree = "<group>"; };
-		44C0D4171D9CE03100325F2B /* ZivAskForLeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivAskForLeaveViewController.h; sourceTree = "<group>"; };
-		44C0D4181D9CE03100325F2B /* ZivAskForLeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivAskForLeaveViewController.m; sourceTree = "<group>"; };
-		44C0D4191D9CE03100325F2B /* ZivAskForLeaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivAskForLeaveViewController.xib; sourceTree = "<group>"; };
 		44C0D41A1D9CE03100325F2B /* ZivRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivRegisterViewController.h; sourceTree = "<group>"; };
 		44C0D41B1D9CE03100325F2B /* ZivRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivRegisterViewController.m; sourceTree = "<group>"; };
 		44C0D41C1D9CE03100325F2B /* ZivRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivRegisterViewController.xib; sourceTree = "<group>"; };
@@ -274,9 +269,6 @@
 				44C0D4141D9CE03100325F2B /* ZivRegistOrLeaveViewController.h */,
 				44C0D4151D9CE03100325F2B /* ZivRegistOrLeaveViewController.m */,
 				44C0D4161D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib */,
-				44C0D4171D9CE03100325F2B /* ZivAskForLeaveViewController.h */,
-				44C0D4181D9CE03100325F2B /* ZivAskForLeaveViewController.m */,
-				44C0D4191D9CE03100325F2B /* ZivAskForLeaveViewController.xib */,
 				44C0D41A1D9CE03100325F2B /* ZivRegisterViewController.h */,
 				44C0D41B1D9CE03100325F2B /* ZivRegisterViewController.m */,
 				44C0D41C1D9CE03100325F2B /* ZivRegisterViewController.xib */,
@@ -372,7 +364,6 @@
 				44C0D4211D9CE03100325F2B /* ZivRegistOrLeaveViewController.xib in Resources */,
 				44C0D40D1D9CE01800325F2B /* ZivAddContactViewController.xib in Resources */,
 				44C0D4021D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.xib in Resources */,
-				44C0D4231D9CE03100325F2B /* ZivAskForLeaveViewController.xib in Resources */,
 				44C0D3DD1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.xib in Resources */,
 				44C0D3701D9CD36F00325F2B /* Assets.xcassets in Resources */,
 				44C0D3EE1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib in Resources */,
@@ -399,7 +390,6 @@
 				44C0D40C1D9CE01800325F2B /* ZivAddContactViewController.m in Sources */,
 				44C0D4241D9CE03100325F2B /* ZivRegisterViewController.m in Sources */,
 				44C0D4301D9CE07B00325F2B /* ZivRootViewController.m in Sources */,
-				44C0D4221D9CE03100325F2B /* ZivAskForLeaveViewController.m in Sources */,
 				4436032F1DA33ED800BA63C4 /* ZivDayAttendanceViewController.m in Sources */,
 				44C0D3E11D9CDF3700325F2B /* zkeySandboxHelper.m in Sources */,
 				44C0D40B1D9CE01800325F2B /* ZivInfoRegistTableViewController.m in Sources */,

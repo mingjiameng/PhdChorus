@@ -42,9 +42,9 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 - (BOOL)createAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(nonnull NSString *)attendanceTableDate withDescription:(BOOL)isFormalAttendance;
 - (nonnull NSArray<NSString *> *)attendanceTableList;
 
-- (BOOL)attendAt:(nonnull NSString *)attendanceTableName inPart:(nonnull NSString *)part withName:(nonnull NSString *)name;
-- (BOOL)askForLeaveInAttendanceTable:(nonnull  NSString *)date Part:(nonnull NSString *)part Name:(nonnull NSString *)name Reason:(nonnull NSString *)reason;
-
+- (BOOL)attendanceTable:(nonnull NSString *)attendanceTableName someoneSignUp:(nonnull NSString *)name inPart:(nonnull NSString *)part;
+- (BOOL)attendanceTable:(nonnull NSString *)attendanceTableName someoneAskForLeve:(nonnull NSString *)name inPart:(nonnull NSString *)part;
+- (BOOL)attendanceTable:(nonnull NSString *)attendanceTableName setSomeoneAbsent:(nonnull NSString *)name inPart:(nonnull NSString *)part;
 
 - (NSInteger)numberOfMemberInPart:(nonnull NSString *)part;
 - (nonnull NSArray *)partList;
@@ -62,5 +62,6 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 - (BOOL)mergeAttendanceTableToLocalDatabase:(nonnull NSData *)attendanceTableData;
 
 - (BOOL)removeName:(nonnull NSArray *)nameList inPart:(nonnull NSString *)part FromAttendanceTable:(nonnull NSString *)attendanceTableName;
+- (BOOL)deleteAttendanceTable:(nonnull NSString *)attendanceTableName;
 
 @end

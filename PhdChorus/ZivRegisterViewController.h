@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, ZivRegisterViewControllerUsage) {
+    ZivRegisterViewControllerUsageSignUp = 1,
+    ZivRegisterViewControllerUsageAskForLeave = 2,
+    ZivRegisterViewControllerUsageAbsent = 3
+};
+
 @interface ZivRegisterViewController : UIViewController
 
-@property (nonatomic, strong) NSString *regiterTableName;
+@property (nonatomic, strong) NSString *attendanceTableName;
+@property (nonatomic) ZivRegisterViewControllerUsage usage;
 
 @end

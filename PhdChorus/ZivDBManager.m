@@ -131,7 +131,7 @@
         [self.attendance_table_list addObject:attendanceTableName];
         self.currentAttendanceTable = [self newAttendanceTable:attendanceTableName inDate:attendanceTableDate withDescription:isFormalAttendance];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:CREATE_ATTENDANCE_TABLE_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
         
         return YES;
     }
@@ -166,7 +166,7 @@
     return tableList;
 }
 
-- (BOOL)attendAt:(NSString *)attendanceTableName inPart:(NSString *)part withName:(NSString *)name
+- (BOOL)attendanceTable:(NSString *)attendanceTableName someoneSignUp:(NSString *)name inPart:(NSString *)part
 {
     //NSLog(@"db manipulation attendance table:%@ part:%@ name:%@", attendanceTableName, part, name);
     
@@ -191,7 +191,7 @@
     return YES;
 }
 
-- (BOOL)askForLeaveInAttendanceTable:(NSString *)date Part:(NSString *)part Name:(NSString *)name Reason:(NSString *)reason
+- (BOOL)attendanceTable:(NSString *)attendanceTableName someoneAskForLeve:(nonnull NSString *)name inPart:(nonnull NSString *)part
 {
     //NSLog(@"db manipulation regist: date:%@ part:%@ name:%@", date, part, name);
     
@@ -199,7 +199,7 @@
         return NO;
     }
     
-    if (![self switchToAttendanceTable:date]) {
+    if (![self switchToAttendanceTable:attendanceTableName]) {
         return NO;
     }
     
@@ -212,6 +212,27 @@
     [part_attendance_list removeObject:name];
     
     //NSLog(@"ask for leave table:%@", self.currentAttendanceTable);
+    
+    return YES;
+}
+
+- (BOOL)attendanceTable:(NSString *)attendanceTableName setSomeoneAbsent:(NSString *)name inPart:(NSString *)part
+{
+    if (![self nameExist:name inPart:part]) {
+        return NO;
+    }
+    
+    if (![self switchToAttendanceTable:attendanceTableName]) {
+        return NO;
+    }
+    
+    NSMutableDictionary *part_info = [self.currentAttendanceTable objectForKey:part];
+    
+    NSMutableSet *part_ask_for_leave_list = [part_info objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+    [part_ask_for_leave_list removeObject:name];
+    
+    NSMutableSet *part_attendance_list = [part_info objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+    [part_attendance_list removeObject:name];
     
     return YES;
 }
@@ -531,6 +552,36 @@
         [part_ask_for_leave_list removeObject:name];
     }
     
+    
+    return YES;
+}
+
+- (BOOL)deleteAttendanceTable:(NSString *)attendanceTableName
+{
+    NSString *path = [self pathOfAttendanceTableFile:attendanceTableName];
+    if (![zkeySandboxHelper deleteFileAtPath:path]) {
+        return NO;
+    }
+    
+    NSInteger index = 0;
+    NSString *tableName = nil;
+    for (index = 0; index < self.attendance_table_list.count; ++index) {
+        tableName = [self.attendance_table_list objectAtIndex:index];
+        if ([tableName compare:attendanceTableName] == NSOrderedSame) {
+            break;
+        }
+    }
+    
+    if (!([tableName compare:attendanceTableName] == NSOrderedSame)) {
+        return NO;
+    }
+    
+    [self.attendance_table_list removeObjectAtIndex:index];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
+    
+    // 删除成功 将当前签到表置空
+    self.currentAttendanceTable = nil;
     
     return YES;
 }

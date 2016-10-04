@@ -37,7 +37,7 @@
     
     self.navigationItem.title = @"签到表";
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:CREATE_ATTENDANCE_TABLE_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
 
 }
 
@@ -94,7 +94,7 @@
     if (self.usage == ZivAttendanceTableListUsageAsign) {
         ZivRegistOrLeaveViewController *registerVC = [[ZivRegistOrLeaveViewController alloc] init];
         registerVC.hidesBottomBarWhenPushed = YES;
-        registerVC.regiterTableName = [self.registerTableList objectAtIndex:indexPath.row];
+        registerVC.attendanceTableName = [self.registerTableList objectAtIndex:indexPath.row];
         
         [self.navigationController pushViewController:registerVC animated:YES];
         
@@ -113,7 +113,7 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CREATE_ATTENDANCE_TABLE_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
 }
 
 /*

@@ -14,7 +14,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkB-dt-wwm">
@@ -27,7 +27,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="register:" destination="-1" eventType="touchUpInside" id="Ikt-3w-UMJ"/>
+                        <action selector="signUp:" destination="-1" eventType="touchUpInside" id="Bxt-Uo-qgQ"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EdY-m8-4Ti">
@@ -43,15 +43,57 @@
                         <action selector="leave:" destination="-1" eventType="touchUpInside" id="GIn-Y9-Awj"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1k-l9-8UF">
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="YhV-h9-sOt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="删除签到表">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="deleteAttendanceTable:" destination="-1" eventType="touchUpInside" id="jeU-we-Ghf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dje-3o-h6O">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="PvR-44-nsX"/>
+                        <constraint firstAttribute="height" constant="50" id="Xlg-IK-hDX"/>
+                    </constraints>
+                    <state key="normal" title="设为缺勤">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setAbsent:" destination="-1" eventType="touchUpInside" id="YxW-cm-aIy"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未签到且未请假的人会被系统自动设为缺勤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Me-Zh-5WY">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="Cul-pb-cRU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="EdY-m8-4Ti" firstAttribute="top" secondItem="mkB-dt-wwm" secondAttribute="bottom" constant="100" id="Go2-cT-tRf"/>
-                <constraint firstItem="mkB-dt-wwm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="150" id="Sc7-2e-xbU"/>
+                <constraint firstItem="g1k-l9-8UF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BIq-mh-Qtj"/>
+                <constraint firstItem="EdY-m8-4Ti" firstAttribute="top" secondItem="mkB-dt-wwm" secondAttribute="bottom" constant="80" id="Go2-cT-tRf"/>
+                <constraint firstAttribute="bottom" secondItem="g1k-l9-8UF" secondAttribute="bottom" id="P9k-PE-tBN"/>
+                <constraint firstItem="mkB-dt-wwm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="Sc7-2e-xbU"/>
+                <constraint firstItem="dje-3o-h6O" firstAttribute="top" secondItem="EdY-m8-4Ti" secondAttribute="bottom" constant="80" id="T0a-eO-Ize"/>
+                <constraint firstItem="g1k-l9-8UF" firstAttribute="top" secondItem="6Me-Zh-5WY" secondAttribute="bottom" constant="8" id="Ty4-Gr-CZx"/>
+                <constraint firstItem="6Me-Zh-5WY" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="WW4-nd-MOx"/>
+                <constraint firstItem="6Me-Zh-5WY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uw1-o5-2g3"/>
+                <constraint firstItem="g1k-l9-8UF" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="xbw-XN-t8u"/>
                 <constraint firstItem="EdY-m8-4Ti" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xnd-o9-MAa"/>
                 <constraint firstItem="mkB-dt-wwm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="y6X-UG-K52"/>
+                <constraint firstItem="dje-3o-h6O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zGf-S6-Ced"/>
             </constraints>
-            <point key="canvasLocation" x="34.5" y="59.5"/>
+            <point key="canvasLocation" x="34" y="59"/>
         </view>
     </objects>
 </document>

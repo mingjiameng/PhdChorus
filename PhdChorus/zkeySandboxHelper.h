@@ -18,7 +18,7 @@
 + (NSString *)pathOfLibrary_Caches;
 //+ (NSString *)pathOfLibrary_Preferences;
 + (NSString *)pathOfTmp;
-+ (void)deleteFileAtPath:(NSString *)filePath;
++ (BOOL)deleteFileAtPath:(NSString *)filePath;
 + (BOOL)fileExitAtPath:(NSString *)filePath;
 + (NSString *)getDeviceString;
 

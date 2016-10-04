@@ -61,12 +61,12 @@
         highPartAttendanceLabel = [self highPartCountLabelOfPart:partName];
         lowPartAttendanceLabel = [self lowPartCountLabelOfPart:partName];
         
-        attendanceCountLabel.text = [NSString stringWithFormat:@"出勤 %ld", (attendance_count_high_part + attendance_count_low_part)];
-        absenceCountLabel.text = [NSString stringWithFormat:@"请假 %ld", (absence_count_high_part + absence_count_low_part)];
-        zhongguancunAttendanceCountLabel.text = [NSString stringWithFormat:@"%ld/%ld", attendance_count_zone_zhongguancun, member_count_zone_zhongguancun];
-        yanqiAttendanceCountLabel.text = [NSString stringWithFormat:@"%ld/%ld", attendance_count_zone_yanqi, member_count_zone_yanqi];
-        lowPartAttendanceLabel.text = [NSString stringWithFormat:@"%ld/%ld", attendance_count_low_part, member_count_low_part];
-        highPartAttendanceLabel.text = [NSString stringWithFormat:@"%ld/%ld", attendance_count_high_part, member_count_high_part];
+        attendanceCountLabel.text = [NSString stringWithFormat:@"出勤 %ld", (long)(attendance_count_high_part + attendance_count_low_part)];
+        absenceCountLabel.text = [NSString stringWithFormat:@"请假 %ld", (long)(absence_count_high_part + absence_count_low_part)];
+        zhongguancunAttendanceCountLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)attendance_count_zone_zhongguancun, (long)member_count_zone_zhongguancun];
+        yanqiAttendanceCountLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)attendance_count_zone_yanqi, (long)member_count_zone_yanqi];
+        lowPartAttendanceLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)attendance_count_low_part, (long)member_count_low_part];
+        highPartAttendanceLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)attendance_count_high_part, (long)member_count_high_part];
         
         
     }
@@ -165,8 +165,6 @@
 
 - (IBAction)selectPart:(UIButton *)sender
 {
-    NSLog(@"touched");
-    
     NSString *part = [self partOfTagID:sender.tag];
     ZivDayAttendanceViewController *dayVC = [[ZivDayAttendanceViewController alloc] init];
     dayVC.part = part;
