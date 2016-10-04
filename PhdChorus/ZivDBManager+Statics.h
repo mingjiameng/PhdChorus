@@ -17,6 +17,10 @@
 - (void)part:(nonnull NSString *)part attendanceCountOfHighPart:(nonnull NSInteger *)highPartCount andLowPart:(nonnull NSInteger *)lowPartCount inAttendanceTable:(nonnull NSString *)tableName;
 - (void)part:(nonnull NSString *)part attendanceCountOfZhongguancun:(nonnull NSInteger *)zhongguancunCount andYanqi:(nonnull NSInteger *)yanqiCount inAttendanceTable:(nonnull NSString *)tableName;
 
+// 蓝色字－声部名（T1、T2） 黑色字－中关村 灰色字－雁栖湖 字号－14
+- (nonnull NSAttributedString *)part:(nonnull NSString *)part attendanceNameListInAttendanceTable:(nonnull NSString *)tableName;
+- (nonnull NSAttributedString *)part:(nonnull NSString *)part askForLeaveNameListInAttendanceTable:(nonnull NSString *)tableName;
+
 - (nullable NSString *)exportAttendanceTableOfPart:(nonnull NSString *)part from:(nonnull NSString *)startTime to:(nonnull NSString *)endTime;
 
 @end

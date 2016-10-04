@@ -10,6 +10,8 @@
 
 #import "ZivDBManager+Statics.h"
 
+#import "ZivDayAttendanceViewController.h"
+
 @interface ZivStaticsDayAttendanceViewController () <UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *attendanceCountLabels;
@@ -17,6 +19,8 @@
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *zhongguancunAttendanceCountLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *yanqiAttendanceCountLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *partAttendanceLabels;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 
 @end
 
@@ -26,6 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"签到统计";
+    self.titleLabel.text = self.attendanceTableName;
     [self calculateStatics];
 }
 
@@ -122,6 +127,29 @@
     return -1;
 }
 
+- (NSString *)partOfTagID:(NSInteger)tagID
+{
+    switch (tagID) {
+        case 0:
+            return ZivChorusPartS;
+            break;
+        case 1:
+            return ZivChorusPartA;
+            break;
+        case 2:
+            return ZivChorusPartT;
+            break;
+        case 3:
+            return ZivChorusPartB;
+            break;
+            
+        default:
+            break;
+    }
+    
+    return nil;
+}
+
 - (nullable UILabel *)labelWithTagID:(NSInteger)tagID inLabelArray:(NSArray *)labelArray
 {
     for (UILabel *label in labelArray) {
@@ -134,6 +162,18 @@
     
     return nil;
 }
+
+- (IBAction)selectPart:(UIButton *)sender
+{
+    NSLog(@"touched");
+    
+    NSString *part = [self partOfTagID:sender.tag];
+    ZivDayAttendanceViewController *dayVC = [[ZivDayAttendanceViewController alloc] init];
+    dayVC.part = part;
+    dayVC.attendanceTableName = self.attendanceTableName;
+    [self.navigationController pushViewController:dayVC animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

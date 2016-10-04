@@ -11,6 +11,9 @@
 #import <LibXL/LibXL.h>
 #import "zkeySandboxHelper.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /*
  * 数据统计相关
  */
@@ -297,6 +300,77 @@
     
     *highPartCount = high_part_count;
     *lowPartCount = low_part_count;
+}
+
+- (NSAttributedString *)part:(NSString *)part attendanceNameListInAttendanceTable:(NSString *)tableName
+{
+    NSDictionary *table = [self attendanceTableByName:tableName];
+    NSString *highPartName = [part stringByAppendingString:@"1"];
+    NSString *lowPartName = [part stringByAppendingString:@"2"];
+    NSSet *highPartNameList = [[table objectForKey:highPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+    NSSet *lowPartNameList = [[table objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+    
+    return [self attributedNameListWithPart:@[highPartName, lowPartName] andPartMemberList:@[highPartNameList, lowPartNameList]];
+}
+
+- (nonnull NSAttributedString *)attributedNameListWithPart:(NSArray *)partArray andPartMemberList:(NSArray *)partMemberArray
+{
+    if (partArray.count != partMemberArray.count) {
+        return nil;
+    }
+    
+    if (partArray.count <= 0) {
+        return [[NSAttributedString alloc] initWithString:@""];
+    }
+    
+    CGFloat fontSize = 14.0;
+    UIFont *universalFont = [UIFont systemFontOfSize:fontSize];
+    UIColor *partNameColor = [UIColor colorWithRed:0.0/255 green:122.0/255 blue:255.0/255 alpha:1.0];
+    UIColor *zhongguancunColor = [UIColor blackColor];
+    UIColor *yanqiColor = [UIColor lightGrayColor];
+    NSDictionary *partNameAttribute = @{NSFontAttributeName : universalFont,
+                                        NSForegroundColorAttributeName : partNameColor};
+    NSDictionary *yanqiAttribute = @{NSFontAttributeName : universalFont,
+                                     NSForegroundColorAttributeName : yanqiColor};
+    NSDictionary *zhongguancunAttribute = @{NSFontAttributeName : universalFont,
+                                            NSForegroundColorAttributeName : zhongguancunColor};
+    
+    NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
+    NSString *zone = nil;
+    NSAttributedString *attributedName = nil;
+    
+    for (int index = 0; index < partArray.count; ++index) {
+        NSString *part = [partArray objectAtIndex:index];
+        NSArray *partNameList = [partMemberArray objectAtIndex:index];
+        NSAttributedString *attributedPartName = [[NSAttributedString alloc] initWithString:[part stringByAppendingString:@"："] attributes:partNameAttribute];
+        [result appendAttributedString:attributedPartName];
+        
+        for (NSString *name in partNameList) {
+            zone = [self zoneOfMember:name inPart:part];
+            if ([zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
+                attributedName = [[NSAttributedString alloc] initWithString:[name stringByAppendingString:@"、"] attributes:zhongguancunAttribute];
+            } else if ([zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
+                attributedName = [[NSAttributedString alloc] initWithString:[name stringByAppendingString:@"、"] attributes:yanqiAttribute];
+            }
+            
+            [result appendAttributedString:attributedName];
+        }
+        
+        [result appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:partNameAttribute]];
+    }
+    
+    return result;
+}
+
+- (NSAttributedString *)part:(NSString *)part askForLeaveNameListInAttendanceTable:(NSString *)tableName
+{
+    NSDictionary *table = [self attendanceTableByName:tableName];
+    NSString *highPartName = [part stringByAppendingString:@"1"];
+    NSString *lowPartName = [part stringByAppendingString:@"2"];
+    NSSet *highPartNameList = [[table objectForKey:highPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+    NSSet *lowPartNameList = [[table objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+    
+    return [self attributedNameListWithPart:@[highPartName, lowPartName] andPartMemberList:@[highPartNameList, lowPartNameList]];
 }
 
 @end

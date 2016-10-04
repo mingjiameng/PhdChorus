@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZivStaticsDayAttendanceViewController">
             <connections>
+                <outlet property="titleLabel" destination="vJr-kB-G5V" id="lIT-86-LzE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="attendanceCountLabels" destination="3Kb-K0-1V2" id="P96-zt-B3m"/>
                 <outletCollection property="attendanceCountLabels" destination="zzi-wY-Yaz" id="wKa-pS-IkT"/>
@@ -209,12 +210,22 @@
                                         </stackView>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mn7-qq-yp2">
+                                    <frame key="frameInset" width="320" height="88"/>
+                                    <connections>
+                                        <action selector="selectPart:" destination="-1" eventType="touchUpInside" id="pph-ie-jv5"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="1uE-vr-cfa" firstAttribute="height" secondItem="mwT-8O-Jgj" secondAttribute="height" id="ME4-T5-IKG"/>
+                                <constraint firstItem="mn7-qq-yp2" firstAttribute="centerX" secondItem="mwT-8O-Jgj" secondAttribute="centerX" id="Mzs-sL-Qud"/>
                                 <constraint firstItem="1uE-vr-cfa" firstAttribute="centerY" secondItem="mwT-8O-Jgj" secondAttribute="centerY" id="OLm-og-c1Z"/>
+                                <constraint firstItem="mn7-qq-yp2" firstAttribute="height" secondItem="mwT-8O-Jgj" secondAttribute="height" id="aTd-1b-kJb"/>
+                                <constraint firstItem="mn7-qq-yp2" firstAttribute="width" secondItem="mwT-8O-Jgj" secondAttribute="width" id="aZi-ev-ubv"/>
                                 <constraint firstAttribute="trailing" secondItem="1uE-vr-cfa" secondAttribute="trailing" id="i9H-O5-Tfa"/>
+                                <constraint firstItem="mn7-qq-yp2" firstAttribute="centerY" secondItem="mwT-8O-Jgj" secondAttribute="centerY" id="iVG-cY-oK4"/>
                                 <constraint firstItem="0Jd-TO-0Ml" firstAttribute="leading" secondItem="mwT-8O-Jgj" secondAttribute="leading" id="lDN-Kv-ZbO"/>
                                 <constraint firstItem="0Jd-TO-0Ml" firstAttribute="centerY" secondItem="mwT-8O-Jgj" secondAttribute="centerY" id="mmc-dg-JmM"/>
                                 <constraint firstItem="1uE-vr-cfa" firstAttribute="leading" secondItem="0Jd-TO-0Ml" secondAttribute="trailing" constant="1" id="oGc-4b-p4E"/>
@@ -380,6 +391,11 @@
                                         </stackView>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXn-AX-niI">
+                                    <connections>
+                                        <action selector="selectPart:" destination="-1" eventType="touchUpInside" id="0bu-kh-M37"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
@@ -389,7 +405,11 @@
                                 <constraint firstItem="DSb-dQ-qMF" firstAttribute="centerY" secondItem="Axg-gX-hN6" secondAttribute="centerY" id="CM7-aX-Qd6"/>
                                 <constraint firstItem="DSb-dQ-qMF" firstAttribute="leading" secondItem="zhf-AH-QMn" secondAttribute="trailing" constant="1" id="Fij-hx-Ten"/>
                                 <constraint firstItem="DSb-dQ-qMF" firstAttribute="height" secondItem="Axg-gX-hN6" secondAttribute="height" id="LGr-Kc-7ty"/>
+                                <constraint firstItem="QXn-AX-niI" firstAttribute="centerX" secondItem="Axg-gX-hN6" secondAttribute="centerX" id="VeF-FT-JUc"/>
+                                <constraint firstItem="QXn-AX-niI" firstAttribute="width" secondItem="Axg-gX-hN6" secondAttribute="width" id="hJA-hf-b0I"/>
+                                <constraint firstItem="QXn-AX-niI" firstAttribute="centerY" secondItem="Axg-gX-hN6" secondAttribute="centerY" id="k1v-7O-QsG"/>
                                 <constraint firstItem="zhf-AH-QMn" firstAttribute="centerY" secondItem="Axg-gX-hN6" secondAttribute="centerY" id="l5m-gf-HF2"/>
+                                <constraint firstItem="QXn-AX-niI" firstAttribute="height" secondItem="Axg-gX-hN6" secondAttribute="height" id="pbl-R6-eMN"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f3i-Zx-KbT">
@@ -551,14 +571,23 @@
                                         </stackView>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdB-DF-tvb">
+                                    <connections>
+                                        <action selector="selectPart:" destination="-1" eventType="touchUpInside" id="0yc-cN-Lph"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
+                                <constraint firstItem="TdB-DF-tvb" firstAttribute="width" secondItem="f3i-Zx-KbT" secondAttribute="width" id="8ay-5N-jvP"/>
                                 <constraint firstItem="SI3-3q-axh" firstAttribute="centerY" secondItem="f3i-Zx-KbT" secondAttribute="centerY" id="FzJ-fh-zqN"/>
                                 <constraint firstItem="SI3-3q-axh" firstAttribute="height" secondItem="f3i-Zx-KbT" secondAttribute="height" id="GyP-Zu-r34"/>
                                 <constraint firstItem="e6h-sl-sI9" firstAttribute="leading" secondItem="f3i-Zx-KbT" secondAttribute="leading" id="Kib-PW-RDk"/>
+                                <constraint firstItem="TdB-DF-tvb" firstAttribute="centerX" secondItem="f3i-Zx-KbT" secondAttribute="centerX" id="aTq-5F-eOR"/>
                                 <constraint firstItem="e6h-sl-sI9" firstAttribute="height" secondItem="f3i-Zx-KbT" secondAttribute="height" id="c2l-eV-WcI"/>
+                                <constraint firstItem="TdB-DF-tvb" firstAttribute="centerY" secondItem="f3i-Zx-KbT" secondAttribute="centerY" id="gMp-re-qti"/>
                                 <constraint firstItem="e6h-sl-sI9" firstAttribute="centerY" secondItem="f3i-Zx-KbT" secondAttribute="centerY" id="gps-X9-Aek"/>
+                                <constraint firstItem="TdB-DF-tvb" firstAttribute="height" secondItem="f3i-Zx-KbT" secondAttribute="height" id="lKD-9L-SMq"/>
                                 <constraint firstItem="SI3-3q-axh" firstAttribute="leading" secondItem="e6h-sl-sI9" secondAttribute="trailing" constant="1" id="pgD-LS-Klr"/>
                                 <constraint firstAttribute="trailing" secondItem="SI3-3q-axh" secondAttribute="trailing" id="qwh-gk-iNJ"/>
                             </constraints>
@@ -722,16 +751,25 @@
                                         </stackView>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2K-ny-n2y">
+                                    <connections>
+                                        <action selector="selectPart:" destination="-1" eventType="touchUpInside" id="gtq-NU-fqo"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="N4R-Ii-Fq6" secondAttribute="trailing" id="0Jc-ai-cTM"/>
+                                <constraint firstItem="V2K-ny-n2y" firstAttribute="width" secondItem="VfE-Qd-Zya" secondAttribute="width" id="3jA-3b-xSh"/>
                                 <constraint firstItem="DXG-ox-xT9" firstAttribute="leading" secondItem="VfE-Qd-Zya" secondAttribute="leading" id="9aa-hO-rtm"/>
                                 <constraint firstItem="DXG-ox-xT9" firstAttribute="centerY" secondItem="VfE-Qd-Zya" secondAttribute="centerY" id="9rW-bp-UAd"/>
                                 <constraint firstItem="N4R-Ii-Fq6" firstAttribute="height" secondItem="VfE-Qd-Zya" secondAttribute="height" id="CqD-FK-CpF"/>
                                 <constraint firstItem="N4R-Ii-Fq6" firstAttribute="centerY" secondItem="VfE-Qd-Zya" secondAttribute="centerY" id="JHC-jy-rGK"/>
                                 <constraint firstItem="DXG-ox-xT9" firstAttribute="height" secondItem="VfE-Qd-Zya" secondAttribute="height" id="OYE-hm-4gn"/>
+                                <constraint firstItem="V2K-ny-n2y" firstAttribute="centerX" secondItem="VfE-Qd-Zya" secondAttribute="centerX" id="Z00-AI-LW4"/>
                                 <constraint firstItem="N4R-Ii-Fq6" firstAttribute="leading" secondItem="DXG-ox-xT9" secondAttribute="trailing" constant="1" id="oG3-xF-dgt"/>
+                                <constraint firstItem="V2K-ny-n2y" firstAttribute="height" secondItem="VfE-Qd-Zya" secondAttribute="height" id="q3I-pq-qVf"/>
+                                <constraint firstItem="V2K-ny-n2y" firstAttribute="centerY" secondItem="VfE-Qd-Zya" secondAttribute="centerY" id="qK2-v5-dp0"/>
                             </constraints>
                         </view>
                     </subviews>
