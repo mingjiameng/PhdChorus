@@ -20,6 +20,7 @@
 // 蓝色字－声部名（T1、T2） 黑色字－中关村 灰色字－雁栖湖 字号－14
 - (nonnull NSAttributedString *)part:(nonnull NSString *)part attendanceNameListInAttendanceTable:(nonnull NSString *)tableName;
 - (nonnull NSAttributedString *)part:(nonnull NSString *)part askForLeaveNameListInAttendanceTable:(nonnull NSString *)tableName;
+- (nonnull NSAttributedString *)part:(nonnull NSString *)part absenceNameListInAttendanceTable:(nonnull NSString *)tableName;
 
 - (nullable NSString *)exportAttendanceTableOfPart:(nonnull NSString *)part from:(nonnull NSString *)startTime to:(nonnull NSString *)endTime;
 

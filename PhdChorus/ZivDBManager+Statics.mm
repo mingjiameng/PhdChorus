@@ -367,8 +367,35 @@
     NSDictionary *table = [self attendanceTableByName:tableName];
     NSString *highPartName = [part stringByAppendingString:@"1"];
     NSString *lowPartName = [part stringByAppendingString:@"2"];
-    NSSet *highPartNameList = [[table objectForKey:highPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
-    NSSet *lowPartNameList = [[table objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+    NSSet *highPartNameSet = [[table objectForKey:highPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+    NSSet *lowPartNameSet = [[table objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+    
+    NSArray *highPartNameList = [highPartNameSet allObjects];
+    NSArray *lowPartNameList = [lowPartNameSet allObjects];
+    
+    return [self attributedNameListWithPart:@[highPartName, lowPartName] andPartMemberList:@[highPartNameList, lowPartNameList]];
+}
+
+- (NSAttributedString *)part:(NSString *)part absenceNameListInAttendanceTable:(NSString *)tableName
+{
+    NSDictionary *table = [self attendanceTableByName:tableName];
+    NSString *highPartName = [part stringByAppendingString:@"1"];
+    NSString *lowPartName = [part stringByAppendingString:@"2"];
+    
+    NSSet *attendance_highPartNameSet = [[table objectForKey:highPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+    NSSet *leave_highPartNameSet = [[table objectForKey:highPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+    NSMutableSet *all_highPartNameSet = [[NSMutableSet alloc] initWithArray:[self memberNameListOfPart:highPartName]];
+    [all_highPartNameSet minusSet:attendance_highPartNameSet];
+    [all_highPartNameSet minusSet:leave_highPartNameSet];
+    
+    NSSet *attendance_lowPartNameSet = [[table objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+    NSSet *leave_lowPartNameSet = [[table objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+    NSMutableSet *all_lowPartNameSet = [[NSMutableSet alloc] initWithArray:[self memberNameListOfPart:lowPartName]];
+    [all_lowPartNameSet minusSet:attendance_lowPartNameSet];
+    [all_lowPartNameSet minusSet:leave_lowPartNameSet];
+    
+    NSArray *highPartNameList = [all_highPartNameSet allObjects];
+    NSArray *lowPartNameList = [all_lowPartNameSet allObjects];
     
     return [self attributedNameListWithPart:@[highPartName, lowPartName] andPartMemberList:@[highPartNameList, lowPartNameList]];
 }

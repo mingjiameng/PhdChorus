@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *attendanceTextView;
 @property (weak, nonatomic) IBOutlet UITextView *askForLeaveTextView;
+@property (weak, nonatomic) IBOutlet UITextView *absenceTextView;
 
 @end
 
@@ -30,6 +31,7 @@
 {
     self.attendanceTextView.attributedText = [[ZivDBManager shareDatabaseManager] part:self.part attendanceNameListInAttendanceTable:self.attendanceTableName];
     self.askForLeaveTextView.attributedText = [[ZivDBManager shareDatabaseManager] part:self.part askForLeaveNameListInAttendanceTable:self.attendanceTableName];
+    self.absenceTextView.attributedText = [[ZivDBManager shareDatabaseManager] part:self.part absenceNameListInAttendanceTable:self.attendanceTableName];
 }
 
 - (void)didReceiveMemoryWarning {

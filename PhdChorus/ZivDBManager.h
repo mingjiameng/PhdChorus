@@ -29,11 +29,7 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 
 @interface ZivDBManager : NSObject
 
-@property (nonatomic, nonnull, strong, readonly) NSMutableDictionary *register_record_db;
-@property (nonatomic, nonnull, strong, readonly) NSMutableDictionary *ask_for_leave_db;
 @property (nonatomic, nonnull, strong, readonly) NSMutableDictionary *member_info_db;
-@property (nonatomic, nonnull, strong, readonly) NSArray *partList;
-@property (nonatomic, nonnull, strong, readonly) NSArray *zoneList;
 
 
 + (nonnull ZivDBManager *)shareDatabaseManager;
@@ -49,6 +45,9 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 - (NSInteger)numberOfMemberInPart:(nonnull NSString *)part;
 - (nonnull NSArray *)partList;
 - (nonnull NSDictionary *)member_info;
+- (nullable NSArray*)memberNameListOfPart:(nonnull NSString *)part;
+- (nonnull NSArray *)zoneList;
+
 // name－姓名 part－声部 stage-届数 zone-所在园区
 - (BOOL)registerName:(nonnull NSString *)name toPart:(nonnull NSString *)part withStage:(nonnull NSString *)stage andZone:(nonnull NSString *)zone;
 

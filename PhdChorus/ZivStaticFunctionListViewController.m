@@ -9,6 +9,7 @@
 #import "ZivStaticFunctionListViewController.h"
 #import "ZivAttendanceTableListViewController.h"
 #import "ZivSelectStartEndTimeViewController.h"
+#import "ZivSelectMemberToQueryViewController.h"
 
 @interface ZivStaticFunctionListViewController ()
 
@@ -35,6 +36,14 @@
     selectTimeVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:selectTimeVC animated:YES];
 }
+
+- (IBAction)attendanceStaticsByName:(UIButton *)sender
+{
+    ZivSelectMemberToQueryViewController *selectMemberVC = [[ZivSelectMemberToQueryViewController alloc] init];
+    selectMemberVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:selectMemberVC animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

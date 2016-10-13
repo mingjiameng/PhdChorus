@@ -22,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *partTextField;
 
 @property (weak, nonatomic) UITextField *currentTextField;
-@property (strong, nonatomic) NSDictionary *memberInfo;
 @property (strong, nonatomic) NSArray *currentPartNameList;
 
 @end
@@ -55,7 +54,7 @@
         success = [[ZivDBManager shareDatabaseManager] attendanceTable:self.attendanceTableName someoneSignUp:self.nameTextField.text inPart:self.partTextField.text];
         message = (success ? @"签到成功" : @"签到失败");
     } else if (self.usage == ZivRegisterViewControllerUsageAskForLeave) {
-        [[ZivDBManager shareDatabaseManager] attendanceTable:self.attendanceTableName someoneSignUp:self.nameTextField.text inPart:self.partTextField.text];
+        success = [[ZivDBManager shareDatabaseManager] attendanceTable:self.attendanceTableName someoneAskForLeve:self.nameTextField.text inPart:self.partTextField.text];
         message = (success ? @"请假成功" : @"请假失败");
     } else if (self.usage == ZivRegisterViewControllerUsageAbsent) {
         success = [[ZivDBManager shareDatabaseManager] attendanceTable:self.attendanceTableName setSomeoneAbsent:self.nameTextField.text inPart:self.partTextField.text];
@@ -136,8 +135,9 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (pickerView == self.partPickerView) {
-        self.partTextField.text = [self.partList objectAtIndex:row];
-        self.currentPartNameList = [[self.memberInfo objectForKey:self.partTextField.text] allKeys];
+        NSString *part = [self.partList objectAtIndex:row];
+        self.partTextField.text = part;
+        self.currentPartNameList = [[ZivDBManager shareDatabaseManager] memberNameListOfPart:part];
         [self.namePickerView reloadAllComponents];
         
     } else if (pickerView == self.namePickerView) {
@@ -149,19 +149,19 @@
 - (NSArray *)partList
 {
     if (!_partList) {
-        _partList = CHORUS_PART_LIST;
+        _partList = [[ZivDBManager shareDatabaseManager] partList];
     }
     
     return _partList;
 }
 
-- (NSDictionary *)memberInfo
+- (NSArray *)currentPartNameList
 {
-    if (!_memberInfo) {
-        _memberInfo = [[ZivDBManager shareDatabaseManager] member_info];
+    if (!_currentPartNameList) {
+        _currentPartNameList = [[ZivDBManager shareDatabaseManager] memberNameListOfPart:[self.partList firstObject]];
     }
     
-    return _memberInfo;
+    return _currentPartNameList;
 }
 
 - (void)didReceiveMemoryWarning {

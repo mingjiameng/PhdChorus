@@ -367,6 +367,16 @@
     return _partList;
 }
 
+- (NSArray *)memberNameListOfPart:(NSString *)part
+{
+    NSDictionary *part_info = [self.member_info_db objectForKey:part];
+    if (part_info == nil) {
+        return @[];
+    }
+    
+    return [part_info allKeys];
+}
+
 - (NSArray *)zoneList
 {
     if (!_zoneList) {

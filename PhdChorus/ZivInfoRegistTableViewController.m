@@ -149,7 +149,7 @@
 - (NSArray *)partIndex
 {
     if (!_partIndex) {
-        _partIndex = CHORUS_PART_LIST;
+        _partIndex = [[ZivDBManager shareDatabaseManager] partList];
     }
     
     return _partIndex;

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZivDayAttendanceViewController">
             <connections>
+                <outlet property="absenceTextView" destination="ikg-X4-2Ut" id="f7w-ug-PJQ"/>
                 <outlet property="askForLeaveTextView" destination="gsb-I9-mOJ" id="Yae-Kb-api"/>
                 <outlet property="attendanceTextView" destination="ake-Zs-gD8" id="E8V-xx-QCy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,7 +30,7 @@
                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ake-Zs-gD8">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ake-Zs-gD8">
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -57,7 +58,7 @@
                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gsb-I9-mOJ">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gsb-I9-mOJ">
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -73,6 +74,34 @@
                                 <constraint firstItem="OS0-D6-qhA" firstAttribute="leading" secondItem="mZJ-AO-cwA" secondAttribute="leading" constant="8" id="jOh-tJ-XTI"/>
                                 <constraint firstItem="gsb-I9-mOJ" firstAttribute="leading" secondItem="mZJ-AO-cwA" secondAttribute="leading" constant="8" id="q02-Hf-AlP"/>
                                 <constraint firstAttribute="trailing" secondItem="gsb-I9-mOJ" secondAttribute="trailing" constant="8" id="zTq-LW-Tyj"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMD-UK-2Wu">
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="缺勤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBp-du-TvI">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="bgl-v6-2uS"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ikg-X4-2Ut">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="ikg-X4-2Ut" secondAttribute="trailing" constant="8" id="9O1-p1-0SP"/>
+                                <constraint firstItem="ikg-X4-2Ut" firstAttribute="top" secondItem="XBp-du-TvI" secondAttribute="bottom" constant="4" id="IYL-cj-hLl"/>
+                                <constraint firstItem="XBp-du-TvI" firstAttribute="leading" secondItem="XMD-UK-2Wu" secondAttribute="leading" constant="8" id="LA9-4B-2cj"/>
+                                <constraint firstItem="XBp-du-TvI" firstAttribute="top" secondItem="XMD-UK-2Wu" secondAttribute="top" id="b8W-Qu-nnb"/>
+                                <constraint firstAttribute="trailing" secondItem="XBp-du-TvI" secondAttribute="trailing" id="mGA-4E-cSq"/>
+                                <constraint firstItem="ikg-X4-2Ut" firstAttribute="leading" secondItem="XMD-UK-2Wu" secondAttribute="leading" constant="8" id="n4m-9X-bZM"/>
+                                <constraint firstAttribute="bottom" secondItem="ikg-X4-2Ut" secondAttribute="bottom" constant="8" id="wjh-DG-tpd"/>
                             </constraints>
                         </view>
                     </subviews>
