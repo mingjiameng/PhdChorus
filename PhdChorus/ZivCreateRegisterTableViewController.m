@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *monthPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *dayPickerView;
 @property (weak, nonatomic) IBOutlet UISwitch *formalAttendanceSwitch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *zoneSegment;
 
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UILabel *monthLabel;
@@ -50,8 +51,10 @@
 - (void)done
 {
     NSString *date = [[self.yearLabel.text stringByAppendingString:self.monthLabel.text] stringByAppendingString:self.dayLabel.text];
-    NSString *name = [date stringByAppendingString:(self.formalAttendanceSwitch.on ? @"大排" : @"小排")];
-    if (![[ZivDBManager shareDatabaseManager] createAttendanceTable:name inDate:date withDescription:self.formalAttendanceSwitch.on]) {
+    NSString *zone = [self.zoneSegment titleForSegmentAtIndex:[self.zoneSegment selectedSegmentIndex]];
+    BOOL isFormalAttendance = self.formalAttendanceSwitch.on;
+    
+    if (![[ZivDBManager shareDatabaseManager] createAttendanceTableInDate:date atZone:zone whetherFormalAttendance:isFormalAttendance]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"创建失败" message:@"签到表已存在" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:NULL];
         [alertController addAction:confirmAction];

@@ -80,7 +80,7 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52D-R8-FW2">
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                    <state key="normal" title="出勤数据统计"/>
+                                    <state key="normal" title="个人出勤统计"/>
                                     <connections>
                                         <action selector="attendanceStaticsByName:" destination="-1" eventType="touchUpInside" id="Nft-Zc-aio"/>
                                     </connections>

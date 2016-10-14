@@ -400,4 +400,169 @@
     return [self attributedNameListWithPart:@[highPartName, lowPartName] andPartMemberList:@[highPartNameList, lowPartNameList]];
 }
 
+/*
+ * 单人出勤数据统计
+ */
+- (NSArray <NSString *> *)part:(NSString *)part attendanceStaticByName:(NSString *)name from:(NSString *)startTime to:(NSString *)endTime
+{
+    if (![self nameExist:name inPart:part]) {
+        return nil;
+    }
+    
+    // 找出在给定日期内的大排&小排签到表
+//    NSMutableArray *zhongguancun_informal_satisfiedTableNameList = [NSMutableArray array];
+//    NSMutableArray *zhongguancun_formal_satisfiedTableNameList = [NSMutableArray array];
+//    NSMutableArray *yanqi_informal_satisfiedTableNameList = [NSMutableArray array];
+//    NSMutableArray *yanqi_formal_satisfiedTableNameList = [NSMutableArray array];
+    
+    NSInteger zhongguancun_informal_attendance_count = 0;
+    NSInteger zhongguancun_formal_attendance_count = 0;
+    NSInteger yanqi_informal_attendance_count = 0;
+    NSInteger yanqi_formal_attendance_count = 0;
+    
+    NSInteger zhongguancun_informal_attendance_table_count = 0;
+    NSInteger zhongguancun_formal_attendance_table_count = 0;
+    NSInteger yanqi_informal_attendance_table_count = 0;
+    NSInteger yanqi_formal_attendance_table_count = 0;
+    
+    NSString *date = nil;
+    BOOL attendance = NO;
+    
+    for (NSString *tableName in self.attendanceTableList) {
+        date = [tableName substringToIndex:8];
+        if (!([date compare:startTime] != NSOrderedAscending && [date compare:endTime] != NSOrderedDescending)) {
+            continue;
+        }
+        
+        attendance = [self part:part someone:name attendAt:tableName];
+        
+        if ([tableName containsString:@"小排"]) {
+            if ([tableName containsString:ZivAttendanceZoneIdentifireZhongguancun]) {
+                ++zhongguancun_informal_attendance_table_count;
+                if (attendance) {
+                    ++zhongguancun_informal_attendance_count;
+                }
+            } else if ([tableName containsString:ZivAttendanceZoneIdentifireYanqi]) {
+                ++yanqi_informal_attendance_table_count;
+                if (attendance) {
+                    ++yanqi_informal_attendance_count;
+                }
+            }
+        } else if ([tableName containsString:@"大排"]) {
+            if ([tableName containsString:ZivAttendanceZoneIdentifireZhongguancun]) {
+                ++zhongguancun_formal_attendance_table_count;
+                if (attendance) {
+                    ++zhongguancun_formal_attendance_count;
+                }
+            } else if ([tableName containsString:ZivAttendanceZoneIdentifireYanqi]) {
+                ++yanqi_formal_attendance_table_count;
+                if (attendance) {
+                    ++yanqi_formal_attendance_count;
+                }
+            }
+        }
+    }
+    
+    NSString *zhongguancun_attendance_description = [NSString stringWithFormat:@"中关村大排%ld/%ld  ·  小排%ld/%ld",
+                                                     (long)zhongguancun_formal_attendance_count,
+                                                     (long)zhongguancun_formal_attendance_table_count,
+                                                     (long)zhongguancun_informal_attendance_count,
+                                                     (long)zhongguancun_informal_attendance_table_count];
+    
+    NSString *yanqi_atttendance_description = [NSString stringWithFormat:@"雁栖湖大排%ld/%ld  ·  小排%ld/%ld",
+                                               (long)yanqi_formal_attendance_count,
+                                               (long)yanqi_formal_attendance_table_count,
+                                               (long)yanqi_informal_attendance_count,
+                                               (long)yanqi_informal_attendance_table_count];
+    
+    return @[zhongguancun_attendance_description, yanqi_atttendance_description];
+}
+
+- (NSArray <NSString *> *)part:(NSString *)part last3WeekAttendanceStaticByName:(NSString *)name
+{
+    NSDate *current_date = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:current_date];
+    NSInteger current_weekday = comps.weekday;
+    
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:3];
+    
+    for (NSInteger week_distance = 0; week_distance < 3; ++week_distance) {
+        NSInteger wednesday_distance = 4 - current_weekday - 7 * week_distance;
+        NSDateComponents *wednesday_comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:current_date];
+        [wednesday_comps setDay:current_weekday + wednesday_distance];
+        NSDate *wednesday_date = [calendar dateFromComponents:wednesday_comps];
+        BOOL wednesday_attendance = [self part:part someone:name attendAt:[dateFormat stringFromDate:wednesday_date]];
+        NSString *wednesday_string = (wednesday_attendance ? @"✔️" : @"✖️");
+        
+        NSInteger saturday_distance = 7 - current_weekday - 7 * week_distance;
+        NSDateComponents *saturday_comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:current_date];
+        [saturday_comps setDay:current_weekday + saturday_distance];
+        NSDate *saturday_date = [calendar dateFromComponents:saturday_comps];
+        BOOL saturday_attendance = [self part:part someone:name attendAt:[dateFormat stringFromDate:saturday_date]];
+        NSString *saturday_string = (saturday_attendance ? @"✔️" : @"✖️");
+        
+        NSInteger sunday_distance = 1 - current_weekday - 7 * week_distance;
+        NSDateComponents *sunday_comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:current_date];
+        [sunday_comps setDay:current_weekday + sunday_distance];
+        NSDate *sunday_date = [calendar dateFromComponents:sunday_comps];
+        BOOL sunday_attendance = [self part:part someone:name attendAt:[dateFormat stringFromDate:sunday_date]];
+        NSString *sunday_string = (sunday_attendance ? @"✔️" : @"✖️");
+        
+        NSString *week_string = @"本";
+        if (week_distance == 1) {
+            week_string = @"上";
+        } else if (week_distance == 2) {
+            week_string = @"隔";
+        }
+        
+        NSString *week_description = [NSString stringWithFormat:@"%@周三%@  ·  周六%@  ·  周日%@", week_string, wednesday_string, saturday_string, sunday_string];
+        
+        [result addObject:week_description];
+    }
+    
+    return result;
+}
+
+// date = @"20160928"
+- (BOOL)part:(NSString *)part someone:(NSString *)name attendAtDate:(NSString *)date
+{
+    for (NSString *tableName in self.attendanceTableList) {
+        if (![tableName containsString:date]) {
+            continue;
+        }
+        
+        if ([self part:part someone:name attendAt:tableName]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+
+- (BOOL)part:(NSString *)part someone:(NSString *)name attendAt:(NSString *)attendanceTableName
+{
+    NSDictionary *table = [self attendanceTableByName:attendanceTableName];
+    if (table == nil) {
+        NSLog(@"alert! query attendance table:%@ which do not exist", attendanceTableName);
+        return NO;
+    }
+    
+    NSDictionary *part_info = [table objectForKey:part];
+    if (part_info == nil) {
+        NSLog(@"alert! query part:%@ which do not exist", part);
+        return NO;
+    }
+    
+    NSSet *attendance_set = [part_info objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+    if (![attendance_set containsObject:name]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

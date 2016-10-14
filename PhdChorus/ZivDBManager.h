@@ -14,6 +14,7 @@
 #define ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST @"ask_for_leave_list"
 #define ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE @"is_formal_attendance"
 #define ATTENDANCE_TABLE_DATE @"table_date"
+#define ATTENDANCE_TABLE_ZONE @"table_zone"
 
 #define MEMBER_INFO_KEY_NAME @"name"
 #define MEMBER_INFO_KEY_STAGE @"stage"
@@ -35,7 +36,7 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 + (nonnull ZivDBManager *)shareDatabaseManager;
 
 
-- (BOOL)createAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(nonnull NSString *)attendanceTableDate withDescription:(BOOL)isFormalAttendance;
+- (BOOL)createAttendanceTableInDate:(nonnull NSString *)date atZone:(nonnull NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance;
 - (nonnull NSArray<NSString *> *)attendanceTableList;
 
 - (BOOL)attendanceTable:(nonnull NSString *)attendanceTableName someoneSignUp:(nonnull NSString *)name inPart:(nonnull NSString *)part;
@@ -47,6 +48,7 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 - (nonnull NSDictionary *)member_info;
 - (nullable NSArray*)memberNameListOfPart:(nonnull NSString *)part;
 - (nonnull NSArray *)zoneList;
+- (nullable NSString *)personalInfoDescriptionOfMember:(nonnull NSString *)name inPart:(nonnull NSString *)part;
 
 // name－姓名 part－声部 stage-届数 zone-所在园区
 - (BOOL)registerName:(nonnull NSString *)name toPart:(nonnull NSString *)part withStage:(nonnull NSString *)stage andZone:(nonnull NSString *)zone;

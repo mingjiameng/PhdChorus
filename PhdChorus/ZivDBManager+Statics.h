@@ -24,4 +24,10 @@
 
 - (nullable NSString *)exportAttendanceTableOfPart:(nonnull NSString *)part from:(nonnull NSString *)startTime to:(nonnull NSString *)endTime;
 
+
+
+
+- (nullable NSArray <NSString *> *)part:(nonnull NSString *)part attendanceStaticByName:(nonnull NSString *)name from:(nonnull NSString *)startTime to:(nonnull NSString *)endTime;
+- (nullable NSArray <NSString *> *)part:(nonnull NSString *)part last3WeekAttendanceStaticByName:(nonnull NSString *)name;
+
 @end

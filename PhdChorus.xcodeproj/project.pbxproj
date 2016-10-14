@@ -13,6 +13,8 @@
 		443603301DA33ED800BA63C4 /* ZivDayAttendanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4436032E1DA33ED800BA63C4 /* ZivDayAttendanceViewController.xib */; };
 		444100561DA54854003B353C /* ZivSelectMemberToQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 444100541DA54854003B353C /* ZivSelectMemberToQueryViewController.m */; };
 		444100571DA54854003B353C /* ZivSelectMemberToQueryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444100551DA54854003B353C /* ZivSelectMemberToQueryViewController.xib */; };
+		4441005C1DB0F55B003B353C /* ZivStaticByNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441005A1DB0F55B003B353C /* ZivStaticByNameViewController.m */; };
+		4441005D1DB0F55B003B353C /* ZivStaticByNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4441005B1DB0F55B003B353C /* ZivStaticByNameViewController.xib */; };
 		44C0D3651D9CD36F00325F2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3641D9CD36F00325F2B /* main.m */; };
 		44C0D3681D9CD36F00325F2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3671D9CD36F00325F2B /* AppDelegate.m */; };
 		44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D36A1D9CD36F00325F2B /* ViewController.m */; };
@@ -60,6 +62,9 @@
 		444100531DA54854003B353C /* ZivSelectMemberToQueryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivSelectMemberToQueryViewController.h; sourceTree = "<group>"; };
 		444100541DA54854003B353C /* ZivSelectMemberToQueryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivSelectMemberToQueryViewController.m; sourceTree = "<group>"; };
 		444100551DA54854003B353C /* ZivSelectMemberToQueryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivSelectMemberToQueryViewController.xib; sourceTree = "<group>"; };
+		444100591DB0F55B003B353C /* ZivStaticByNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivStaticByNameViewController.h; sourceTree = "<group>"; };
+		4441005A1DB0F55B003B353C /* ZivStaticByNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivStaticByNameViewController.m; sourceTree = "<group>"; };
+		4441005B1DB0F55B003B353C /* ZivStaticByNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivStaticByNameViewController.xib; sourceTree = "<group>"; };
 		44C0D3601D9CD36F00325F2B /* PhdChorus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhdChorus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C0D3641D9CD36F00325F2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		44C0D3661D9CD36F00325F2B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -138,8 +143,18 @@
 				444100531DA54854003B353C /* ZivSelectMemberToQueryViewController.h */,
 				444100541DA54854003B353C /* ZivSelectMemberToQueryViewController.m */,
 				444100551DA54854003B353C /* ZivSelectMemberToQueryViewController.xib */,
+				444100591DB0F55B003B353C /* ZivStaticByNameViewController.h */,
+				4441005A1DB0F55B003B353C /* ZivStaticByNameViewController.m */,
+				4441005B1DB0F55B003B353C /* ZivStaticByNameViewController.xib */,
 			);
 			name = StaticsByName;
+			sourceTree = "<group>";
+		};
+		4441005E1DB12943003B353C /* VersionUpdate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = VersionUpdate;
 			sourceTree = "<group>";
 		};
 		44C0D3571D9CD36F00325F2B = {
@@ -162,6 +177,7 @@
 		44C0D3621D9CD36F00325F2B /* PhdChorus */ = {
 			isa = PBXGroup;
 			children = (
+				4441005E1DB12943003B353C /* VersionUpdate */,
 				44C0D42D1D9CE06900325F2B /* Root */,
 				44C0D4261D9CE03500325F2B /* Database */,
 				44C0D40E1D9CE02100325F2B /* SignUp */,
@@ -382,6 +398,7 @@
 				44C0D40D1D9CE01800325F2B /* ZivAddContactViewController.xib in Resources */,
 				44C0D4021D9CDFFC00325F2B /* ZivAttendanceStaticByDayViewController.xib in Resources */,
 				44C0D3DD1D9CDF2600325F2B /* ZivMergeAttendanceTableViewController.xib in Resources */,
+				4441005D1DB0F55B003B353C /* ZivStaticByNameViewController.xib in Resources */,
 				44C0D3701D9CD36F00325F2B /* Assets.xcassets in Resources */,
 				44C0D3EE1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib in Resources */,
 				4436032B1DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.xib in Resources */,
@@ -404,6 +421,7 @@
 				44C0D42B1D9CE04000325F2B /* ZivDBManager.m in Sources */,
 				44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */,
 				44C0D4201D9CE03100325F2B /* ZivRegistOrLeaveViewController.m in Sources */,
+				4441005C1DB0F55B003B353C /* ZivStaticByNameViewController.m in Sources */,
 				44C0D40C1D9CE01800325F2B /* ZivAddContactViewController.m in Sources */,
 				44C0D4241D9CE03100325F2B /* ZivRegisterViewController.m in Sources */,
 				444100561DA54854003B353C /* ZivSelectMemberToQueryViewController.m in Sources */,

@@ -29,6 +29,7 @@
         @"table_name" : @"20160921大排", // 签到表名
         @"table_date" : @"20160921" // 签到日期
         @"is_formal_attendance" : @"0", // 是否大排
+        @"zone" : @"雁栖湖", // 签到表区域
         @"T2" : { @"attendance_list" : set{@"梁志鹏", ...},
                   @"ask_for_leave_list" : set{@"罗成", ...} },
         ...
@@ -111,8 +112,10 @@
     return dbManager;
 }
 
-- (BOOL)createAttendanceTable:(NSString *)attendanceTableName inDate:(NSString *)attendanceTableDate withDescription:(BOOL)isFormalAttendance
+- (BOOL)createAttendanceTableInDate:(NSString *)date atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
 {
+    NSString *attendanceTableName = [NSString stringWithFormat:@"%@%@%@", date, zone, (isFormalAttendance ? @"大排" : @"小排")];
+    
     NSString *currentTableName = [self getTheNameOfTheCurrentAttendanceTable];
     if (currentTableName != nil && ([currentTableName compare:attendanceTableName] == NSOrderedSame)) {
         return NO;
@@ -129,7 +132,7 @@
         [self saveCurrentAttendanceTable];
         
         [self.attendance_table_list addObject:attendanceTableName];
-        self.currentAttendanceTable = [self newAttendanceTable:attendanceTableName inDate:attendanceTableDate withDescription:isFormalAttendance];
+        self.currentAttendanceTable = [self newAttendanceTable:attendanceTableName inDate:date atZone:zone whetherFormalAttendance:isFormalAttendance];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
         
@@ -139,12 +142,13 @@
     return NO;
 }
 
-- (nonnull NSMutableDictionary *)newAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(NSString *)date withDescription:(BOOL)isFormalAttendance
+- (nonnull NSMutableDictionary *)newAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(NSString *)date atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
 {
     NSMutableDictionary *newTable = [NSMutableDictionary dictionary];
     [newTable setObject:attendanceTableName forKey:ATTENDANCE_TABLE_NAME];
     [newTable setObject:(isFormalAttendance ? @"1" : @"0") forKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE];
     [newTable setObject:date forKey:ATTENDANCE_TABLE_DATE];
+    [newTable setObject:zone forKey:ATTENDANCE_TABLE_ZONE];
     
     for (NSString *part in self.partList) {
         NSMutableDictionary *part_info = [NSMutableDictionary dictionary];
@@ -279,11 +283,12 @@
     NSString *attendanceTableName = [table01 objectForKey:ATTENDANCE_TABLE_NAME];
     BOOL isFormalAttendance = [[table01 objectForKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE] boolValue];
     NSString *attendanceTableDate = [table01 objectForKey:ATTENDANCE_TABLE_DATE];
+    NSString *attendanceTableZone = [table01 objectForKey:ATTENDANCE_TABLE_ZONE];
     //NSLog(@"begin merge file:%@", tableName01);
     
     if (![self attendanceTableExist:attendanceTableName]) {
         // 本地没有这个日期的签到表，直接将接受到的签到表存到本地
-        if (![self createAttendanceTable:attendanceTableName inDate:attendanceTableDate withDescription:isFormalAttendance]) {
+        if (![self createAttendanceTableInDate:attendanceTableDate atZone:attendanceTableZone whetherFormalAttendance:isFormalAttendance]) {
             return NO;
         };
         
@@ -384,6 +389,17 @@
     }
     
     return _zoneList;
+}
+
+- (NSString *)personalInfoDescriptionOfMember:(NSString *)name inPart:(NSString *)part
+{
+    NSDictionary *part_info = [self.member_info_db objectForKey:part];
+    NSDictionary *personal_info = [part_info objectForKey:name];
+    NSString *zone = [personal_info objectForKey:MEMBER_INFO_KEY_ZONE];
+    NSString *stage = [personal_info objectForKey:MEMBER_INFO_KEY_STAGE];
+    
+    NSString *description = [NSString stringWithFormat:@"%@ · %@届%@", zone, stage, part];
+    return description;
 }
 
 + (NSString *)pathOfDatabaseFile
