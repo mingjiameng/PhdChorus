@@ -60,6 +60,8 @@
         [alertController addAction:confirmAction];
         
         [self presentViewController:alertController animated:YES completion:NULL];
+        
+        return;
     }
     
     [self.navigationController dismissViewControllerAnimated:YES completion:NULL];

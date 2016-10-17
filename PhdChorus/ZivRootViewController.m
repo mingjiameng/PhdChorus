@@ -11,6 +11,7 @@
 #import "ZivInfoRegistTableViewController.h"
 #import "ZivAttendanceTableListViewController.h"
 #import "ZivStaticFunctionListViewController.h"
+#import "ZivDBManager.h"
 
 @interface ZivRootViewController ()
 
@@ -24,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[ZivDBManager shareDatabaseManager] updateDatabaseVersion];
     
     _attendanceTableListViewController = [[ZivAttendanceTableListViewController alloc] init];
     _attendanceTableListViewController.title = @"签到";

@@ -15,6 +15,8 @@
 		444100571DA54854003B353C /* ZivSelectMemberToQueryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444100551DA54854003B353C /* ZivSelectMemberToQueryViewController.xib */; };
 		4441005C1DB0F55B003B353C /* ZivStaticByNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4441005A1DB0F55B003B353C /* ZivStaticByNameViewController.m */; };
 		4441005D1DB0F55B003B353C /* ZivStaticByNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4441005B1DB0F55B003B353C /* ZivStaticByNameViewController.xib */; };
+		444100641DB12BDB003B353C /* ZivVersionUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 444100631DB12BDB003B353C /* ZivVersionUpdate.m */; };
+		4441006A1DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.m in Sources */ = {isa = PBXBuildFile; fileRef = 444100691DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.m */; };
 		44C0D3651D9CD36F00325F2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3641D9CD36F00325F2B /* main.m */; };
 		44C0D3681D9CD36F00325F2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3671D9CD36F00325F2B /* AppDelegate.m */; };
 		44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D36A1D9CD36F00325F2B /* ViewController.m */; };
@@ -65,6 +67,10 @@
 		444100591DB0F55B003B353C /* ZivStaticByNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivStaticByNameViewController.h; sourceTree = "<group>"; };
 		4441005A1DB0F55B003B353C /* ZivStaticByNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivStaticByNameViewController.m; sourceTree = "<group>"; };
 		4441005B1DB0F55B003B353C /* ZivStaticByNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivStaticByNameViewController.xib; sourceTree = "<group>"; };
+		444100621DB12BDB003B353C /* ZivVersionUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivVersionUpdate.h; sourceTree = "<group>"; };
+		444100631DB12BDB003B353C /* ZivVersionUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivVersionUpdate.m; sourceTree = "<group>"; };
+		444100681DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivUpdateVersionFromBuild3ToBuild4.h; sourceTree = "<group>"; };
+		444100691DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivUpdateVersionFromBuild3ToBuild4.m; sourceTree = "<group>"; };
 		44C0D3601D9CD36F00325F2B /* PhdChorus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhdChorus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C0D3641D9CD36F00325F2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		44C0D3661D9CD36F00325F2B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -153,6 +159,10 @@
 		4441005E1DB12943003B353C /* VersionUpdate */ = {
 			isa = PBXGroup;
 			children = (
+				444100621DB12BDB003B353C /* ZivVersionUpdate.h */,
+				444100631DB12BDB003B353C /* ZivVersionUpdate.m */,
+				444100681DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.h */,
+				444100691DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.m */,
 			);
 			name = VersionUpdate;
 			sourceTree = "<group>";
@@ -440,6 +450,8 @@
 				44C0D3651D9CD36F00325F2B /* main.m in Sources */,
 				44C0D41D1D9CE03100325F2B /* ZivAttendanceTableListViewController.m in Sources */,
 				44C0D3F61D9CDFE700325F2B /* ZivExportExcelViewController.m in Sources */,
+				444100641DB12BDB003B353C /* ZivVersionUpdate.m in Sources */,
+				4441006A1DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

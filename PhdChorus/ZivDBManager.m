@@ -114,7 +114,22 @@
 
 - (BOOL)createAttendanceTableInDate:(NSString *)date atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
 {
-    NSString *attendanceTableName = [NSString stringWithFormat:@"%@%@%@", date, zone, (isFormalAttendance ? @"大排" : @"小排")];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    NSDate *calenderDate = [dateFormat dateFromString:date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:calenderDate];
+    NSString *weekdayString = @"周三";
+    // 从周日开始算起 周日＝1
+    if (comps.weekday == 1) {
+        weekdayString = @"周日";
+    } else if (comps.weekday == 7) {
+        weekdayString = @"周六";
+    } else if (comps.weekday == 4) {
+        weekdayString = @"周三";
+    }
+    
+    NSString *attendanceTableName = [NSString stringWithFormat:@"%@%@%@%@", date, weekdayString, zone, (isFormalAttendance ? @"大排" : @"小排")];
     
     NSString *currentTableName = [self getTheNameOfTheCurrentAttendanceTable];
     if (currentTableName != nil && ([currentTableName compare:attendanceTableName] == NSOrderedSame)) {
@@ -132,7 +147,7 @@
         [self saveCurrentAttendanceTable];
         
         [self.attendance_table_list addObject:attendanceTableName];
-        self.currentAttendanceTable = [self newAttendanceTable:attendanceTableName inDate:date atZone:zone whetherFormalAttendance:isFormalAttendance];
+        self.currentAttendanceTable = [self newAttendanceTable:attendanceTableName inDate:date andWeekday:weekdayString atZone:zone whetherFormalAttendance:isFormalAttendance];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
         
@@ -142,13 +157,14 @@
     return NO;
 }
 
-- (nonnull NSMutableDictionary *)newAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(NSString *)date atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
+- (nonnull NSMutableDictionary *)newAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(NSString *)date andWeekday:(NSString *)weekdayString atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
 {
     NSMutableDictionary *newTable = [NSMutableDictionary dictionary];
     [newTable setObject:attendanceTableName forKey:ATTENDANCE_TABLE_NAME];
     [newTable setObject:(isFormalAttendance ? @"1" : @"0") forKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE];
     [newTable setObject:date forKey:ATTENDANCE_TABLE_DATE];
     [newTable setObject:zone forKey:ATTENDANCE_TABLE_ZONE];
+    [newTable setObject:weekdayString forKey:ATTENDANCE_TABLE_WEEKDAY];
     
     for (NSString *part in self.partList) {
         NSMutableDictionary *part_info = [NSMutableDictionary dictionary];
@@ -556,6 +572,17 @@
     return YES;
 }
 
+- (void)saveAttendanceTable:(NSMutableDictionary *)attendanceTable
+{
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:attendanceTable forKey:ATTENDANCE_TABLE];
+    [archiver finishEncoding];
+    
+    NSString *tableName = [attendanceTable objectForKey:ATTENDANCE_TABLE_NAME];
+    [data writeToFile:[self pathOfAttendanceTableFile:tableName] atomically:YES];
+}
+
 - (BOOL)deleteMemberInfo:(NSString *)name fromPart:(NSString *)part
 {
     NSMutableDictionary *part_info = [self.member_info_db objectForKey:part];
@@ -618,7 +645,185 @@
 }
 
 
+- (void)updateDatabaseVersion
+{
+//    [self.attendance_table_list removeAllObjects];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *docDir = [paths firstObject];
+//    NSDirectoryEnumerator *fileEnumerator = [fileManager enumeratorAtPath:docDir];
+//    NSString *filePath = nil;
+//    while ((filePath = [fileEnumerator nextObject]) != nil) {
+//        NSLog(@"%@", filePath);
+//        if (filePath.length == 16) {
+//            [self.attendance_table_list addObject:[filePath substringToIndex:10]];
+//        }
+//    }
+//    
+//    [self saveDBFile];
+//    
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"updated_version"];
+//    
+//    return;
+    
+    // 判断是否需要升级数据库
+    // 只在第一次打开时升级
+    NSString *updatedVersionString = [[NSUserDefaults standardUserDefaults] objectForKey:@"updated_version"];
+    NSString *currentAppVersionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 
+    if (updatedVersionString != nil && [updatedVersionString compare:currentAppVersionString] == NSOrderedSame) {
+        return;
+    }
+    
+    if ([currentAppVersionString compare:@"0.9.2"] != NSOrderedSame) {
+        return;
+    }
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSArray *oldAttendanceTableList = self.attendance_table_list;
+    NSMutableArray *newAttendanceTableList = [NSMutableArray arrayWithCapacity:oldAttendanceTableList.count];
+    
+    for (NSString *tableName in oldAttendanceTableList) {
+        NSMutableDictionary *table = [self getAttendanceTable:tableName];
+        NSString *attendanceDate = [table objectForKey:ATTENDANCE_TABLE_DATE];
+        NSDate *date = [dateFormat dateFromString:attendanceDate];
+        NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:date];
+        
+        NSString *zone = ZivAttendanceZoneIdentifireZhongguancun;
+        NSString *isFormalAttendanceString = [table objectForKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE];
+        BOOL isFormalAttendance = [isFormalAttendanceString boolValue];
+        NSString *weekdayString = @"周三";
+        if (isFormalAttendance) {
+            // 大排
+            if (comps.weekday == 1) {
+                // 大排－周日－雁栖湖
+                weekdayString = @"周日";
+                zone = ZivAttendanceZoneIdentifireYanqi;
+            } else if (comps.weekday == 7) {
+                // 大排－周六－中关村
+                zone = ZivAttendanceZoneIdentifireZhongguancun;
+                weekdayString = @"周六";
+            } else if (comps.weekday == 4) {
+                // 大排－周三－中关村
+                zone = ZivAttendanceZoneIdentifireZhongguancun;
+                weekdayString = @"周三";
+            }
+            
+            NSString *newAttendanceTableName = [NSString stringWithFormat:@"%@%@%@%@",attendanceDate, weekdayString, zone, (isFormalAttendance ? @"大排" : @"小排")];
+            [table setObject:zone forKey:ATTENDANCE_TABLE_ZONE];
+            [table setObject:newAttendanceTableName forKey:ATTENDANCE_TABLE_NAME];
+            [table setObject:weekdayString forKey:ATTENDANCE_TABLE_WEEKDAY];
+            
+            // 保存新文件
+            [newAttendanceTableList addObject:newAttendanceTableName];
+            [self saveAttendanceTable:table];
+            
+        } else {
+            // 小排－拆分签到表
+            if (comps.weekday != 4) {
+                continue;
+            }
+            
+            if ([tableName compare:@"20160914小排"] != NSOrderedSame) {
+                zone = ZivAttendanceZoneIdentifireYanqi;
+                weekdayString = @"周三";
+                NSString *newAttendanceTableName = [NSString stringWithFormat:@"%@%@%@%@",attendanceDate, weekdayString, zone, (isFormalAttendance ? @"大排" : @"小排")];
+                [table setObject:zone forKey:ATTENDANCE_TABLE_ZONE];
+                [table setObject:newAttendanceTableName forKey:ATTENDANCE_TABLE_NAME];
+                [table setObject:weekdayString forKey:ATTENDANCE_TABLE_WEEKDAY];
+                
+                // 保存新文件
+                [newAttendanceTableList addObject:newAttendanceTableName];
+                [self saveAttendanceTable:table];
+                
+                continue;
+            }
+            
+            // 周三
+            weekdayString = @"周三";
+            NSString *zhongguancun_table_name = [NSString stringWithFormat:@"%@%@%@%@",attendanceDate, weekdayString, ZivAttendanceZoneIdentifireZhongguancun, (isFormalAttendance ? @"大排" : @"小排")];
+            NSMutableDictionary *zhongguancun_table = [self newAttendanceTable:zhongguancun_table_name inDate:attendanceDate andWeekday:weekdayString atZone:ZivAttendanceZoneIdentifireZhongguancun whetherFormalAttendance:isFormalAttendance];
+            NSString *yanqi_table_name = [NSString stringWithFormat:@"%@%@%@%@",attendanceDate, weekdayString, ZivAttendanceZoneIdentifireYanqi, (isFormalAttendance ? @"大排" : @"小排")];
+            NSMutableDictionary *yanqi_table = [self newAttendanceTable:yanqi_table_name inDate:attendanceDate andWeekday:weekdayString atZone:ZivAttendanceZoneIdentifireYanqi whetherFormalAttendance:isFormalAttendance];
+            
+            for (NSString *part in self.partList) {
+                NSMutableDictionary *zhongguancun_part = [zhongguancun_table objectForKey:part];
+                NSMutableSet *zhongguancun_attendance_list = [zhongguancun_part objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+                NSMutableSet *zhongguancun_leave_list = [zhongguancun_part objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+                NSMutableDictionary *yanqi_part = [yanqi_table objectForKey:part];
+                NSMutableSet *yanqi_attendance_list = [yanqi_part objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+                NSMutableSet *yanqi_leave_list = [yanqi_part objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+                NSDictionary *part_info = [table objectForKey:part];
+                NSSet *attendance_list = [part_info objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+                NSSet *leave_list = [part_info objectForKey:ATTENDANCE_TABLE_ASK_FOR_LEAVE_LIST];
+                
+                NSString *zone = nil;
+                for (NSString *name in attendance_list) {
+                    NSDictionary *personal_info = [[self.member_info_db objectForKey:part] objectForKey:name];
+                    zone = [personal_info objectForKey:MEMBER_INFO_KEY_ZONE];
+                    if ([zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
+                        [yanqi_attendance_list addObject:name];
+                    } else if ([zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
+                        [zhongguancun_attendance_list addObject:name];
+                    }
+                }
+                
+                for (NSString *name in leave_list) {
+                    NSDictionary *personal_info = [[self.member_info_db objectForKey:part] objectForKey:name];
+                    zone = [personal_info objectForKey:MEMBER_INFO_KEY_ZONE];
+                    if ([zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
+                        [yanqi_leave_list addObject:name];
+                    } else if ([zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
+                        [zhongguancun_leave_list addObject:name];
+                    }
+                }
+                
+            }
+            
+            // 保存这两张签到表
+            [self saveAttendanceTable:yanqi_table];
+            [self saveAttendanceTable:zhongguancun_table];
+            [newAttendanceTableList addObject:zhongguancun_table_name];
+            [newAttendanceTableList addObject:yanqi_table_name];
+            
+        }
+        
+    }
+    
+    self.attendance_table_list = newAttendanceTableList;
+    [self saveDBFile];
+    [[NSUserDefaults standardUserDefaults] setObject:currentAppVersionString forKey:@"updated_version"];
+    
+}
 
+- (NSString *)backupAllAttendanceTable
+{
+    NSMutableArray *backup_table = [NSMutableArray arrayWithCapacity:self.attendance_table_list.count];
+    
+    for (NSString *tableName in self.attendance_table_list) {
+        NSMutableDictionary *table = [self getAttendanceTable:tableName];
+        [backup_table addObject:table];
+    }
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths firstObject];
+    NSString *backup_path = [docDir stringByAppendingPathComponent:@"table_backup.txt"];
+    
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:backup_table forKey:ATTENDANCE_TABLE];
+    [archiver finishEncoding];
+    
+    if ([data writeToFile:backup_path atomically:YES]) {
+        return backup_path;
+    }
+    
+    NSLog(@"fail to backup");
+    
+    return nil;
+}
 
 @end

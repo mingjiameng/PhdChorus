@@ -9,6 +9,7 @@
 #import "ZivSelectMemberToQueryViewController.h"
 
 #import "ZivDBManager.h"
+#import "ZivStaticByNameViewController.h"
 
 @interface ZivSelectMemberToQueryViewController () <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -43,8 +44,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"条件选择";
     [self configInputView];
 }
+
+- (IBAction)doQuery:(UIButton *)sender
+{
+    ZivStaticByNameViewController *staticByNameVC = [[ZivStaticByNameViewController alloc] init];
+    staticByNameVC.startTime = self.startTimeTextField.text;
+    staticByNameVC.endTime = self.endTimeTextField.text;
+    staticByNameVC.part = self.partTextField.text;
+    staticByNameVC.name = self.nameTextField.text;
+    
+    [self.navigationController pushViewController:staticByNameVC animated:YES];
+}
+
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {

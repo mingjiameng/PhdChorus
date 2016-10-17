@@ -15,6 +15,7 @@
 #define ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE @"is_formal_attendance"
 #define ATTENDANCE_TABLE_DATE @"table_date"
 #define ATTENDANCE_TABLE_ZONE @"table_zone"
+#define ATTENDANCE_TABLE_WEEKDAY @"table_weekday"
 
 #define MEMBER_INFO_KEY_NAME @"name"
 #define MEMBER_INFO_KEY_STAGE @"stage"
@@ -64,5 +65,8 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 
 - (BOOL)removeName:(nonnull NSArray *)nameList inPart:(nonnull NSString *)part FromAttendanceTable:(nonnull NSString *)attendanceTableName;
 - (BOOL)deleteAttendanceTable:(nonnull NSString *)attendanceTableName;
+
+- (void)updateDatabaseVersion;
+- (nonnull NSString *)backupAllAttendanceTable;
 
 @end

@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *weekAttendanceLabel01;
 @property (weak, nonatomic) IBOutlet UILabel *weekAttendanceLabel02;
 @property (weak, nonatomic) IBOutlet UILabel *weekAttendanceLabel03;
+@property (weak, nonatomic) IBOutlet UILabel *weekAttendanceLabel04;
 
 @end
 
@@ -36,6 +37,7 @@
 
 - (void)configInputView
 {
+    self.navigationItem.title = @"个人出勤统计";
     self.nameLabel.text = self.name;
     self.personalDetailInfoLabel.text = [[ZivDBManager shareDatabaseManager] personalInfoDescriptionOfMember:self.name inPart:self.part];
     self.timeIntervalLabel.text = [NSString stringWithFormat:@"%@~%@签到统计", self.startTime, self.endTime];
@@ -51,7 +53,7 @@
     self.weekAttendanceLabel01.text = [weekStaticsArray objectAtIndex:0];
     self.weekAttendanceLabel02.text = [weekStaticsArray objectAtIndex:1];
     self.weekAttendanceLabel03.text = [weekStaticsArray objectAtIndex:2];
-    
+    self.weekAttendanceLabel04.text = [weekStaticsArray objectAtIndex:3];
 }
 
 - (void)didReceiveMemoryWarning {

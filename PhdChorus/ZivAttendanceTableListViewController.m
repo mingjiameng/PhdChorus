@@ -11,6 +11,7 @@
 #import "ZivCreateRegisterTableViewController.h"
 #import "ZivDBManager.h"
 #import "SHARED_MICRO.h"
+#import "zkeySandboxHelper.h"
 #import "ZivRegistOrLeaveViewController.h"
 #import "ZivAttendanceStaticByDayViewController.h"
 #import "ZivStaticsDayAttendanceViewController.h"
@@ -33,12 +34,38 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     if (self.usage == ZivAttendanceTableListUsageAsign) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRegisterTable)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(backupAttendanceTable)];
     }
     
     self.navigationItem.title = @"签到表";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
 
+}
+
+- (void)backupAttendanceTable
+{
+    NSString *filePath = [[ZivDBManager shareDatabaseManager] backupAllAttendanceTable];
+    if (filePath == nil) {
+        return;
+    }
+    
+    NSString *fileName = @"签到表备份.txt";
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[fileName, fileURL] applicationActivities:nil];
+    
+    NSString *device = [zkeySandboxHelper getDeviceString];
+    if ([device hasPrefix:@"iPhone"]) {
+        
+    } else if ([device hasPrefix:@"iPad"]) {
+        UIPopoverPresentationController *popOverVC = activityVC.popoverPresentationController;
+        if (popOverVC) {
+            popOverVC.sourceView = self.view;
+            popOverVC.permittedArrowDirections = UIPopoverArrowDirectionUp;
+        }
+    }
+    
+    [self presentViewController:activityVC animated:YES completion:NULL];
 }
 
 - (void)reloadTableView

@@ -116,7 +116,7 @@
             
             NSString *tableName = [table_list objectAtIndex:i];
             NSDictionary *table = [self attendanceTableByName:tableName];
-            NSString *tableDate = [tableName substringToIndex:8];
+            //NSString *tableDate = [tableName substringToIndex:8];
             
             NSDictionary *part_sign_info = [table objectForKey:part];
             NSSet *attendance_set = [part_sign_info objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
@@ -126,7 +126,7 @@
             //NSLog(@"tableName:%@, tableDate:%@", tableName, tableDate);
             
             // 在当前行写下签到表名称
-            xlSheetWriteStrA(sheet, currentRow, currentColumn, [tableDate UTF8String], 0);
+            xlSheetWriteStrA(sheet, currentRow, currentColumn, [tableName UTF8String], 0);
             // 移到下一行
             ++currentRow;
             
@@ -484,38 +484,49 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyyMMdd"];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:current_date];
+    NSDateComponents *comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:current_date];
     NSInteger current_weekday = comps.weekday;
+    NSInteger current_day = comps.day;
+    //NSLog(@"current_day:%ld,current_weekday:%ld", current_day, current_weekday);
     
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:3];
     
-    for (NSInteger week_distance = 0; week_distance < 3; ++week_distance) {
+    for (NSInteger week_distance = 0; week_distance < 4; ++week_distance) {
         NSInteger wednesday_distance = 4 - current_weekday - 7 * week_distance;
+        if (current_weekday == 1) {
+            wednesday_distance -= 7;
+        }
         NSDateComponents *wednesday_comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:current_date];
-        [wednesday_comps setDay:current_weekday + wednesday_distance];
+        [wednesday_comps setDay:current_day + wednesday_distance];
         NSDate *wednesday_date = [calendar dateFromComponents:wednesday_comps];
-        BOOL wednesday_attendance = [self part:part someone:name attendAt:[dateFormat stringFromDate:wednesday_date]];
-        NSString *wednesday_string = (wednesday_attendance ? @"✔️" : @"✖️");
+        NSString *wednesday_string = [self part:part someone:name attendAtDate:[dateFormat stringFromDate:wednesday_date]];
+        
         
         NSInteger saturday_distance = 7 - current_weekday - 7 * week_distance;
+        if (current_weekday == 1) {
+            saturday_distance -= 7;
+        }
         NSDateComponents *saturday_comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:current_date];
-        [saturday_comps setDay:current_weekday + saturday_distance];
+        [saturday_comps setDay:current_day + saturday_distance];
         NSDate *saturday_date = [calendar dateFromComponents:saturday_comps];
-        BOOL saturday_attendance = [self part:part someone:name attendAt:[dateFormat stringFromDate:saturday_date]];
-        NSString *saturday_string = (saturday_attendance ? @"✔️" : @"✖️");
+        NSString *saturday_string = [self part:part someone:name attendAtDate:[dateFormat stringFromDate:saturday_date]];
         
-        NSInteger sunday_distance = 1 - current_weekday - 7 * week_distance;
+        NSInteger sunday_distance = 8 - current_weekday - 7 * week_distance;
+        if (current_weekday == 1) {
+            sunday_distance -= 7;
+        }
         NSDateComponents *sunday_comps = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday) fromDate:current_date];
-        [sunday_comps setDay:current_weekday + sunday_distance];
+        [sunday_comps setDay:current_day + sunday_distance];
         NSDate *sunday_date = [calendar dateFromComponents:sunday_comps];
-        BOOL sunday_attendance = [self part:part someone:name attendAt:[dateFormat stringFromDate:sunday_date]];
-        NSString *sunday_string = (sunday_attendance ? @"✔️" : @"✖️");
+        NSString *sunday_string = [self part:part someone:name attendAtDate:[dateFormat stringFromDate:sunday_date]];
         
         NSString *week_string = @"本";
         if (week_distance == 1) {
             week_string = @"上";
         } else if (week_distance == 2) {
             week_string = @"隔";
+        } else if (week_distance == 3) {
+            week_string = @"次";
         }
         
         NSString *week_description = [NSString stringWithFormat:@"%@周三%@  ·  周六%@  ·  周日%@", week_string, wednesday_string, saturday_string, sunday_string];
@@ -527,19 +538,37 @@
 }
 
 // date = @"20160928"
-- (BOOL)part:(NSString *)part someone:(NSString *)name attendAtDate:(NSString *)date
+// return 💤 OR ✔️ OR ✖️
+- (NSString *)part:(NSString *)part someone:(NSString *)name attendAtDate:(NSString *)date
 {
+    //NSLog(@"query %@%@ attend at date:%@",part, name, date);
+    
+    BOOL isFreeday = YES;
+    BOOL attended = NO;
     for (NSString *tableName in self.attendanceTableList) {
         if (![tableName containsString:date]) {
             continue;
         }
         
+        isFreeday = NO;
+        
         if ([self part:part someone:name attendAt:tableName]) {
-            return YES;
+            attended = YES;
+            break;
         }
     }
     
-    return NO;
+    if (isFreeday) {
+        return @"💤";
+    } else {
+        if (attended) {
+            return @"✔️";
+        } else {
+            return @"✖️";
+        }
+    }
+    
+    return @"💤";
 }
 
 
