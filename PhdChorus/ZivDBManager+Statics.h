@@ -22,6 +22,8 @@
 - (nonnull NSAttributedString *)part:(nonnull NSString *)part askForLeaveNameListInAttendanceTable:(nonnull NSString *)tableName;
 - (nonnull NSAttributedString *)part:(nonnull NSString *)part absenceNameListInAttendanceTable:(nonnull NSString *)tableName;
 
+
+// part = S | A | T | B
 - (nullable NSString *)exportAttendanceTableOfPart:(nonnull NSString *)part from:(nonnull NSString *)startTime to:(nonnull NSString *)endTime;
 
 

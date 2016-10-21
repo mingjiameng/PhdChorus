@@ -11,6 +11,7 @@
                 <outlet property="endTimeLabel" destination="9mZ-rK-frM" id="ru0-GZ-k9u"/>
                 <outlet property="endTimeTextField" destination="JzX-Mk-FQc" id="sVW-Z0-5Hh"/>
                 <outlet property="monthPickerView" destination="2Mm-xl-zh8" id="XB1-WX-Xt9"/>
+                <outlet property="partPickerView" destination="c39-oQ-lvE" id="fcm-Yz-O2N"/>
                 <outlet property="partTextField" destination="FzA-Qs-KTO" id="GR1-Bd-l1j"/>
                 <outlet property="startTimeLabel" destination="BPo-yU-6cK" id="1b1-eZ-uwi"/>
                 <outlet property="startTimeTextField" destination="Vnf-eZ-UxC" id="a5T-7D-La5"/>
@@ -25,15 +26,9 @@
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sbT-bK-YsU">
                     <subviews>
-                        <pickerView hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vkg-2E-kzX">
-                            <frame key="frameInset" minY="-451" height="216"/>
-                        </pickerView>
-                        <pickerView hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Mm-xl-zh8">
-                            <frame key="frameInset" minY="-451" height="216"/>
-                        </pickerView>
-                        <pickerView hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdZ-dn-8tH">
-                            <frame key="frameInset" minY="-451" height="216"/>
-                        </pickerView>
+                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vkg-2E-kzX"/>
+                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Mm-xl-zh8"/>
+                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BdZ-dn-8tH"/>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="height" constant="216" id="i3c-hC-vvf"/>
@@ -79,7 +74,7 @@
                         <action selector="export:" destination="-1" eventType="touchUpInside" id="NaW-t6-oTq"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="S1/S2/A1/A2/T1/T2/B1/B2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FzA-Qs-KTO">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="S/A/T/B" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FzA-Qs-KTO">
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -91,6 +86,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c39-oQ-lvE"/>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -98,6 +94,7 @@
                 <constraint firstItem="al7-0a-3xC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="3Av-7P-sEn"/>
                 <constraint firstAttribute="trailing" secondItem="FzA-Qs-KTO" secondAttribute="trailing" constant="16" id="66b-G9-Spk"/>
                 <constraint firstAttribute="bottom" secondItem="sbT-bK-YsU" secondAttribute="bottom" id="A3r-zA-iLt"/>
+                <constraint firstItem="c39-oQ-lvE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="GMZ-bc-vod"/>
                 <constraint firstAttribute="trailing" secondItem="JzX-Mk-FQc" secondAttribute="trailing" constant="16" id="Tab-RQ-m0v"/>
                 <constraint firstItem="al7-0a-3xC" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="YLC-V7-SUr"/>
                 <constraint firstItem="sbT-bK-YsU" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="aPz-bo-3M9"/>
@@ -105,7 +102,9 @@
                 <constraint firstItem="wwy-EG-hbS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="289" id="dzq-EM-6Sz"/>
                 <constraint firstItem="FzA-Qs-KTO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="104" id="ffV-aa-6PY"/>
                 <constraint firstItem="sbT-bK-YsU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ho9-n3-Fyq"/>
+                <constraint firstItem="c39-oQ-lvE" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="iWv-XJ-xPQ"/>
                 <constraint firstItem="wwy-EG-hbS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="iYS-Px-4vX"/>
+                <constraint firstAttribute="bottom" secondItem="c39-oQ-lvE" secondAttribute="bottom" id="oJD-nC-CfE"/>
                 <constraint firstItem="FzA-Qs-KTO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="211" id="q1s-wb-Tsn"/>
                 <constraint firstAttribute="trailing" secondItem="Vnf-eZ-UxC" secondAttribute="trailing" constant="16" id="tmk-oq-R2k"/>
                 <constraint firstItem="Vnf-eZ-UxC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="135" id="w0T-3H-oPF"/>

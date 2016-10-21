@@ -28,6 +28,8 @@
     if ([endTime compare:startTime] == NSOrderedAscending) {
         return nil;
     }
+    
+    
     // 找出在给定日期内的大排&小排签到表
     NSMutableArray *informal_satisfiedTableNameList = [NSMutableArray array];
     NSMutableArray *formal_satisfiedTableNameList = [NSMutableArray array];
@@ -44,21 +46,30 @@
         }
     }
     
+    NSString *high_part = [part stringByAppendingString:@"1"];
+    NSString *low_part = [part stringByAppendingString:@"2"];
+    NSArray *part_array = @[high_part, low_part];
     // 找出在该声部的 雁栖湖&中关村人员列表
-    NSDictionary *part_info = [self.member_info_db objectForKey:part];
-    NSArray *part_name_list = [part_info allKeys];
-    NSMutableArray *yanqi_part_name_list = [NSMutableArray array];
-    NSMutableArray *zhongguancun_part_name_list = [NSMutableArray array];
-    NSDictionary *personal_info = nil;
-    NSString *personal_zone = nil;
-    for (NSString *name in part_name_list) {
-        personal_info = [part_info objectForKey:name];
-        personal_zone = [personal_info objectForKey:MEMBER_INFO_KEY_ZONE];
-        if ([personal_zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
-            [yanqi_part_name_list addObject:name];
-        } else if ([personal_zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
-            [zhongguancun_part_name_list addObject:name];
+    NSMutableDictionary *part_zone_name_info = [NSMutableDictionary dictionaryWithCapacity:2];
+    for (NSString *exact_part in part_array) {
+        NSDictionary *part_info = [self.member_info_db objectForKey:exact_part];
+        NSArray *part_name_list = [part_info allKeys];
+        NSMutableArray *yanqi_part_name_list = [NSMutableArray array];
+        NSMutableArray *zhongguancun_part_name_list = [NSMutableArray array];
+        NSDictionary *personal_info = nil;
+        NSString *personal_zone = nil;
+        for (NSString *name in part_name_list) {
+            personal_info = [part_info objectForKey:name];
+            personal_zone = [personal_info objectForKey:MEMBER_INFO_KEY_ZONE];
+            if ([personal_zone compare:ZivAttendanceZoneIdentifireYanqi] == NSOrderedSame) {
+                [yanqi_part_name_list addObject:name];
+            } else if ([personal_zone compare:ZivAttendanceZoneIdentifireZhongguancun] == NSOrderedSame) {
+                [zhongguancun_part_name_list addObject:name];
+            }
         }
+        
+        [part_zone_name_info setObject:@{ZivAttendanceZoneIdentifireZhongguancun : zhongguancun_part_name_list,
+                                         ZivAttendanceZoneIdentifireYanqi : yanqi_part_name_list} forKey:exact_part];
     }
     
     NSMutableArray *sheet_info_array = [NSMutableArray arrayWithCapacity:2];
@@ -67,11 +78,17 @@
     
     // 创建小排 & 大排 sheet
     BookHandle book = xlCreateBook();
-    // 雁栖湖背景色设为灰色
+    // 中关村－黑色 雁栖湖－蓝色
     FontHandle blueFont = xlBookAddFontA(book, 0);
     xlFontSetColorA(blueFont, COLOR_BLUE);
     FormatHandle yanqi_format = xlBookAddFormatA(book, 0);
     xlFormatSetFontA(yanqi_format, blueFont);
+    // 统计－红色
+    FontHandle redFont = xlBookAddFontA(book, 0);
+    xlFontSetColorA(redFont, COLOR_RED);
+    FormatHandle statics_format = xlBookAddFormatA(book, 0);
+    xlFormatSetFontA(statics_format, redFont);
+    
     
     // 大排、小排各创建一个sheet
     for (int index = 0; index < sheet_info_array.count; ++index) {
@@ -92,20 +109,25 @@
         xlSheetWriteStrA(sheet, currentRow, currentColumn + 2, [@"姓名" UTF8String], 0);
         ++currentRow;
         
-        // 先中关村
-        for (int i = 0; i < zhongguancun_part_name_list.count; ++i) {
-            xlSheetWriteStrA(sheet, currentRow, currentColumn, [part UTF8String], 0);
-            xlSheetWriteStrA(sheet, currentRow, currentColumn + 1, [[NSString stringWithFormat:@"%d", currentRow - 2] UTF8String], 0);
-            xlSheetWriteStrA(sheet, currentRow, currentColumn + 2, [[zhongguancun_part_name_list objectAtIndex:i] UTF8String], 0);
-            ++currentRow;
+        for (NSString *exact_part in part_array) {
+            NSArray *zhongguancun_part_name_list = [[part_zone_name_info objectForKey:exact_part] objectForKey:ZivAttendanceZoneIdentifireZhongguancun];
+            NSArray *yanqi_part_name_list = [[part_zone_name_info objectForKey:exact_part] objectForKey:ZivAttendanceZoneIdentifireYanqi];
+            // 先中关村
+            for (int i = 0; i < zhongguancun_part_name_list.count; ++i) {
+                xlSheetWriteStrA(sheet, currentRow, currentColumn, [exact_part UTF8String], 0);
+                xlSheetWriteStrA(sheet, currentRow, currentColumn + 1, [[NSString stringWithFormat:@"%d", currentRow - 2] UTF8String], 0);
+                xlSheetWriteStrA(sheet, currentRow, currentColumn + 2, [[zhongguancun_part_name_list objectAtIndex:i] UTF8String], 0);
+                ++currentRow;
+            }
+            // 后雁栖湖
+            for (int i = 0; i < yanqi_part_name_list.count; ++i) {
+                xlSheetWriteStrA(sheet, currentRow, currentColumn, [exact_part UTF8String], yanqi_format);
+                xlSheetWriteStrA(sheet, currentRow, currentColumn + 1, [[NSString stringWithFormat:@"%d", currentRow - 2] UTF8String], yanqi_format);
+                xlSheetWriteStrA(sheet, currentRow, currentColumn + 2, [[yanqi_part_name_list objectAtIndex:i] UTF8String], yanqi_format);
+                ++currentRow;
+            }
         }
-        // 后雁栖湖
-        for (int i = 0; i < yanqi_part_name_list.count; ++i) {
-            xlSheetWriteStrA(sheet, currentRow, currentColumn, [part UTF8String], yanqi_format);
-            xlSheetWriteStrA(sheet, currentRow, currentColumn + 1, [[NSString stringWithFormat:@"%d", currentRow - 2] UTF8String], yanqi_format);
-            xlSheetWriteStrA(sheet, currentRow, currentColumn + 2, [[yanqi_part_name_list objectAtIndex:i] UTF8String], yanqi_format);
-            ++currentRow;
-        }
+        
         
         currentColumn = startColumn + 3;
         
@@ -116,48 +138,77 @@
             
             NSString *tableName = [table_list objectAtIndex:i];
             NSDictionary *table = [self attendanceTableByName:tableName];
-            //NSString *tableDate = [tableName substringToIndex:8];
-            
-            NSDictionary *part_sign_info = [table objectForKey:part];
-            NSSet *attendance_set = [part_sign_info objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
-            
-            NSString *name = nil;
-            
-            //NSLog(@"tableName:%@, tableDate:%@", tableName, tableDate);
             
             // 在当前行写下签到表名称
             xlSheetWriteStrA(sheet, currentRow, currentColumn, [tableName UTF8String], 0);
             // 移到下一行
             ++currentRow;
             
-            for (int row = 0; row < zhongguancun_part_name_list.count; ++row) {
-                name = [zhongguancun_part_name_list objectAtIndex:row];
-                if ([attendance_set containsObject:name]) {
-                    xlSheetWriteNumA(sheet, currentRow, currentColumn, 1, 0);
-                } else {
-                    xlSheetWriteNumA(sheet, currentRow, currentColumn, 0, 0);
+            for (NSString *exact_part in part_array) {
+                NSDictionary *part_sign_info = [table objectForKey:exact_part];
+                NSSet *attendance_set = [part_sign_info objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST];
+                
+                NSString *name = nil;
+                NSArray *zhongguancun_part_name_list = [[part_zone_name_info objectForKey:exact_part] objectForKey:ZivAttendanceZoneIdentifireZhongguancun];
+                NSArray *yanqi_part_name_list = [[part_zone_name_info objectForKey:exact_part] objectForKey:ZivAttendanceZoneIdentifireYanqi];
+                
+                for (int row = 0; row < zhongguancun_part_name_list.count; ++row) {
+                    name = [zhongguancun_part_name_list objectAtIndex:row];
+                    if ([attendance_set containsObject:name]) {
+                        xlSheetWriteNumA(sheet, currentRow, currentColumn, 1, 0);
+                    } else {
+                        xlSheetWriteNumA(sheet, currentRow, currentColumn, 0, 0);
+                    }
+                    
+                    ++currentRow;
                 }
                 
-                ++currentRow;
-            }
-            
-            for (int row = 0; row < yanqi_part_name_list.count; ++row) {
-                name = [yanqi_part_name_list objectAtIndex:row];
-                if ([attendance_set containsObject:name]) {
-                    xlSheetWriteNumA(sheet, currentRow, currentColumn, 1, yanqi_format);
-                } else {
-                    xlSheetWriteNumA(sheet, currentRow, currentColumn, 0, yanqi_format);
+                for (int row = 0; row < yanqi_part_name_list.count; ++row) {
+                    name = [yanqi_part_name_list objectAtIndex:row];
+                    if ([attendance_set containsObject:name]) {
+                        xlSheetWriteNumA(sheet, currentRow, currentColumn, 1, yanqi_format);
+                    } else {
+                        xlSheetWriteNumA(sheet, currentRow, currentColumn, 0, yanqi_format);
+                    }
+                    
+                    ++currentRow;
                 }
                 
-                ++currentRow;
             }
             
             // 移到下一列
             ++currentColumn;
         }
         
+        // 统计工作
+        // 每列加和
+        int from_row = startRow + 1;
+        int to_row = from_row;
+        for (NSString *exact_part in part_array) {
+            to_row += [self numberOfMemberInPart:exact_part];
+        }
+        to_row -= 1;
+        int from_column = startColumn + 3;
+        int to_column = (int)(from_column + table_list.count - 1);
         
         
+        NSString *columnFlag = nil;
+        NSString *formulaString = nil;
+        int write_at_row = to_row + 2;
+        for (currentColumn = from_column; currentColumn <= to_column; ++currentColumn) {
+            columnFlag = [self flagForColumn:currentColumn + 1];
+            formulaString = [NSString stringWithFormat:@"SUM(%@%d:%@%d)", columnFlag, from_row + 1, columnFlag, to_row + 1];
+            xlSheetWriteFormulaA(sheet, write_at_row, currentColumn, [formulaString cStringUsingEncoding:NSUTF8StringEncoding], statics_format);
+        }
+        
+        // 每行加和
+        int write_at_column = to_column + 2;
+        NSString *from_column_flag_string = [self flagForColumn:from_column + 1];
+        NSString *to_column_flag_string = [self flagForColumn:to_column + 1];
+        for (currentRow = from_row; currentRow <= to_row; ++currentRow) {
+            formulaString = [NSString stringWithFormat:@"SUM(%@%d:%@%d)", from_column_flag_string, currentRow + 1, to_column_flag_string, currentRow + 1];
+            xlSheetWriteFormulaA(sheet, currentRow, write_at_column, [formulaString cStringUsingEncoding:NSUTF8StringEncoding], statics_format);
+        }
     }
     
     NSString *filePath = [self publicPathForAttendanceExcelOfPart:part From:startTime to:endTime];
@@ -169,6 +220,21 @@
     
     return filePath;
 
+}
+
+- (NSString *)flagForColumn:(int)column
+{
+    NSString *result = @"";
+    unichar flag;
+    while (column > 0) {
+        flag = (unichar)(column % 26 + 64);
+        result = [NSString stringWithFormat:@"%C%@", flag, result];
+        column /= 26;
+    }
+    
+    //NSLog(@"column_flag:%@", result);
+    
+    return result;
 }
 
 // return nil if the attendance is not formal

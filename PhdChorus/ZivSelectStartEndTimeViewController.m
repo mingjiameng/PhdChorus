@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *yearPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *monthPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *dayPickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *partPickerView;
 
 @property (weak, nonatomic) IBOutlet UITextField *startTimeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *endTimeTextField;
@@ -26,6 +27,8 @@
 @property (nonatomic, strong) NSArray *yearArray;
 @property (nonatomic, strong) NSArray *monthArray;
 @property (nonatomic, strong) NSArray *dayArray;
+@property (nonatomic, strong) NSArray *partArray;
+
 @property (nonatomic, weak) UITextField *currentTimeTextField;
 
 @end
@@ -59,12 +62,15 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
+
     if (pickerView == self.yearPickerView) {
         return self.yearArray.count;
     } else if (pickerView == self.monthPickerView) {
         return self.monthArray.count;
     } else if (pickerView == self.dayPickerView) {
         return self.dayArray.count;
+    } else if (pickerView == self.partPickerView) {
+        return self.partArray.count;
     }
     
     return 0;
@@ -78,6 +84,8 @@
         return [self.monthArray objectAtIndex:row];
     } else if (pickerView == self.dayPickerView) {
         return [self.dayArray objectAtIndex:row];
+    } else if (pickerView == self.partPickerView) {
+        return [self.partArray objectAtIndex:row];
     }
     
     return @"";
@@ -85,6 +93,11 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    if (pickerView == self.partPickerView) {
+        self.partTextField.text = [self.partArray objectAtIndex:row];
+        return;
+    }
+    
     NSString *year = [self.yearArray objectAtIndex:[self.yearPickerView selectedRowInComponent:0]];
     NSString *month = [self.monthArray objectAtIndex:[self.monthPickerView selectedRowInComponent:0]];
     NSString *day = [self.dayArray objectAtIndex:[self.dayPickerView selectedRowInComponent:0]];
@@ -98,39 +111,30 @@
         self.yearPickerView.hidden = YES;
         self.monthPickerView.hidden = YES;
         self.dayPickerView.hidden = YES;
+        self.partPickerView.hidden = NO;
         
         self.startTimeLabel.textColor = [UIColor blackColor];
         self.endTimeLabel.textColor = [UIColor blackColor];
+    } else {
+        self.yearPickerView.hidden = NO;
+        self.monthPickerView.hidden = NO;
+        self.dayPickerView.hidden = NO;
+        self.partPickerView.hidden = YES;
         
-        return YES;
-    }
-    
-    [self.view endEditing:YES];
-    
-    self.yearPickerView.hidden = NO;
-    self.monthPickerView.hidden = NO;
-    self.dayPickerView.hidden = NO;
-    
-    if (textField == self.startTimeTextField) {
-        self.currentTimeTextField = self.startTimeTextField;
-        self.startTimeLabel.textColor = self.view.tintColor;
-        self.endTimeLabel.textColor = [UIColor blackColor];
-        
-    } else if (textField == self.endTimeTextField) {
-        self.currentTimeTextField = self.endTimeTextField;
-        self.startTimeLabel.textColor = [UIColor blackColor];
-        self.endTimeLabel.textColor = self.view.tintColor;
-        
+        if (textField == self.startTimeTextField) {
+            self.currentTimeTextField = self.startTimeTextField;
+            self.startTimeLabel.textColor = self.view.tintColor;
+            self.endTimeLabel.textColor = [UIColor blackColor];
+            
+        } else if (textField == self.endTimeTextField) {
+            self.currentTimeTextField = self.endTimeTextField;
+            self.startTimeLabel.textColor = [UIColor blackColor];
+            self.endTimeLabel.textColor = self.view.tintColor;
+            
+        }
     }
     
     return NO;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    
-    return YES;
 }
 
 - (void)configInputView
@@ -141,9 +145,12 @@
     self.monthPickerView.delegate = self;
     self.dayPickerView.dataSource = self;
     self.dayPickerView.delegate = self;
+    self.partPickerView.dataSource = self;
+    self.partPickerView.delegate = self;
     
     self.startTimeTextField.delegate = self;
     self.endTimeTextField.delegate = self;
+    self.partTextField.delegate = self;
     self.partTextField.delegate = self;
 }
 
@@ -173,6 +180,15 @@
     }
     
     return _dayArray;
+}
+
+- (NSArray *)partArray
+{
+    if (!_partArray) {
+        _partArray = @[@"S", @"A", @"T", @"B"];
+    }
+    
+    return _partArray;
 }
 
 - (void)didReceiveMemoryWarning {
