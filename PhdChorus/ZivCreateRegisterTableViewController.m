@@ -36,7 +36,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.title = @"创建签到表";
+    if (self.usage == ZivCreateRegisterTableVCUsageCreate) {
+        self.navigationItem.title = @"创建签到表";
+    } else if (self.usage == ZivCreateRegisterTableVCUsageEdit) {
+        self.navigationItem.title = @"编辑签到表";
+    }
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     
@@ -54,7 +59,15 @@
     NSString *zone = [self.zoneSegment titleForSegmentAtIndex:[self.zoneSegment selectedSegmentIndex]];
     BOOL isFormalAttendance = self.formalAttendanceSwitch.on;
     
-    if (![[ZivDBManager shareDatabaseManager] createAttendanceTableInDate:date atZone:zone whetherFormalAttendance:isFormalAttendance]) {
+    BOOL success = YES;
+    if (self.usage == ZivCreateRegisterTableVCUsageCreate) {
+        success = [[ZivDBManager shareDatabaseManager] createAttendanceTableInDate:date atZone:zone whetherFormalAttendance:isFormalAttendance];
+        
+    } else if (self.usage == ZivCreateRegisterTableVCUsageEdit) {
+        success = [[ZivDBManager shareDatabaseManager] editAttendanceTable:self.attendanceTableName inDate:date atZone:zone whetherFormalAttendance:isFormalAttendance];
+    }
+    
+    if (!success) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"创建失败" message:@"签到表已存在" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:NULL];
         [alertController addAction:confirmAction];
@@ -119,14 +132,38 @@
     self.dayPickerView.dataSource = self;
     self.dayPickerView.delegate = self;
     
-    NSDateComponents *comps = [self currentYearMonthDay];
-    self.yearLabel.text = [NSString stringWithFormat:@"%ld", (long)comps.year];
-    self.monthLabel.text = [NSString stringWithFormat:@"%02ld", (long)comps.month];
-    self.dayLabel.text = [NSString stringWithFormat:@"%02ld", (long)comps.day];
+    NSInteger year, month, day;
+    if (self.usage == ZivCreateRegisterTableVCUsageCreate) {
+        NSDateComponents *comps = [self currentYearMonthDay];
+        year = comps.year;
+        month = comps.month;
+        day = comps.day;
+    } else if (self.usage == ZivCreateRegisterTableVCUsageEdit) {
+        NSString *yearString = [self.attendanceTableName substringWithRange:NSMakeRange(0, 4)];
+        year = [yearString integerValue];
+        NSString *monthString = [self.attendanceTableName substringWithRange:NSMakeRange(4, 2)];
+        month = [monthString integerValue];
+        NSString *dayString = [self.attendanceTableName substringWithRange:NSMakeRange(6, 2)];
+        day = [dayString integerValue];
+        
+        NSString *zoneString = [self.attendanceTableName substringWithRange:NSMakeRange(10, 3)];
+        if ([zoneString isEqualToString:ZivAttendanceZoneIdentifireYanqi]) {
+            [self.zoneSegment setSelectedSegmentIndex:1];
+        }
+        
+        NSString *formalString = [self.attendanceTableName substringWithRange:NSMakeRange(13, 2)];
+        if ([formalString isEqualToString:@"小排"]) {
+            self.formalAttendanceSwitch.on = NO;
+        }
+    }
     
-    [self.yearPickerView selectRow:(comps.year - 2016) inComponent:0 animated:NO];
-    [self.monthPickerView selectRow:(comps.month - 1) inComponent:0 animated:NO];
-    [self.dayPickerView selectRow:(comps.day - 1) inComponent:0 animated:NO];
+    self.yearLabel.text = [NSString stringWithFormat:@"%ld", (long)year];
+    self.monthLabel.text = [NSString stringWithFormat:@"%02ld", (long)month];
+    self.dayLabel.text = [NSString stringWithFormat:@"%02ld", (long)day];
+    
+    [self.yearPickerView selectRow:(year - 2016) inComponent:0 animated:NO];
+    [self.monthPickerView selectRow:(month - 1) inComponent:0 animated:NO];
+    [self.dayPickerView selectRow:(day - 1) inComponent:0 animated:NO];
 }
 
 - (NSDateComponents *)currentYearMonthDay

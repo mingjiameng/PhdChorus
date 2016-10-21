@@ -43,19 +43,6 @@
                         <action selector="leave:" destination="-1" eventType="touchUpInside" id="GIn-Y9-Awj"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1k-l9-8UF">
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="YhV-h9-sOt"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="删除签到表">
-                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="deleteAttendanceTable:" destination="-1" eventType="touchUpInside" id="jeU-we-Ghf"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dje-3o-h6O">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -77,20 +64,37 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dtR-Oc-CHy">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1k-l9-8UF">
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="删除签到表">
+                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="deleteAttendanceTable:" destination="-1" eventType="touchUpInside" id="jeU-we-Ghf"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="qAy-UE-I6A"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="g1k-l9-8UF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BIq-mh-Qtj"/>
+                <constraint firstAttribute="bottom" secondItem="dtR-Oc-CHy" secondAttribute="bottom" id="0EV-xv-YGN"/>
                 <constraint firstItem="EdY-m8-4Ti" firstAttribute="top" secondItem="mkB-dt-wwm" secondAttribute="bottom" constant="80" id="Go2-cT-tRf"/>
-                <constraint firstAttribute="bottom" secondItem="g1k-l9-8UF" secondAttribute="bottom" id="P9k-PE-tBN"/>
+                <constraint firstItem="dtR-Oc-CHy" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="HJM-Dx-3W4"/>
                 <constraint firstItem="mkB-dt-wwm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="Sc7-2e-xbU"/>
                 <constraint firstItem="dje-3o-h6O" firstAttribute="top" secondItem="EdY-m8-4Ti" secondAttribute="bottom" constant="80" id="T0a-eO-Ize"/>
-                <constraint firstItem="g1k-l9-8UF" firstAttribute="top" secondItem="6Me-Zh-5WY" secondAttribute="bottom" constant="8" id="Ty4-Gr-CZx"/>
                 <constraint firstItem="6Me-Zh-5WY" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="WW4-nd-MOx"/>
+                <constraint firstItem="dtR-Oc-CHy" firstAttribute="top" secondItem="6Me-Zh-5WY" secondAttribute="bottom" constant="8" id="f1w-OY-zN5"/>
                 <constraint firstItem="6Me-Zh-5WY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uw1-o5-2g3"/>
-                <constraint firstItem="g1k-l9-8UF" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="xbw-XN-t8u"/>
                 <constraint firstItem="EdY-m8-4Ti" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xnd-o9-MAa"/>
                 <constraint firstItem="mkB-dt-wwm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="y6X-UG-K52"/>
+                <constraint firstItem="dtR-Oc-CHy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zFU-Zx-QYK"/>
                 <constraint firstItem="dje-3o-h6O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zGf-S6-Ced"/>
             </constraints>
             <point key="canvasLocation" x="34" y="59"/>

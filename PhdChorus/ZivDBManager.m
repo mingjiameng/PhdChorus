@@ -157,6 +157,66 @@
     return NO;
 }
 
+- (BOOL)editAttendanceTable:(NSString *)oldAttendanceTableName inDate:(NSString *)date atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    NSDate *calenderDate = [dateFormat dateFromString:date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:calenderDate];
+    NSString *weekdayString = @"周三";
+    // 从周日开始算起 周日＝1
+    if (comps.weekday == 1) {
+        weekdayString = @"周日";
+    } else if (comps.weekday == 7) {
+        weekdayString = @"周六";
+    } else if (comps.weekday == 4) {
+        weekdayString = @"周三";
+    }
+    
+    NSString *attendanceTableName = [NSString stringWithFormat:@"%@%@%@%@", date, weekdayString, zone, (isFormalAttendance ? @"大排" : @"小排")];
+    
+    if ([attendanceTableName isEqualToString:oldAttendanceTableName]) {
+        // 无修改
+        return YES;
+    }
+    
+    NSInteger index = 0;
+    for (index = 0; index < self.attendance_table_list.count; ++index) {
+        NSString *tableName = [self.attendance_table_list objectAtIndex:index];
+        if ([tableName isEqualToString:attendanceTableName]) {
+            // 签到表已存在
+            return NO;
+        }
+        
+        if ([tableName isEqualToString:oldAttendanceTableName]) {
+            break;
+        }
+    }
+    
+    if (![self switchToAttendanceTable:oldAttendanceTableName]) {
+        return NO;
+    }
+    
+    NSMutableDictionary *newTable = self.currentAttendanceTable;
+    [newTable setObject:attendanceTableName forKey:ATTENDANCE_TABLE_NAME];
+    [newTable setObject:(isFormalAttendance ? @"1" : @"0") forKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE];
+    [newTable setObject:date forKey:ATTENDANCE_TABLE_DATE];
+    [newTable setObject:zone forKey:ATTENDANCE_TABLE_ZONE];
+    [newTable setObject:weekdayString forKey:ATTENDANCE_TABLE_WEEKDAY];
+    
+    if (![self saveCurrentAttendanceTable]) {
+        return NO;
+    }
+    
+    [self.attendance_table_list replaceObjectAtIndex:index withObject:attendanceTableName];
+    [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
+    
+    [zkeySandboxHelper deleteFileAtPath:[self pathOfAttendanceTableFile:oldAttendanceTableName]];
+    
+    return YES;
+}
+
 - (nonnull NSMutableDictionary *)newAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(NSString *)date andWeekday:(NSString *)weekdayString atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
 {
     NSMutableDictionary *newTable = [NSMutableDictionary dictionary];

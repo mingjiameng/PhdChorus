@@ -9,6 +9,7 @@
 #import "ZivRegistOrLeaveViewController.h"
 
 #import "ZivRegisterViewController.h"
+#import "ZivCreateRegisterTableViewController.h"
 #import "ZivDBManager.h"
 #import <sys/utsname.h>
 #import "zkeySandboxHelper.h"
@@ -79,6 +80,14 @@
     registerVC.usage = ZivRegisterViewControllerUsageAbsent;
     
     [self.navigationController pushViewController:registerVC animated:YES];
+}
+
+- (IBAction)editAttendanceTable:(UIButton *)sender
+{
+    ZivCreateRegisterTableViewController *editTableVC = [[ZivCreateRegisterTableViewController alloc] init];
+    editTableVC.usage = ZivCreateRegisterTableVCUsageEdit;
+    
+    [self.navigationController pushViewController:editTableVC animated:YES];
 }
 
 

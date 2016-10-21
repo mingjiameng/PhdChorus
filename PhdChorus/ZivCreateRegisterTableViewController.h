@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, ZivCreateRegisterTableVCUsage) {
+    ZivCreateRegisterTableVCUsageCreate = 1,
+    ZivCreateRegisterTableVCUsageEdit = 2
+};
+
 @interface ZivCreateRegisterTableViewController : UIViewController
+
+@property (nonatomic) ZivCreateRegisterTableVCUsage usage;
+
+// nonnull when ZivCreateRegisterTableVCUsage = Edit
+@property (nonatomic, strong, nonnull) NSString *attendanceTableName;
 
 @end

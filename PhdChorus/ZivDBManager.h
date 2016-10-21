@@ -38,6 +38,7 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 
 
 - (BOOL)createAttendanceTableInDate:(nonnull NSString *)date atZone:(nonnull NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance;
+- (BOOL)editAttendanceTable:(nonnull NSString *)oldAttendanceTableName inDate:(nonnull NSString *)date atZone:(nonnull NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance;
 - (nonnull NSArray<NSString *> *)attendanceTableList;
 
 - (BOOL)attendanceTable:(nonnull NSString *)attendanceTableName someoneSignUp:(nonnull NSString *)name inPart:(nonnull NSString *)part;

@@ -77,9 +77,21 @@
 - (void)addRegisterTable
 {
     ZivCreateRegisterTableViewController *newTableVC = [[ZivCreateRegisterTableViewController alloc] init];
+    newTableVC.usage = ZivCreateRegisterTableVCUsageCreate;
     
     [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:newTableVC] animated:YES completion:NULL];
     
+}
+
+- (void)editRegisterTableAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *tableName = [self.registerTableList objectAtIndex:indexPath.row];
+    
+    ZivCreateRegisterTableViewController *newTableVC = [[ZivCreateRegisterTableViewController alloc] init];
+    newTableVC.usage = ZivCreateRegisterTableVCUsageEdit;
+    newTableVC.attendanceTableName = tableName;
+    
+    [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:newTableVC] animated:YES completion:NULL];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,6 +153,17 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
+}
+
+- (NSArray <UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    __weak typeof(self) weakSelf = self;
+    UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"编辑" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        [weakSelf editRegisterTableAtIndexPath:indexPath];
+    }];
+    editAction.backgroundColor = self.view.tintColor;
+    
+    return @[editAction];
 }
 
 /*
