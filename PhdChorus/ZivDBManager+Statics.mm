@@ -33,15 +33,21 @@
     // 找出在给定日期内的大排&小排签到表
     NSMutableArray *informal_satisfiedTableNameList = [NSMutableArray array];
     NSMutableArray *formal_satisfiedTableNameList = [NSMutableArray array];
+    NSMutableArray *shengyueke_satisfiedTableNameList = [NSMutableArray array];
+    NSMutableArray *zhouriwan_satisfiedTableNameList = [NSMutableArray array];
     NSString *date = nil;
     
     for (NSString *tableName in self.attendanceTableList) {
         date = [tableName substringToIndex:8];
         if ([date compare:startTime] != NSOrderedAscending && [date compare:endTime] != NSOrderedDescending) {
-            if ([tableName containsString:@"小排"]) {
-                [informal_satisfiedTableNameList addObject:tableName];
-            } else if ([tableName containsString:@"大排"]) {
+            if ([tableName containsString:ZivAttendanceTypeDapai]) {
                 [formal_satisfiedTableNameList addObject:tableName];
+            } else if ([tableName containsString:ZivAttendanceTypeXiaopai]) {
+                [informal_satisfiedTableNameList addObject:tableName];
+            } else if ([tableName containsString:ZivAttendanceTypeShengyueke]) {
+                [shengyueke_satisfiedTableNameList addObject:tableName];
+            } else if ([tableName containsString:ZivAttendanceTypeZhouriwan]) {
+                [zhouriwan_satisfiedTableNameList addObject:tableName];
             }
         }
     }
@@ -75,8 +81,9 @@
     NSMutableArray *sheet_info_array = [NSMutableArray arrayWithCapacity:2];
     [sheet_info_array addObject:@{@"sheet_name" : @"大排", @"table_list" : formal_satisfiedTableNameList}];
     [sheet_info_array addObject:@{@"sheet_name" : @"小排", @"table_list" : informal_satisfiedTableNameList}];
-    
-    // 创建小排 & 大排 sheet
+    [sheet_info_array addObject:@{@"sheet_name" : @"声乐课", @"table_list" : shengyueke_satisfiedTableNameList}];
+    [sheet_info_array addObject:@{@"sheet_name" : @"周日晚", @"table_list" : zhouriwan_satisfiedTableNameList}];
+    // 创建Book(Excel文件)
     BookHandle book = xlCreateBook();
     // 中关村－黑色 雁栖湖－蓝色
     FontHandle blueFont = xlBookAddFontA(book, 0);
@@ -90,7 +97,7 @@
     xlFormatSetFontA(statics_format, redFont);
     
     
-    // 大排、小排各创建一个sheet
+    // 大排、小排、声乐课、周日晚各创建一个sheet
     for (int index = 0; index < sheet_info_array.count; ++index) {
         NSDictionary *sheet_info = [sheet_info_array objectAtIndex:index];
         NSString *sheet_name = [sheet_info objectForKey:@"sheet_name"];

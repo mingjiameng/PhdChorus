@@ -15,8 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *yearPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *monthPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *dayPickerView;
-@property (weak, nonatomic) IBOutlet UISwitch *formalAttendanceSwitch;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *zoneSegment;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *typeSegment;
 
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UILabel *monthLabel;
@@ -57,14 +57,14 @@
 {
     NSString *date = [[self.yearLabel.text stringByAppendingString:self.monthLabel.text] stringByAppendingString:self.dayLabel.text];
     NSString *zone = [self.zoneSegment titleForSegmentAtIndex:[self.zoneSegment selectedSegmentIndex]];
-    BOOL isFormalAttendance = self.formalAttendanceSwitch.on;
+    NSString *type = [self.typeSegment titleForSegmentAtIndex:[self.typeSegment selectedSegmentIndex]];
     
     BOOL success = YES;
     if (self.usage == ZivCreateRegisterTableVCUsageCreate) {
-        success = [[ZivDBManager shareDatabaseManager] createAttendanceTableInDate:date atZone:zone whetherFormalAttendance:isFormalAttendance];
+        success = [[ZivDBManager shareDatabaseManager] createAttendanceTableInDate:date atZone:zone withType:type];
         
     } else if (self.usage == ZivCreateRegisterTableVCUsageEdit) {
-        success = [[ZivDBManager shareDatabaseManager] editAttendanceTable:self.attendanceTableName inDate:date atZone:zone whetherFormalAttendance:isFormalAttendance];
+        success = [[ZivDBManager shareDatabaseManager] editAttendanceTable:self.attendanceTableName inDate:date atZone:zone withType:type];
     }
     
     if (!success) {
@@ -151,10 +151,16 @@
             [self.zoneSegment setSelectedSegmentIndex:1];
         }
         
-        NSString *formalString = [self.attendanceTableName substringWithRange:NSMakeRange(13, 2)];
-        if ([formalString isEqualToString:@"小排"]) {
-            self.formalAttendanceSwitch.on = NO;
+        NSString *typeString = [self.attendanceTableName substringFromIndex:13];
+        NSInteger index = 0;
+        NSArray *typeList = [[ZivDBManager shareDatabaseManager] attendanceTypeList];
+        for (index = 0; index < typeList.count; ++index) {
+            if ([[typeList objectAtIndex:index] isEqualToString:typeString]) {
+                break;
+            }
         }
+        
+        [self.typeSegment setSelectedSegmentIndex:index];
     }
     
     self.yearLabel.text = [NSString stringWithFormat:@"%ld", (long)year];

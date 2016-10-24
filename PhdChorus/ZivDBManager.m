@@ -30,6 +30,7 @@
         @"table_date" : @"20160921" // 签到日期
         @"is_formal_attendance" : @"0", // 是否大排
         @"zone" : @"雁栖湖", // 签到表区域
+        @"attendance_type" : @"大排" // 大排、小排、声乐课、周日晚
         @"T2" : { @"attendance_list" : set{@"梁志鹏", ...},
                   @"ask_for_leave_list" : set{@"罗成", ...} },
         ...
@@ -51,6 +52,8 @@
 #define ATTENDANCE_RECORD_TABLE_LIST @"resgister_record_table_list"
 #define MEMBER_INFO_DB @"member_info_db"
 
+#define UPDATED_VERSION @"update_to"
+
 @interface ZivDBManager()
 
 @property (nonatomic, nonnull, strong) NSMutableArray *attendance_table_list;
@@ -58,6 +61,7 @@
 @property (nonatomic, strong) NSMutableDictionary *currentAttendanceTable;
 @property (nonatomic, strong) NSArray *partList;
 @property (nonatomic, strong) NSArray *zoneList;
+@property (nonatomic, strong) NSArray *attendanceTypeList;
 
 @end
 
@@ -112,7 +116,7 @@
     return dbManager;
 }
 
-- (BOOL)createAttendanceTableInDate:(NSString *)date atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
+- (BOOL)createAttendanceTableInDate:(NSString *)date atZone:(NSString *)zone withType:(NSString *)type
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyyMMdd"];
@@ -129,7 +133,7 @@
         weekdayString = @"周三";
     }
     
-    NSString *attendanceTableName = [NSString stringWithFormat:@"%@%@%@%@", date, weekdayString, zone, (isFormalAttendance ? @"大排" : @"小排")];
+    NSString *attendanceTableName = [NSString stringWithFormat:@"%@%@%@%@", date, weekdayString, zone, type];
     
     NSString *currentTableName = [self getTheNameOfTheCurrentAttendanceTable];
     if (currentTableName != nil && ([currentTableName compare:attendanceTableName] == NSOrderedSame)) {
@@ -147,7 +151,7 @@
         [self saveCurrentAttendanceTable];
         
         [self.attendance_table_list addObject:attendanceTableName];
-        self.currentAttendanceTable = [self newAttendanceTable:attendanceTableName inDate:date andWeekday:weekdayString atZone:zone whetherFormalAttendance:isFormalAttendance];
+        self.currentAttendanceTable = [self newAttendanceTable:attendanceTableName inDate:date andWeekday:weekdayString atZone:zone withType:type];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_ATTENDANCE_TABLE_LIST_NOTIFICATION object:nil];
         
@@ -157,7 +161,7 @@
     return NO;
 }
 
-- (BOOL)editAttendanceTable:(NSString *)oldAttendanceTableName inDate:(NSString *)date atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
+- (BOOL)editAttendanceTable:(NSString *)oldAttendanceTableName inDate:(NSString *)date atZone:(NSString *)zone withType:(NSString *)type
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyyMMdd"];
@@ -174,7 +178,7 @@
         weekdayString = @"周三";
     }
     
-    NSString *attendanceTableName = [NSString stringWithFormat:@"%@%@%@%@", date, weekdayString, zone, (isFormalAttendance ? @"大排" : @"小排")];
+    NSString *attendanceTableName = [NSString stringWithFormat:@"%@%@%@%@", date, weekdayString, zone, type];
     
     if ([attendanceTableName isEqualToString:oldAttendanceTableName]) {
         // 无修改
@@ -200,7 +204,7 @@
     
     NSMutableDictionary *newTable = self.currentAttendanceTable;
     [newTable setObject:attendanceTableName forKey:ATTENDANCE_TABLE_NAME];
-    [newTable setObject:(isFormalAttendance ? @"1" : @"0") forKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE];
+    [newTable setObject:type forKey:ATTENDANCE_TABLE_TYPE];
     [newTable setObject:date forKey:ATTENDANCE_TABLE_DATE];
     [newTable setObject:zone forKey:ATTENDANCE_TABLE_ZONE];
     [newTable setObject:weekdayString forKey:ATTENDANCE_TABLE_WEEKDAY];
@@ -217,11 +221,11 @@
     return YES;
 }
 
-- (nonnull NSMutableDictionary *)newAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(NSString *)date andWeekday:(NSString *)weekdayString atZone:(NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance
+- (nonnull NSMutableDictionary *)newAttendanceTable:(nonnull NSString *)attendanceTableName inDate:(NSString *)date andWeekday:(NSString *)weekdayString atZone:(NSString *)zone withType:(NSString *)type
 {
     NSMutableDictionary *newTable = [NSMutableDictionary dictionary];
     [newTable setObject:attendanceTableName forKey:ATTENDANCE_TABLE_NAME];
-    [newTable setObject:(isFormalAttendance ? @"1" : @"0") forKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE];
+    [newTable setObject:type forKey:ATTENDANCE_TABLE_TYPE];
     [newTable setObject:date forKey:ATTENDANCE_TABLE_DATE];
     [newTable setObject:zone forKey:ATTENDANCE_TABLE_ZONE];
     [newTable setObject:weekdayString forKey:ATTENDANCE_TABLE_WEEKDAY];
@@ -357,14 +361,14 @@
     
     NSMutableDictionary *table01 = attendanceTable;
     NSString *attendanceTableName = [table01 objectForKey:ATTENDANCE_TABLE_NAME];
-    BOOL isFormalAttendance = [[table01 objectForKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE] boolValue];
+    NSString *attendanceType = [table01 objectForKey:ATTENDANCE_TABLE_TYPE];
     NSString *attendanceTableDate = [table01 objectForKey:ATTENDANCE_TABLE_DATE];
     NSString *attendanceTableZone = [table01 objectForKey:ATTENDANCE_TABLE_ZONE];
     //NSLog(@"begin merge file:%@", tableName01);
     
     if (![self attendanceTableExist:attendanceTableName]) {
         // 本地没有这个日期的签到表，直接将接受到的签到表存到本地
-        if (![self createAttendanceTableInDate:attendanceTableDate atZone:attendanceTableZone whetherFormalAttendance:isFormalAttendance]) {
+        if (![self createAttendanceTableInDate:attendanceTableDate atZone:attendanceTableZone withType:attendanceType]) {
             return NO;
         };
         
@@ -465,6 +469,15 @@
     }
     
     return _zoneList;
+}
+
+- (NSArray *)attendanceTypeList
+{
+    if (!_attendanceTypeList) {
+        _attendanceTypeList = @[ZivAttendanceTypeDapai, ZivAttendanceTypeXiaopai, ZivAttendanceTypeShengyueke, ZivAttendanceTypeZhouriwan];
+    }
+    
+    return _attendanceTypeList;
 }
 
 - (NSString *)personalInfoDescriptionOfMember:(NSString *)name inPart:(NSString *)part
@@ -726,18 +739,39 @@
 //    
 //    return;
     
-    // 判断是否需要升级数据库
-    // 只在第一次打开时升级
-    NSString *updatedVersionString = [[NSUserDefaults standardUserDefaults] objectForKey:@"updated_version"];
-    NSString *currentAppVersionString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [self updateToBuild5];
+    [self updateToBuild7];
+    
+}
 
-    if (updatedVersionString != nil && [updatedVersionString compare:currentAppVersionString] == NSOrderedSame) {
+// 签到表名称从"20160813大排" -> "20160813周六中关村大排"
+- (void)updateToBuild5
+{
+    // 判断是否需要升级数据库
+    
+    NSNumber *updated_version = [[NSUserDefaults standardUserDefaults] objectForKey:UPDATED_VERSION];
+    if (updated_version != nil && [updated_version integerValue] >= 5) {
+        // 已经做过此次升级
         return;
     }
     
-    if ([currentAppVersionString compare:@"0.9.2"] != NSOrderedSame) {
+    if (self.attendance_table_list.count <= 0) {
+        // 没有签到表，或者直接安装Build5，而非从更低版本升级到Build5
+        // build 5
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:5] forKey:UPDATED_VERSION];
         return;
     }
+    
+    NSString *example_attendance_table_name = [self.attendance_table_list firstObject];
+    if (example_attendance_table_name.length > 10) {
+        // 已经做过此次升级
+        // build 5
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:5] forKey:UPDATED_VERSION];
+        return;
+    }
+    
+    
+    // 签到表名称从"20160813大排" -> "20160813周六中关村大排"
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyyMMdd"];
@@ -805,9 +839,9 @@
             // 周三
             weekdayString = @"周三";
             NSString *zhongguancun_table_name = [NSString stringWithFormat:@"%@%@%@%@",attendanceDate, weekdayString, ZivAttendanceZoneIdentifireZhongguancun, (isFormalAttendance ? @"大排" : @"小排")];
-            NSMutableDictionary *zhongguancun_table = [self newAttendanceTable:zhongguancun_table_name inDate:attendanceDate andWeekday:weekdayString atZone:ZivAttendanceZoneIdentifireZhongguancun whetherFormalAttendance:isFormalAttendance];
+            NSMutableDictionary *zhongguancun_table = [self newAttendanceTable:zhongguancun_table_name inDate:attendanceDate andWeekday:weekdayString atZone:ZivAttendanceZoneIdentifireZhongguancun withType:(isFormalAttendance ? @"大排" : @"小排")];
             NSString *yanqi_table_name = [NSString stringWithFormat:@"%@%@%@%@",attendanceDate, weekdayString, ZivAttendanceZoneIdentifireYanqi, (isFormalAttendance ? @"大排" : @"小排")];
-            NSMutableDictionary *yanqi_table = [self newAttendanceTable:yanqi_table_name inDate:attendanceDate andWeekday:weekdayString atZone:ZivAttendanceZoneIdentifireYanqi whetherFormalAttendance:isFormalAttendance];
+            NSMutableDictionary *yanqi_table = [self newAttendanceTable:yanqi_table_name inDate:attendanceDate andWeekday:weekdayString atZone:ZivAttendanceZoneIdentifireYanqi withType:(isFormalAttendance ? @"大排" : @"小排")];
             
             for (NSString *part in self.partList) {
                 NSMutableDictionary *zhongguancun_part = [zhongguancun_table objectForKey:part];
@@ -855,8 +889,41 @@
     
     self.attendance_table_list = newAttendanceTableList;
     [self saveDBFile];
-    [[NSUserDefaults standardUserDefaults] setObject:currentAppVersionString forKey:@"updated_version"];
+
+    // set updated_verison flag to build 5
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:5] forKey:UPDATED_VERSION];
+}
+
+- (void)updateToBuild7
+{
+    NSNumber *updated_version = [[NSUserDefaults standardUserDefaults] objectForKey:UPDATED_VERSION];
+    if (updated_version != nil && [updated_version integerValue] >= 7) {
+        // 已经做过此次升级
+        return;
+    }
     
+    if (self.attendance_table_list.count <= 0) {
+        // 没有签到表，或者直接安装Build7，而非从更低版本升级到Build7
+        // build 7
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:7] forKey:UPDATED_VERSION];
+        return;
+    }
+    
+    // 从Build5升级到Build7
+    for (NSString *tableName in self.attendance_table_list) {
+        NSMutableDictionary *table = [self getAttendanceTable:tableName];
+        BOOL isFormalAttendance = [[table objectForKey:ATTENDANCE_TABLE_IS_FORMAL_ATTENDANCE] boolValue];
+        if (isFormalAttendance) {
+            [table setObject:ZivAttendanceTypeDapai forKey:ATTENDANCE_TABLE_TYPE];
+        } else {
+            [table setObject:ZivAttendanceTypeXiaopai forKey:ATTENDANCE_TABLE_TYPE];
+        }
+        
+        [self saveAttendanceTable:table];
+    }
+    
+    // build 7
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:7] forKey:UPDATED_VERSION];
 }
 
 - (NSString *)backupAllAttendanceTable

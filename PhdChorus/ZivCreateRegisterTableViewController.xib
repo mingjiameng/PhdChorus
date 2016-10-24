@@ -9,9 +9,9 @@
             <connections>
                 <outlet property="dayLabel" destination="chm-xT-4qB" id="CfI-ac-sfW"/>
                 <outlet property="dayPickerView" destination="4Cd-J9-TJ8" id="Gnn-L3-RpA"/>
-                <outlet property="formalAttendanceSwitch" destination="sni-hg-j1h" id="u5M-1e-hfW"/>
                 <outlet property="monthLabel" destination="y9w-dB-otD" id="Ali-AK-iam"/>
                 <outlet property="monthPickerView" destination="6HG-ey-AVt" id="qiq-ci-Wct"/>
+                <outlet property="typeSegment" destination="Dyy-d3-8t9" id="j9Q-WC-eTc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="yearLabel" destination="zEd-E4-sWg" id="hAU-bb-7qe"/>
                 <outlet property="yearPickerView" destination="WNL-1U-4Om" id="kXM-c8-wO5"/>
@@ -69,7 +69,7 @@
                         <constraint firstAttribute="width" constant="240" id="dL1-yb-gc7"/>
                     </constraints>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是否大排" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcQ-l1-Wmr">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="签到表类型" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcQ-l1-Wmr">
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="1Mj-ru-WWy"/>
                         <constraint firstAttribute="width" constant="100" id="uf7-SY-oep"/>
@@ -78,12 +78,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sni-hg-j1h">
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Dyy-d3-8t9">
                     <constraints>
-                        <constraint firstAttribute="width" constant="49" id="E6e-XQ-Hjh"/>
-                        <constraint firstAttribute="height" constant="31" id="s7c-m0-t1k"/>
+                        <constraint firstAttribute="height" constant="28" id="b57-09-x2P"/>
+                        <constraint firstAttribute="width" constant="240" id="xVF-WI-ToV"/>
                     </constraints>
-                </switch>
+                    <segments>
+                        <segment title="大排"/>
+                        <segment title="小排"/>
+                        <segment title="声乐课"/>
+                        <segment title="周日晚"/>
+                    </segments>
+                </segmentedControl>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="所在园区" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pr5-ib-ySJ">
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="2b7-9q-GVz"/>
@@ -118,15 +124,15 @@
             <constraints>
                 <constraint firstItem="LeK-tP-sgn" firstAttribute="top" secondItem="lla-Xz-ekN" secondAttribute="bottom" constant="10" id="1J1-zo-xBA"/>
                 <constraint firstItem="LeK-tP-sgn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AtJ-DU-3Lh"/>
+                <constraint firstItem="Dyy-d3-8t9" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="E3Q-bd-5oo"/>
                 <constraint firstItem="lla-Xz-ekN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="F8g-AH-qca"/>
                 <constraint firstItem="Gdq-4o-bIV" firstAttribute="top" secondItem="pr5-ib-ySJ" secondAttribute="bottom" constant="8" id="Nu1-2g-mn9"/>
-                <constraint firstItem="sni-hg-j1h" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QuE-ok-LAF"/>
                 <constraint firstItem="fcQ-l1-Wmr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UIS-Cf-z8b"/>
                 <constraint firstItem="Gdq-4o-bIV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="XPa-mv-b7Q"/>
-                <constraint firstItem="sni-hg-j1h" firstAttribute="top" secondItem="fcQ-l1-Wmr" secondAttribute="bottom" constant="8" id="ayO-5k-B4q"/>
                 <constraint firstItem="uPY-R9-DlG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cxc-5e-WQJ"/>
                 <constraint firstItem="pr5-ib-ySJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ei5-Vt-D8L"/>
                 <constraint firstItem="pr5-ib-ySJ" firstAttribute="top" secondItem="LeK-tP-sgn" secondAttribute="bottom" constant="34.5" id="fBJ-ZO-rJ2"/>
+                <constraint firstItem="Dyy-d3-8t9" firstAttribute="top" secondItem="fcQ-l1-Wmr" secondAttribute="bottom" constant="8" id="kPm-h0-Ycz"/>
                 <constraint firstItem="uPY-R9-DlG" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="peh-IJ-1Q6"/>
                 <constraint firstItem="lla-Xz-ekN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qMn-08-XTr"/>
                 <constraint firstItem="fcQ-l1-Wmr" firstAttribute="top" secondItem="Gdq-4o-bIV" secondAttribute="bottom" constant="30" id="v7V-4M-IPs"/>

@@ -16,6 +16,7 @@
 #define ATTENDANCE_TABLE_DATE @"table_date"
 #define ATTENDANCE_TABLE_ZONE @"table_zone"
 #define ATTENDANCE_TABLE_WEEKDAY @"table_weekday"
+#define ATTENDANCE_TABLE_TYPE @"table_type"
 
 #define MEMBER_INFO_KEY_NAME @"name"
 #define MEMBER_INFO_KEY_STAGE @"stage"
@@ -29,16 +30,20 @@ static NSString * _Nonnull ZivChorusPartA = @"A";
 static NSString * _Nonnull ZivChorusPartT = @"T";
 static NSString * _Nonnull ZivChorusPartB = @"B";
 
+static NSString * _Nonnull ZivAttendanceTypeDapai = @"大排";
+static NSString * _Nonnull ZivAttendanceTypeXiaopai = @"小排";
+static NSString * _Nonnull ZivAttendanceTypeShengyueke = @"声乐课";
+static NSString * _Nonnull ZivAttendanceTypeZhouriwan = @"周日晚";
+
 @interface ZivDBManager : NSObject
 
 @property (nonatomic, nonnull, strong, readonly) NSMutableDictionary *member_info_db;
 
-
 + (nonnull ZivDBManager *)shareDatabaseManager;
 
 
-- (BOOL)createAttendanceTableInDate:(nonnull NSString *)date atZone:(nonnull NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance;
-- (BOOL)editAttendanceTable:(nonnull NSString *)oldAttendanceTableName inDate:(nonnull NSString *)date atZone:(nonnull NSString *)zone whetherFormalAttendance:(BOOL)isFormalAttendance;
+- (BOOL)createAttendanceTableInDate:(nonnull NSString *)date atZone:(nonnull NSString *)zone withType:(nonnull NSString *)type;
+- (BOOL)editAttendanceTable:(nonnull NSString *)oldAttendanceTableName inDate:(nonnull NSString *)date atZone:(nonnull NSString *)zone withType:(nonnull NSString *)type;
 - (nonnull NSArray<NSString *> *)attendanceTableList;
 
 - (BOOL)attendanceTable:(nonnull NSString *)attendanceTableName someoneSignUp:(nonnull NSString *)name inPart:(nonnull NSString *)part;
@@ -50,6 +55,7 @@ static NSString * _Nonnull ZivChorusPartB = @"B";
 - (nonnull NSDictionary *)member_info;
 - (nullable NSArray*)memberNameListOfPart:(nonnull NSString *)part;
 - (nonnull NSArray *)zoneList;
+- (nonnull NSArray *)attendanceTypeList;
 - (nullable NSString *)personalInfoDescriptionOfMember:(nonnull NSString *)name inPart:(nonnull NSString *)part;
 
 // name－姓名 part－声部 stage-届数 zone-所在园区

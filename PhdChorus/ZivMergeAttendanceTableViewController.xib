@@ -13,7 +13,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attendance_table_merge" translatesAutoresizingMaskIntoConstraints="NO" id="aBK-Vg-AM4">
@@ -25,7 +25,6 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20160921" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fM6-5c-Hqo">
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="Izx-D4-m97"/>
-                        <constraint firstAttribute="width" constant="200" id="UQS-aC-4Bl"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,6 +66,7 @@
                 <constraint firstItem="l0c-QH-RPW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9KF-5v-K3a"/>
                 <constraint firstItem="l0c-QH-RPW" firstAttribute="top" secondItem="uYM-a5-R4T" secondAttribute="bottom" constant="8" id="9gf-hh-tLQ"/>
                 <constraint firstItem="uYM-a5-R4T" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="B97-fI-NV4"/>
+                <constraint firstItem="fM6-5c-Hqo" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="EyW-xR-IKE"/>
                 <constraint firstItem="JP7-e1-zKL" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="I11-jn-pfC"/>
                 <constraint firstItem="uYM-a5-R4T" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="251" id="JiR-9V-IJd"/>
                 <constraint firstItem="uYM-a5-R4T" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="RWM-YD-mBd"/>
