@@ -37,7 +37,7 @@
 - (void)shareRegisterTable:(UIBarButtonItem *)item
 {
     NSString *fileName = self.attendanceTableName;
-    NSURL *fileURL = [[ZivDBManager shareDatabaseManager] publicUrlForAttendanceTable:fileName];
+    NSURL *fileURL = [NSURL fileURLWithPath:[[ZivDBManager shareDatabaseManager] shareAttendanceTable:@[self.attendanceTableName]]];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[fileName, fileURL] applicationActivities:nil];
     
     NSString *device = [zkeySandboxHelper getDeviceString];

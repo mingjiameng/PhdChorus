@@ -52,6 +52,7 @@
 		44C0D42C1D9CE04000325F2B /* ZivDBManager+Statics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D42A1D9CE04000325F2B /* ZivDBManager+Statics.mm */; };
 		44C0D4301D9CE07B00325F2B /* ZivRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D42F1D9CE07B00325F2B /* ZivRootViewController.m */; };
 		44C0D4321D9CE08900325F2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4311D9CE08900325F2B /* LaunchScreen.storyboard */; };
+		44D8E7071DC039A800560590 /* ZivShareAttendanceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D8E7061DC039A800560590 /* ZivShareAttendanceTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +128,8 @@
 		44C0D42F1D9CE07B00325F2B /* ZivRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivRootViewController.m; sourceTree = "<group>"; };
 		44C0D4311D9CE08900325F2B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44C0D4341D9CE0E400325F2B /* SHARED_MICRO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHARED_MICRO.h; sourceTree = "<group>"; };
+		44D8E7051DC039A800560590 /* ZivShareAttendanceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivShareAttendanceTableViewController.h; sourceTree = "<group>"; };
+		44D8E7061DC039A800560590 /* ZivShareAttendanceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivShareAttendanceTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +317,8 @@
 				44C0D41A1D9CE03100325F2B /* ZivRegisterViewController.h */,
 				44C0D41B1D9CE03100325F2B /* ZivRegisterViewController.m */,
 				44C0D41C1D9CE03100325F2B /* ZivRegisterViewController.xib */,
+				44D8E7051DC039A800560590 /* ZivShareAttendanceTableViewController.h */,
+				44D8E7061DC039A800560590 /* ZivShareAttendanceTableViewController.m */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				44C0D42B1D9CE04000325F2B /* ZivDBManager.m in Sources */,
 				44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */,
 				44C0D4201D9CE03100325F2B /* ZivRegistOrLeaveViewController.m in Sources */,
+				44D8E7071DC039A800560590 /* ZivShareAttendanceTableViewController.m in Sources */,
 				4441005C1DB0F55B003B353C /* ZivStaticByNameViewController.m in Sources */,
 				44C0D40C1D9CE01800325F2B /* ZivAddContactViewController.m in Sources */,
 				44C0D4241D9CE03100325F2B /* ZivRegisterViewController.m in Sources */,

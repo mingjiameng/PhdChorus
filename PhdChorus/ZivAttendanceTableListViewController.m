@@ -15,6 +15,7 @@
 #import "ZivRegistOrLeaveViewController.h"
 #import "ZivAttendanceStaticByDayViewController.h"
 #import "ZivStaticsDayAttendanceViewController.h"
+#import "ZivShareAttendanceTableViewController.h"
 
 @interface ZivAttendanceTableListViewController ()
 
@@ -45,27 +46,9 @@
 
 - (void)backupAttendanceTable
 {
-    NSString *filePath = [[ZivDBManager shareDatabaseManager] backupAllAttendanceTable];
-    if (filePath == nil) {
-        return;
-    }
+    ZivShareAttendanceTableViewController *shareVC = [[ZivShareAttendanceTableViewController alloc] init];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:shareVC] animated:YES completion:NULL];
     
-    NSString *fileName = @"签到表备份.txt";
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[fileName, fileURL] applicationActivities:nil];
-    
-    NSString *device = [zkeySandboxHelper getDeviceString];
-    if ([device hasPrefix:@"iPhone"]) {
-        
-    } else if ([device hasPrefix:@"iPad"]) {
-        UIPopoverPresentationController *popOverVC = activityVC.popoverPresentationController;
-        if (popOverVC) {
-            popOverVC.sourceView = self.view;
-            popOverVC.permittedArrowDirections = UIPopoverArrowDirectionUp;
-        }
-    }
-    
-    [self presentViewController:activityVC animated:YES completion:NULL];
 }
 
 - (void)reloadTableView
@@ -111,7 +94,11 @@
 
 - (NSArray *)registerTableList
 {
-    return [[ZivDBManager shareDatabaseManager] attendanceTableList];
+    if (!_registerTableList) {
+        _registerTableList = [[ZivDBManager shareDatabaseManager] attendanceTableList];
+    }
+    
+    return _registerTableList;
 }
 
 
@@ -122,6 +109,7 @@
     }
     // Configure the cell...
     cell.textLabel.text = [self.registerTableList objectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     
     return cell;
 }

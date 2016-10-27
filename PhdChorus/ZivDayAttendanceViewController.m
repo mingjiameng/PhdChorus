@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = [NSString stringWithFormat:@"%@%@出勤", self.attendanceTableName, self.part];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@%@", self.attendanceTableName, self.part];
     [self calculateStatics];
 }
 

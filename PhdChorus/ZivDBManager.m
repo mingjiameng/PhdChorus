@@ -334,20 +334,21 @@
     return YES;
 }
 
+// 外部传入的数据合并到本地
 - (BOOL)mergeAttendanceTableToLocalDatabase:(NSData *)attendanceTableData
 {
-    // table01是外部传入的签到表，需要将table01合并到本地
-    
     NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:attendanceTableData];
-    NSMutableDictionary *table = [unarchiver decodeObjectForKey:ATTENDANCE_TABLE];
+    NSArray *table_list = [unarchiver decodeObjectForKey:ATTENDANCE_TABLE];
     NSMutableDictionary *memberInfo = [unarchiver decodeObjectForKey:MEMBER_INFO_DB];
     
     if (![self mergeMemberInfoDB:memberInfo]) {
         return NO;
     }
     
-    if (![self mergeAttendanceTable:table]) {
-        return NO;
+    for (NSMutableDictionary *table in table_list) {
+        if (![self mergeAttendanceTable:table]) {
+            return NO;
+        }
     }
     
     return YES;
@@ -759,6 +760,7 @@
         // 没有签到表，或者直接安装Build5，而非从更低版本升级到Build5
         // build 5
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:5] forKey:UPDATED_VERSION];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         return;
     }
     
@@ -767,6 +769,7 @@
         // 已经做过此次升级
         // build 5
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:5] forKey:UPDATED_VERSION];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         return;
     }
     
@@ -892,6 +895,7 @@
 
     // set updated_verison flag to build 5
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:5] forKey:UPDATED_VERSION];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)updateToBuild7
@@ -906,6 +910,7 @@
         // 没有签到表，或者直接安装Build7，而非从更低版本升级到Build7
         // build 7
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:7] forKey:UPDATED_VERSION];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         return;
     }
     
@@ -924,24 +929,27 @@
     
     // build 7
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:7] forKey:UPDATED_VERSION];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (NSString *)backupAllAttendanceTable
+- (NSString *)shareAttendanceTable:(NSArray *)attendancetableNameArray
 {
-    NSMutableArray *backup_table = [NSMutableArray arrayWithCapacity:self.attendance_table_list.count];
+    NSMutableArray *backup_table_list = [NSMutableArray arrayWithCapacity:attendancetableNameArray.count];
     
-    for (NSString *tableName in self.attendance_table_list) {
+    for (NSString *tableName in attendancetableNameArray) {
         NSMutableDictionary *table = [self getAttendanceTable:tableName];
-        [backup_table addObject:table];
+        [backup_table_list addObject:table];
     }
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docDir = [paths firstObject];
-    NSString *backup_path = [docDir stringByAppendingPathComponent:@"table_backup.txt"];
+    NSString *fileName = [NSString stringWithFormat:@"%@等%ld张签到表.pdf", [attendancetableNameArray firstObject], (unsigned long)attendancetableNameArray.count];
+    NSString *backup_path = [docDir stringByAppendingPathComponent:fileName];
     
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:backup_table forKey:ATTENDANCE_TABLE];
+    [archiver encodeObject:backup_table_list forKey:ATTENDANCE_TABLE];
+    [archiver encodeObject:self.member_info_db forKey:MEMBER_INFO_DB];
     [archiver finishEncoding];
     
     if ([data writeToFile:backup_path atomically:YES]) {

@@ -74,6 +74,6 @@ static NSString * _Nonnull ZivAttendanceTypeZhouriwan = @"周日晚";
 - (BOOL)deleteAttendanceTable:(nonnull NSString *)attendanceTableName;
 
 - (void)updateDatabaseVersion;
-- (nonnull NSString *)backupAllAttendanceTable;
+- (nonnull NSString *)shareAttendanceTable:(nonnull NSArray *)attendancetableNameArray;
 
 @end
