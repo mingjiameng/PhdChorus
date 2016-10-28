@@ -667,4 +667,78 @@
     return YES;
 }
 
+
+
+- (NSDictionary *)partTendancyForAttendanceType:(NSString *)type
+{
+    NSArray *satisfied_table_list = [self last5WeekAttendanceTableForAttendanceType:type];
+    
+    NSMutableDictionary *attendanceCountInfo = [NSMutableDictionary dictionaryWithCapacity:5];
+    [attendanceCountInfo setObject:[NSMutableArray arrayWithCapacity:satisfied_table_list.count] forKey:@"date"];
+    for (NSString *part in [self partList]) {
+        [attendanceCountInfo setObject:[NSMutableArray arrayWithCapacity:satisfied_table_list.count] forKey:part];
+    }
+    
+    NSInteger highPartCount, lowPartCount;
+    NSMutableArray *partAttendanceCount = nil, *dateArray = nil;
+    NSArray *partList = @[@"S", @"A", @"T", @"B"];
+    for (NSString *tableName in satisfied_table_list) {
+        dateArray = [attendanceCountInfo objectForKey:@"date"];
+        [dateArray addObject:[tableName substringWithRange:NSMakeRange(4, 4)]];
+        NSDictionary *table = [self attendanceTableByName:tableName];
+        for (NSString *part in partList) {
+            NSString *highPartName = [part stringByAppendingString:@"1"];
+            NSString *lowPartName = [part stringByAppendingString:@"2"];
+            highPartCount = [[[table objectForKey:highPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
+            lowPartCount = [[[table objectForKey:lowPartName] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
+            
+            partAttendanceCount = [attendanceCountInfo objectForKey:part];
+            [partAttendanceCount addObject:[NSNumber numberWithFloat:(float)(highPartCount + lowPartCount)]];
+        }
+    }
+    
+    return attendanceCountInfo;
+}
+
+- (NSDictionary *)allMemberTendancyForAttendanceType:(NSString *)type
+{
+    NSArray *satisfied_table_list = [self last5WeekAttendanceTableForAttendanceType:type];
+    
+    NSMutableArray *dateArray = [NSMutableArray arrayWithCapacity:satisfied_table_list.count];
+    NSMutableArray *countArray = [NSMutableArray arrayWithCapacity:satisfied_table_list.count];
+    for (NSString *tableName in satisfied_table_list) {
+        [dateArray addObject:[tableName substringWithRange:NSMakeRange(4, 4)]];
+        NSDictionary *table = [self attendanceTableByName:tableName];
+        NSInteger total = 0;
+        for (NSString *part in [self partList]) {
+            total += [[[table objectForKey:part] objectForKey:ATTENDANCE_TABLE_ATTENDANCE_LIST] count];
+        }
+        
+        [countArray addObject:[NSNumber numberWithFloat:(float)total]];
+    }
+    
+    return @{@"date" : dateArray,
+             @"all_member" : countArray};
+}
+
+- (NSArray *)last5WeekAttendanceTableForAttendanceType:(NSString *)type
+{
+    NSArray *tableList = [self attendanceTableList];
+    NSString *tableName = nil;
+    NSMutableArray *satisfied_table_list = [NSMutableArray arrayWithCapacity:5];
+    for (NSInteger index = tableList.count - 1; index >= 0; --index) {
+        tableName = [tableList objectAtIndex:index];
+        if ([tableName containsString:type]) {
+            [satisfied_table_list insertObject:tableName atIndex:0];
+        }
+        
+        if (satisfied_table_list.count >= 5) {
+            break;
+        }
+    }
+    
+    return satisfied_table_list;
+}
+
+
 @end

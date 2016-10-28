@@ -10,6 +10,7 @@
 #import "ZivAttendanceTableListViewController.h"
 #import "ZivSelectStartEndTimeViewController.h"
 #import "ZivSelectMemberToQueryViewController.h"
+#import "ZivStaticTendencyViewController.h"
 
 @interface ZivStaticFunctionListViewController ()
 
@@ -43,6 +44,14 @@
     selectMemberVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:selectMemberVC animated:YES];
 }
+
+- (IBAction)attendanceTendency:(UIButton *)sender
+{
+    ZivStaticTendencyViewController *tendencyVC = [[ZivStaticTendencyViewController alloc] init];
+    tendencyVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:tendencyVC animated:YES];
+}
+
 
 
 - (void)didReceiveMemoryWarning {

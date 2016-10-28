@@ -17,6 +17,12 @@
 		4441005D1DB0F55B003B353C /* ZivStaticByNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4441005B1DB0F55B003B353C /* ZivStaticByNameViewController.xib */; };
 		444100641DB12BDB003B353C /* ZivVersionUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 444100631DB12BDB003B353C /* ZivVersionUpdate.m */; };
 		4441006A1DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.m in Sources */ = {isa = PBXBuildFile; fileRef = 444100691DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.m */; };
+		44B549FB1DC363DB001B175C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B549FA1DC363DB001B175C /* Foundation.framework */; };
+		44B549FD1DC363E3001B175C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B549FC1DC363E3001B175C /* UIKit.framework */; };
+		44B549FF1DC363EC001B175C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B549FE1DC363EC001B175C /* CoreGraphics.framework */; };
+		44B54A011DC363F4001B175C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B54A001DC363F4001B175C /* QuartzCore.framework */; };
+		44B54A061DC366B9001B175C /* ZivStaticTendencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B54A041DC366B9001B175C /* ZivStaticTendencyViewController.m */; };
+		44B54A071DC366B9001B175C /* ZivStaticTendencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B54A051DC366B9001B175C /* ZivStaticTendencyViewController.xib */; };
 		44C0D3651D9CD36F00325F2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3641D9CD36F00325F2B /* main.m */; };
 		44C0D3681D9CD36F00325F2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D3671D9CD36F00325F2B /* AppDelegate.m */; };
 		44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D36A1D9CD36F00325F2B /* ViewController.m */; };
@@ -53,9 +59,11 @@
 		44C0D4301D9CE07B00325F2B /* ZivRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C0D42F1D9CE07B00325F2B /* ZivRootViewController.m */; };
 		44C0D4321D9CE08900325F2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44C0D4311D9CE08900325F2B /* LaunchScreen.storyboard */; };
 		44D8E7071DC039A800560590 /* ZivShareAttendanceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D8E7061DC039A800560590 /* ZivShareAttendanceTableViewController.m */; };
+		7FCE7A8E23A3C7FF4D0E9408 /* Pods_PhdChorus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFC1B4FE780DAFBA96E2EC9 /* Pods_PhdChorus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		39EDCF9F55E7F4514D8CB8B2 /* Pods-PhdChorus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhdChorus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhdChorus/Pods-PhdChorus.debug.xcconfig"; sourceTree = "<group>"; };
 		443603271DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivStaticsDayAttendanceViewController.h; sourceTree = "<group>"; };
 		443603281DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivStaticsDayAttendanceViewController.m; sourceTree = "<group>"; };
 		443603291DA234CE00BA63C4 /* ZivStaticsDayAttendanceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivStaticsDayAttendanceViewController.xib; sourceTree = "<group>"; };
@@ -72,6 +80,13 @@
 		444100631DB12BDB003B353C /* ZivVersionUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivVersionUpdate.m; sourceTree = "<group>"; };
 		444100681DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivUpdateVersionFromBuild3ToBuild4.h; sourceTree = "<group>"; };
 		444100691DB12C36003B353C /* ZivUpdateVersionFromBuild3ToBuild4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivUpdateVersionFromBuild3ToBuild4.m; sourceTree = "<group>"; };
+		44B549FA1DC363DB001B175C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		44B549FC1DC363E3001B175C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		44B549FE1DC363EC001B175C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		44B54A001DC363F4001B175C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		44B54A031DC366B9001B175C /* ZivStaticTendencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivStaticTendencyViewController.h; sourceTree = "<group>"; };
+		44B54A041DC366B9001B175C /* ZivStaticTendencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivStaticTendencyViewController.m; sourceTree = "<group>"; };
+		44B54A051DC366B9001B175C /* ZivStaticTendencyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZivStaticTendencyViewController.xib; sourceTree = "<group>"; };
 		44C0D3601D9CD36F00325F2B /* PhdChorus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhdChorus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C0D3641D9CD36F00325F2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		44C0D3661D9CD36F00325F2B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -130,6 +145,8 @@
 		44C0D4341D9CE0E400325F2B /* SHARED_MICRO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHARED_MICRO.h; sourceTree = "<group>"; };
 		44D8E7051DC039A800560590 /* ZivShareAttendanceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZivShareAttendanceTableViewController.h; sourceTree = "<group>"; };
 		44D8E7061DC039A800560590 /* ZivShareAttendanceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZivShareAttendanceTableViewController.m; sourceTree = "<group>"; };
+		8FFC1B4FE780DAFBA96E2EC9 /* Pods_PhdChorus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhdChorus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99CCE28C41EE9916D1F86A57 /* Pods-PhdChorus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhdChorus.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhdChorus/Pods-PhdChorus.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,15 +154,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44B54A011DC363F4001B175C /* QuartzCore.framework in Frameworks */,
+				44B549FF1DC363EC001B175C /* CoreGraphics.framework in Frameworks */,
+				44B549FD1DC363E3001B175C /* UIKit.framework in Frameworks */,
+				44B549FB1DC363DB001B175C /* Foundation.framework in Frameworks */,
 				44C0D3E81D9CDF6D00325F2B /* libz.tbd in Frameworks */,
 				44C0D3E61D9CDF6200325F2B /* libstdc++.tbd in Frameworks */,
 				44C0D3E31D9CDF4D00325F2B /* LibXL.framework in Frameworks */,
+				7FCE7A8E23A3C7FF4D0E9408 /* Pods_PhdChorus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F9E7E2E0B969EECE00DDE04 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				39EDCF9F55E7F4514D8CB8B2 /* Pods-PhdChorus.debug.xcconfig */,
+				99CCE28C41EE9916D1F86A57 /* Pods-PhdChorus.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		444100581DA54F47003B353C /* StaticsByName */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,12 +201,23 @@
 			name = VersionUpdate;
 			sourceTree = "<group>";
 		};
+		44B54A021DC36669001B175C /* Tendency */ = {
+			isa = PBXGroup;
+			children = (
+				44B54A031DC366B9001B175C /* ZivStaticTendencyViewController.h */,
+				44B54A041DC366B9001B175C /* ZivStaticTendencyViewController.m */,
+				44B54A051DC366B9001B175C /* ZivStaticTendencyViewController.xib */,
+			);
+			name = Tendency;
+			sourceTree = "<group>";
+		};
 		44C0D3571D9CD36F00325F2B = {
 			isa = PBXGroup;
 			children = (
 				44C0D3621D9CD36F00325F2B /* PhdChorus */,
 				44C0D3611D9CD36F00325F2B /* Products */,
 				44C0D3E41D9CDF6200325F2B /* Frameworks */,
+				3F9E7E2E0B969EECE00DDE04 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -239,9 +281,14 @@
 		44C0D3E41D9CDF6200325F2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44B54A001DC363F4001B175C /* QuartzCore.framework */,
+				44B549FE1DC363EC001B175C /* CoreGraphics.framework */,
+				44B549FC1DC363E3001B175C /* UIKit.framework */,
+				44B549FA1DC363DB001B175C /* Foundation.framework */,
 				44C0D3E21D9CDF4D00325F2B /* LibXL.framework */,
 				44C0D3E71D9CDF6D00325F2B /* libz.tbd */,
 				44C0D3E51D9CDF6200325F2B /* libstdc++.tbd */,
+				8FFC1B4FE780DAFBA96E2EC9 /* Pods_PhdChorus.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -252,6 +299,7 @@
 				44C0D3EA1D9CDFD200325F2B /* ZivStaticFunctionListViewController.h */,
 				44C0D3EB1D9CDFD200325F2B /* ZivStaticFunctionListViewController.m */,
 				44C0D3EC1D9CDFD200325F2B /* ZivStaticFunctionListViewController.xib */,
+				44B54A021DC36669001B175C /* Tendency */,
 				44C0D3FA1D9CDFEB00325F2B /* StatisByDay */,
 				44C0D3EF1D9CDFD900325F2B /* Excel */,
 				444100581DA54F47003B353C /* StaticsByName */,
@@ -353,9 +401,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 44C0D3771D9CD36F00325F2B /* Build configuration list for PBXNativeTarget "PhdChorus" */;
 			buildPhases = (
+				6F114B377A33664D5AB17DAF /* [CP] Check Pods Manifest.lock */,
 				44C0D35C1D9CD36F00325F2B /* Sources */,
 				44C0D35D1D9CD36F00325F2B /* Frameworks */,
 				44C0D35E1D9CD36F00325F2B /* Resources */,
+				51D3C7186654A4F6B4CB629A /* [CP] Embed Pods Frameworks */,
+				FDFE8CAB132D124A325E2633 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -421,11 +472,60 @@
 				44C0D4251D9CE03100325F2B /* ZivRegisterViewController.xib in Resources */,
 				44C0D4321D9CE08900325F2B /* LaunchScreen.storyboard in Resources */,
 				44C0D41F1D9CE03100325F2B /* ZivCreateRegisterTableViewController.xib in Resources */,
+				44B54A071DC366B9001B175C /* ZivStaticTendencyViewController.xib in Resources */,
 				44C0D4041D9CDFFC00325F2B /* ZivAttendanceByDayAndPartViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		51D3C7186654A4F6B4CB629A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhdChorus/Pods-PhdChorus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F114B377A33664D5AB17DAF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FDFE8CAB132D124A325E2633 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhdChorus/Pods-PhdChorus-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		44C0D35C1D9CD36F00325F2B /* Sources */ = {
@@ -436,6 +536,7 @@
 				44C0D42B1D9CE04000325F2B /* ZivDBManager.m in Sources */,
 				44C0D36B1D9CD36F00325F2B /* ViewController.m in Sources */,
 				44C0D4201D9CE03100325F2B /* ZivRegistOrLeaveViewController.m in Sources */,
+				44B54A061DC366B9001B175C /* ZivStaticTendencyViewController.m in Sources */,
 				44D8E7071DC039A800560590 /* ZivShareAttendanceTableViewController.m in Sources */,
 				4441005C1DB0F55B003B353C /* ZivStaticByNameViewController.m in Sources */,
 				44C0D40C1D9CE01800325F2B /* ZivAddContactViewController.m in Sources */,
@@ -493,6 +594,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -541,6 +643,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -567,6 +670,7 @@
 		};
 		44C0D3781D9CD36F00325F2B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39EDCF9F55E7F4514D8CB8B2 /* Pods-PhdChorus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A535C7GTCH;
@@ -585,6 +689,7 @@
 		};
 		44C0D3791D9CD36F00325F2B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99CCE28C41EE9916D1F86A57 /* Pods-PhdChorus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A535C7GTCH;

@@ -10,6 +10,9 @@
 
 @interface ZivDBManager (Statics)
 
+/*
+ * 每日出勤统计
+ */
 // part = S | A | T | B
 - (void)part:(nonnull NSString *)part memberCountOfHighPart:(nonnull NSInteger *)highPartCount andLowPart:(nonnull NSInteger *)lowPartCount;
 - (void)part:(nonnull NSString *)part memberCountOfZhongguancun:(nonnull NSInteger *)zhongguancunCount andYanqi:(nonnull NSInteger *)yanqiCount;
@@ -23,13 +26,25 @@
 - (nonnull NSAttributedString *)part:(nonnull NSString *)part absenceNameListInAttendanceTable:(nonnull NSString *)tableName;
 
 
+/*
+ * 导出签到表
+ */
 // part = S | A | T | B
 - (nullable NSString *)exportAttendanceTableOfPart:(nonnull NSString *)part from:(nonnull NSString *)startTime to:(nonnull NSString *)endTime;
 
 
-
-
+/*
+ * 个人近期出勤
+ */
 - (nullable NSArray <NSString *> *)part:(nonnull NSString *)part attendanceStaticByName:(nonnull NSString *)name from:(nonnull NSString *)startTime to:(nonnull NSString *)endTime;
 - (nullable NSArray <NSString *> *)part:(nonnull NSString *)part last3WeekAttendanceStaticByName:(nonnull NSString *)name;
+
+
+/*
+ * 团内出勤趋势
+ */
+
+- (nonnull NSDictionary *)partTendancyForAttendanceType:(nonnull NSString *)type;
+- (nonnull NSDictionary *)allMemberTendancyForAttendanceType:(nonnull NSString *)type;
 
 @end
