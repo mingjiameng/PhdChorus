@@ -27,9 +27,9 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
+    UIBarButtonItem *allItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAll)];
+    self.navigationItem.leftBarButtonItems = @[cancelItem, allItem];
     self.navigationItem.title = @"批量分享签到表";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStyleDone target:self action:@selector(done)];
     
@@ -39,6 +39,12 @@
 - (void)cancel
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)selectAll
+{
+    memset(is_row_selected, 1, sizeof(is_row_selected));
+    [self.tableView reloadData];
 }
 
 - (void)done
@@ -107,9 +113,15 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"register_table"];
     }
+    
     // Configure the cell...
     cell.textLabel.text = [self.registerTableList objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    if (is_row_selected[indexPath.row]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     
     return cell;
 }
