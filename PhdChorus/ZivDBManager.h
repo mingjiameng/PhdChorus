@@ -52,6 +52,7 @@ static NSString * _Nonnull ZivAttendanceTypeZhouriwan = @"周日晚";
 
 - (NSInteger)numberOfMemberInPart:(nonnull NSString *)part;
 - (nonnull NSArray *)partList;
+- (nonnull NSArray *)satbPartList;
 - (nonnull NSDictionary *)member_info;
 - (nullable NSArray*)memberNameListOfPart:(nonnull NSString *)part;
 - (nonnull NSArray *)zoneList;

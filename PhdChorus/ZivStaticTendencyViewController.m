@@ -29,7 +29,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.title = @"全团出勤趋势";
-    [self drawStaticForType:@"周六中关村大排"];
+    self.staticTypeSegment.selectedSegmentIndex = 0;
 }
 
 - (IBAction)selectStaticType:(UISegmentedControl *)sender
@@ -61,24 +61,25 @@
     
     NSDictionary *partTendencyStatic = [[ZivDBManager shareDatabaseManager] partTendancyForAttendanceType:type];
     
+    //NSLog(@"%@", partTendencyStatic);
+    
     PNLineChart *partChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, self.partTendencyView.frame.size.width, self.partTendencyView.frame.size.height)];
     [self.partTendencyView addSubview:partChart];
     
     NSArray *indexArray = [partTendencyStatic objectForKey:@"date"];
+    partChart.xLabelFont = [UIFont systemFontOfSize:12.0f];
     [partChart setXLabels:indexArray];
-    partChart.legendStyle = PNLegendItemStyleSerial;
-    partChart.legendFont = [UIFont systemFontOfSize:12.0f];
-    UIView *partLegend = [partChart getLegendWithMaxWidth:CGRectGetWidth(self.view.frame)];
-    [self.partLegendView addSubview:partLegend];
-    partLegend.center = self.partLegendView.center;
     
     NSMutableArray *chartDataArray = [NSMutableArray array];
-    for (NSString *part in [[ZivDBManager shareDatabaseManager] partList]) {
+    NSArray *partList = [[ZivDBManager shareDatabaseManager] satbPartList];
+    for (NSString *part in partList) {
         NSArray *dataArray = [partTendencyStatic objectForKey:part];
         PNLineChartData *chartData = [PNLineChartData new];
         chartData.color = [self pnColorForPart:part];
         chartData.dataTitle = part;
         chartData.itemCount = dataArray.count;
+        chartData.inflexionPointColor = chartData.color;
+        chartData.inflexionPointStyle = [self inflexionPointStyleForPart:part];
         chartData.getData = ^(NSUInteger index) {
             CGFloat yValue = [[dataArray objectAtIndex:index] floatValue];
             return [PNLineChartDataItem dataItemWithY:yValue];
@@ -89,6 +90,29 @@
     
     partChart.chartData = chartDataArray;
     [partChart strokeChart];
+    
+    partChart.legendFont = [UIFont systemFontOfSize:12.0f];
+    partChart.legendFontColor = [UIColor lightGrayColor];
+    partChart.legendStyle = PNLegendItemStyleSerial;
+    
+    UIView *legendView = [partChart getLegendWithMaxWidth:self.partLegendView.frame.size.width];
+    [legendView setFrame:CGRectMake((self.partLegendView.frame.size.width - legendView.frame.size.width) / 2.0f, (self.partLegendView.frame.size.height - legendView.frame.size.height) / 2.0f, legendView.frame.size.width, legendView.frame.size.height)];
+    [self.partLegendView addSubview:legendView];
+}
+
+- (PNLineChartPointStyle)inflexionPointStyleForPart:(NSString *)part
+{
+    if ([part isEqualToString:ZivChorusPartS]) {
+        return PNLineChartPointStyleTriangle;
+    } else if ([part isEqualToString:ZivChorusPartA]) {
+        return PNLineChartPointStyleCircle;
+    } else if ([part isEqualToString:ZivChorusPartT]) {
+        return PNLineChartPointStyleSquare;
+    } else if ([part isEqualToString:ZivChorusPartB]) {
+        return PNLineChartPointStyleTriangle;
+    }
+    
+    return PNLineChartPointStyleNone;
 }
 
 - (void)drawAllMemberTendencyForType:(NSString *)type
@@ -110,17 +134,14 @@
     
     NSArray *indexArray = [allMemberTendancyStatic objectForKey:@"date"];
     [allMemberChart setXLabels:indexArray];
-    allMemberChart.legendStyle = PNLegendItemStyleSerial;
-    allMemberChart.legendFont = [UIFont systemFontOfSize:12.0f];
-    UIView *partLegend = [allMemberChart getLegendWithMaxWidth:CGRectGetWidth(self.view.frame)];
-    [self.allMemberLegendView addSubview:partLegend];
-    partLegend.center = self.allMemberLegendView.center;
     
     NSArray *dataArray = [allMemberTendancyStatic objectForKey:@"all_member"];
     PNLineChartData *chartData = [PNLineChartData new];
     chartData.color = PNFreshGreen;
-    chartData.dataTitle = @"出勤总数";
+    chartData.dataTitle = @"全团出勤总数";
     chartData.itemCount = dataArray.count;
+    chartData.inflexionPointColor = chartData.color;
+    chartData.inflexionPointStyle = PNLineChartPointStyleTriangle;
     chartData.getData = ^(NSUInteger index) {
         CGFloat yValue = [[dataArray objectAtIndex:index] floatValue];
         return [PNLineChartDataItem dataItemWithY:yValue];
@@ -128,16 +149,24 @@
     
     allMemberChart.chartData = @[chartData];
     [allMemberChart strokeChart];
+    
+    allMemberChart.legendFont = [UIFont systemFontOfSize:12.0f];
+    allMemberChart.legendFontColor = [UIColor lightGrayColor];
+    allMemberChart.legendStyle = PNLegendItemStyleSerial;
+    
+    UIView *legendView = [allMemberChart getLegendWithMaxWidth:self.allMemberLegendView.frame.size.width];
+    [legendView setFrame:CGRectMake((self.allMemberLegendView.frame.size.width - legendView.frame.size.width) / 2.0f, (self.allMemberLegendView.frame.size.height - legendView.frame.size.height) / 2.0f, legendView.frame.size.width, legendView.frame.size.height)];
+    [self.allMemberLegendView addSubview:legendView];
 }
 
 - (UIColor *)pnColorForPart:(NSString *)part
 {
     if ([part isEqualToString:ZivChorusPartS]) {
-        return PNCloudWhite;
+        return PNRed;
     } else if ([part isEqualToString:ZivChorusPartA]) {
-        return PNBlue;
+        return PNLightBlue;
     } else if ([part isEqualToString:ZivChorusPartT]) {
-        return PNYellow;
+        return PNStarYellow;
     } else if ([part isEqualToString:ZivChorusPartB]) {
         return PNBrown;
     }
@@ -145,7 +174,12 @@
     return PNFreshGreen;
 }
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self drawStaticForType:[self.staticTypeSegment titleForSegmentAtIndex:0]];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

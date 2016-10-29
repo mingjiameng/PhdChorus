@@ -675,13 +675,13 @@
     
     NSMutableDictionary *attendanceCountInfo = [NSMutableDictionary dictionaryWithCapacity:5];
     [attendanceCountInfo setObject:[NSMutableArray arrayWithCapacity:satisfied_table_list.count] forKey:@"date"];
-    for (NSString *part in [self partList]) {
+    NSArray *partList = [self satbPartList];
+    for (NSString *part in partList) {
         [attendanceCountInfo setObject:[NSMutableArray arrayWithCapacity:satisfied_table_list.count] forKey:part];
     }
     
     NSInteger highPartCount, lowPartCount;
     NSMutableArray *partAttendanceCount = nil, *dateArray = nil;
-    NSArray *partList = @[@"S", @"A", @"T", @"B"];
     for (NSString *tableName in satisfied_table_list) {
         dateArray = [attendanceCountInfo objectForKey:@"date"];
         [dateArray addObject:[tableName substringWithRange:NSMakeRange(4, 4)]];

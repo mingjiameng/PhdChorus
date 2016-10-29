@@ -62,7 +62,7 @@
 @property (nonatomic, strong) NSArray *partList;
 @property (nonatomic, strong) NSArray *zoneList;
 @property (nonatomic, strong) NSArray *attendanceTypeList;
-
+@property (nonatomic, strong) NSArray *satbPartList;
 @end
 
 
@@ -451,6 +451,15 @@
     }
     
     return _partList;
+}
+
+- (NSArray *)satbPartList
+{
+    if (!_satbPartList) {
+        _satbPartList = CHORUS_SATB_PART_LIST;
+    }
+    
+    return _satbPartList;
 }
 
 - (NSArray *)memberNameListOfPart:(NSString *)part

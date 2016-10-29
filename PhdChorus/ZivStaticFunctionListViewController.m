@@ -11,6 +11,7 @@
 #import "ZivSelectStartEndTimeViewController.h"
 #import "ZivSelectMemberToQueryViewController.h"
 #import "ZivStaticTendencyViewController.h"
+#import "ZivTendencyTestViewController.h"
 
 @interface ZivStaticFunctionListViewController ()
 
