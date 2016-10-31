@@ -203,15 +203,15 @@
         NSString *formulaString = nil;
         int write_at_row = to_row + 2;
         for (currentColumn = from_column; currentColumn <= to_column; ++currentColumn) {
-            columnFlag = [self flagForColumn:currentColumn + 1];
+            columnFlag = [self flagForColumn:currentColumn];
             formulaString = [NSString stringWithFormat:@"SUM(%@%d:%@%d)", columnFlag, from_row + 1, columnFlag, to_row + 1];
             xlSheetWriteFormulaA(sheet, write_at_row, currentColumn, [formulaString cStringUsingEncoding:NSUTF8StringEncoding], statics_format);
         }
         
         // 每行加和
         int write_at_column = to_column + 2;
-        NSString *from_column_flag_string = [self flagForColumn:from_column + 1];
-        NSString *to_column_flag_string = [self flagForColumn:to_column + 1];
+        NSString *from_column_flag_string = [self flagForColumn:from_column];
+        NSString *to_column_flag_string = [self flagForColumn:to_column];
         for (currentRow = from_row; currentRow <= to_row; ++currentRow) {
             formulaString = [NSString stringWithFormat:@"SUM(%@%d:%@%d)", from_column_flag_string, currentRow + 1, to_column_flag_string, currentRow + 1];
             xlSheetWriteFormulaA(sheet, currentRow, write_at_column, [formulaString cStringUsingEncoding:NSUTF8StringEncoding], statics_format);
@@ -229,14 +229,16 @@
 
 }
 
+// column start from 0(A)
 - (NSString *)flagForColumn:(int)column
 {
     NSString *result = @"";
     unichar flag;
-    while (column > 0) {
-        flag = (unichar)(column % 26 + 64);
+    while (column >= 0) {
+        flag = (unichar)(column % 26 + 65);
         result = [NSString stringWithFormat:@"%C%@", flag, result];
         column /= 26;
+        column -= 1;
     }
     
     //NSLog(@"column_flag:%@", result);
