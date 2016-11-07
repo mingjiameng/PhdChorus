@@ -728,7 +728,7 @@
     NSArray *tableList = [self attendanceTableList];
     NSString *tableName = nil;
     NSMutableArray *satisfied_table_list = [NSMutableArray arrayWithCapacity:5];
-    for (NSInteger index = tableList.count - 1; index >= 0; --index) {
+    for (NSInteger index = 0; index < tableList.count; ++index) {
         tableName = [tableList objectAtIndex:index];
         if ([tableName containsString:type]) {
             [satisfied_table_list insertObject:tableName atIndex:0];

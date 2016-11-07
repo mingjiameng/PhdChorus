@@ -244,7 +244,7 @@
 - (NSArray<NSString *> *)attendanceTableList
 {
     NSArray *tableList = [self.attendance_table_list sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        return [obj1 compare:obj2 options:0];
+        return [obj2 compare:obj1];
     }];
     
     return tableList;
